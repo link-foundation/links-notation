@@ -1,0 +1,28 @@
+binary_interop / ten-languages	UNKNOWN STEP	2026-11-23T23:25:48.8546408Z Commit: b8a594ea514ff44cadb5342986c68b1eac6e22ed
+binary_interop / ten-languages	UNKNOWN STEP	2026-11-23T23:25:52.4292453Z Uses: link-foundation/links-notation/.github/workflows/binary-interop.yml@refs/pull/425/merge (c6791a05ad06a8e5915f4094ac9705ee5c38612d)
+binary_interop / ten-languages	UNKNOWN STEP	2026-11-23T23:25:52.4295615Z ##[group] Inputs
+binary_interop / ten-languages	UNKNOWN STEP	2026-11-23T23:25:52.4296037Z   verbose: false
+binary_interop / ten-languages	UNKNOWN STEP	2026-11-23T23:25:52.4296207Z ##[endgroup]
+binary_interop / ten-languages	UNKNOWN STEP	2026-11-23T23:25:52.4296428Z Complete job name: binary_interop / ten-languages
+binary_interop / ten-languages	UNKNOWN STEP	2026-11-23T23:26:05.6763264Z Acquiring 1.27.4 from https://github.com/actions/go-versions/releases/download/1.27.4-42945153609/go-1.27.4-linux-x64.tar.gz
+binary_interop / ten-languages	UNKNOWN STEP	2026-11-23T23:26:17.2481429Z   pythonLocation: /opt/hostedtoolcache/Python/3.15.2/x64
+binary_interop / ten-languages	UNKNOWN STEP	2026-11-23T23:26:54.3179886Z ##[error]Process completed with exit code 1.
+java / test (21)	UNKNOWN STEP	2026-11-24T00:00:45.8757672Z Commit: b8a594ea514ff44cadb5342986c68b1eac6e22ed
+java / test (21)	UNKNOWN STEP	2026-11-24T00:00:47.7932429Z   GITHUB_TOKEN: ***
+java / test (21)	UNKNOWN STEP	2026-11-24T00:00:49.9987722Z Temporarily overriding HOME='/home/runner/work/_temp/4bce4dd8-af85-4429-a333-10daeec250a5' before making global git config changes
+java / test (21)	UNKNOWN STEP	2026-11-24T00:00:51.4293519Z ##[endgroup]
+java / test (21)	UNKNOWN STEP	2026-11-24T00:00:51.4293975Z ##[group]Determining the checkout info
+java / test (21)	UNKNOWN STEP	2026-11-24T00:00:51.4294556Z ##[endgroup]
+java / test (21)	UNKNOWN STEP	2026-11-24T00:00:51.4298187Z [command]/usr/bin/git sparse-checkout disable
+java / test (21)	UNKNOWN STEP	2026-11-24T00:00:55.1851169Z [WARNING] GET request to https://repo.maven.apache.org/maven2/.meta/prefixes.txt failed (attempt 1 of 4) due to status 429. Retrying in 5000 ms (due to retryInterval 5000 ms multiplied by execution count 1)...
+java / test (21)	UNKNOWN STEP	2026-11-24T00:01:00.2242424Z [WARNING] GET request to https://repo.maven.apache.org/maven2/.meta/prefixes.txt failed (attempt 2 of 4) due to status 429. Retrying in 10000 ms (due to retryInterval 5000 ms multiplied by execution count 2)...
+java / test (21)	UNKNOWN STEP	2026-11-24T00:01:10.2456614Z [WARNING] GET request to https://repo.maven.apache.org/maven2/.meta/prefixes.txt failed (attempt 3 of 4) due to status 429. Retrying in 15000 ms (due to retryInterval 5000 ms multiplied by execution count 3)...
+java / test (21)	UNKNOWN STEP	2026-11-24T00:01:25.2763433Z [WARNING] Could not transfer metadata /.meta/prefixes.txt from/to central (https://repo.maven.apache.org/maven2): HTTP Status: 429
+java / test (21)	UNKNOWN STEP	2026-11-24T00:01:25.4915537Z [WARNING] GET request to https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-surefire-plugin/3.6.1/maven-surefire-plugin-3.6.1.pom failed (attempt 1 of 4) due to status 429. Retrying in 5000 ms (due to retryInterval 5000 ms multiplied by execution count 1)...
+java / test (21)	UNKNOWN STEP	2026-11-24T00:01:30.5128668Z [WARNING] GET request to https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-surefire-plugin/3.6.1/maven-surefire-plugin-3.6.1.pom failed (attempt 2 of 4) due to status 429. Retrying in 10000 ms (due to retryInterval 5000 ms multiplied by execution count 2)...
+java / test (21)	UNKNOWN STEP	2026-11-24T00:01:40.5480835Z [WARNING] GET request to https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-surefire-plugin/3.6.1/maven-surefire-plugin-3.6.1.pom failed (attempt 3 of 4) due to status 429. Retrying in 15000 ms (due to retryInterval 5000 ms multiplied by execution count 3)...
+java / test (21)	UNKNOWN STEP	2026-11-24T00:01:55.5693395Z [ERROR] BUILD FAILURE
+java / test (21)	UNKNOWN STEP	2026-11-24T00:01:55.5707131Z [ERROR] 	The following artifacts could not be resolved: org.apache.maven.plugins:maven-surefire-plugin:pom:3.6.1 (absent): Could not transfer artifact org.apache.maven.plugins:maven-surefire-plugin:pom:3.6.1 from/to central (https://repo.maven.apache.org/maven2): HTTP Status: 429
+java / test (21)	UNKNOWN STEP	2026-11-24T00:01:55.5815063Z ##[error]Process completed with exit code 1.
+Java	UNKNOWN STEP	2026-11-24T00:21:44.3653594Z Commit: b8a594ea514ff44cadb5342986c68b1eac6e22ed
+Java	UNKNOWN STEP	2026-11-24T00:21:44.5803612Z ##[error]Process completed with exit code 1.

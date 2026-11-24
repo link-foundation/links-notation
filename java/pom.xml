@@ -6,7 +6,7 @@
 
     <groupId>io.github.link-foundation</groupId>
     <artifactId>links-notation</artifactId>
-    <version>0.31.8</version>
+    <version>0.31.9</version>
     <packaging>jar</packaging>
 
     <name>Links Notation</name>
@@ -142,7 +142,7 @@
             <plugin>
                 <groupId>com.diffplug.spotless</groupId>
                 <artifactId>spotless-maven-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>3.12.0</version>
                 <configuration>
                     <java>
                         <googleJavaFormat>

@@ -34,7 +34,7 @@
             <!-- The parser under measurement, built from ../../java by `java/mvnw install`. -->
             <groupId>io.github.link-foundation</groupId>
             <artifactId>links-notation</artifactId>
-            <version>0.31.8</version>
+            <version>0.31.9</version>
         </dependency>
         <dependency>
             <!-- JTokkit carries the BPE ranks with the jar, so counting a token
@@ -108,7 +108,7 @@
                 <!-- The same formatter the library uses, so both are read alike. -->
                 <groupId>com.diffplug.spotless</groupId>
                 <artifactId>spotless-maven-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>3.12.0</version>
                 <configuration>
                     <java>
                         <googleJavaFormat>

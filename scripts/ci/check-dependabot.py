@@ -34,9 +34,22 @@ EXCLUDED = {
 }
 
 
-def ecosystems(path):
-    """Ecosystems that read the committed file at `path`."""
+def uv_project(path, files):
+    """Whether the file at `path` sits beside a committed uv.lock."""
+    parent = PurePosixPath(path).parent.as_posix()
+    return (parent + "/uv.lock" if parent != "." else "uv.lock") in files
+
+
+def ecosystems(path, files=()):
+    """Ecosystems that read the committed file at `path`.
+
+    A pyproject.toml locked by uv belongs to the uv ecosystem: the pip one
+    rewrites its requirements without regenerating uv.lock, so every such
+    pull request fails `uv lock --check` (issue #437).
+    """
     name = PurePosixPath(path).name
+    if name == "uv.lock" or (name == "pyproject.toml" and uv_project(path, files)):
+        return ["uv"]
     if name == "package.json":
         return ["npm"]
     if name == "bun.lock":
@@ -161,7 +174,7 @@ def problems(files, text):
     entries = configured(text)
     missing = []
     for path in sorted(files):
-        for ecosystem in ecosystems(path):
+        for ecosystem in ecosystems(path, files):
             candidates = owners(path, files)
             listed = entries.get(ecosystem, set())
             if listed.intersection(candidates):
@@ -169,6 +182,13 @@ def problems(files, text):
             if any((ecosystem, c) in EXCLUDED for c in candidates):
                 continue
             missing.append(f"{path}: no {ecosystem} entry for {candidates[0]}")
+    for path in sorted(f for f in files if PurePosixPath(f).name == "uv.lock"):
+        directory = owners(path, files)[0]
+        if directory in entries.get("pip", set()):
+            missing.append(
+                f"{directory} is listed for pip but is locked by uv; list it for "
+                "uv instead, or pip bumps leave uv.lock stale (issue #437)"
+            )
     for (ecosystem, directory), reason in EXCLUDED.items():
         if directory in entries.get(ecosystem, set()):
             missing.append(

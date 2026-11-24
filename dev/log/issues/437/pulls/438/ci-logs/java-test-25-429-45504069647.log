@@ -1,0 +1,46 @@
+java / test (25)	UNKNOWN STEP	2026-11-24T23:02:16.2808881Z [INFO] Scanning for projects...
+java / test (25)	UNKNOWN STEP	2026-11-24T23:02:16.3283174Z [INFO] 
+java / test (25)	UNKNOWN STEP	2026-11-24T23:02:16.3284064Z [INFO] --------------< io.github.link-foundation:links-notation >--------------
+java / test (25)	UNKNOWN STEP	2026-11-24T23:02:16.3284682Z [INFO] Building Links Notation 0.31.9
+java / test (25)	UNKNOWN STEP	2026-11-24T23:02:16.3285088Z [INFO]   from pom.xml
+java / test (25)	UNKNOWN STEP	2026-11-24T23:02:16.3285663Z [INFO] --------------------------------[ jar ]---------------------------------
+java / test (25)	UNKNOWN STEP	2026-11-24T23:02:16.4179506Z [INFO] Loaded 24619 auto-discovered prefixes for remote repository central (prefixes-central.txt)
+java / test (25)	UNKNOWN STEP	2026-11-24T23:02:16.8071483Z [WARNING] GET request to https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-enforcer-plugin/3.7.0/maven-enforcer-plugin-3.7.0.pom failed (attempt 1 of 7) due to status 429. Retrying in 10000 ms (due to retryInterval 10000 ms
+java / test (25)	UNKNOWN STEP	2026-11-24T23:02:26.8313147Z [WARNING] GET request to https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-enforcer-plugin/3.7.0/maven-enforcer-plugin-3.7.0.pom failed (attempt 2 of 7) due to status 429. Retrying in 20000 ms (due to retryInterval 10000 ms
+java / test (25)	UNKNOWN STEP	2026-11-24T23:02:46.8556426Z [WARNING] GET request to https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-enforcer-plugin/3.7.0/maven-enforcer-plugin-3.7.0.pom failed (attempt 3 of 7) due to status 429. Retrying in 30000 ms (due to retryInterval 10000 ms
+java / test (25)	UNKNOWN STEP	2026-11-24T23:03:16.8762844Z [WARNING] GET request to https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-enforcer-plugin/3.7.0/maven-enforcer-plugin-3.7.0.pom failed (attempt 4 of 7) due to status 429. Retrying in 40000 ms (due to retryInterval 10000 ms
+java / test (25)	UNKNOWN STEP	2026-11-24T23:03:56.8980690Z [WARNING] GET request to https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-enforcer-plugin/3.7.0/maven-enforcer-plugin-3.7.0.pom failed (attempt 5 of 7) due to status 429. Retrying in 50000 ms (due to retryInterval 10000 ms
+java / test (25)	UNKNOWN STEP	2026-11-24T23:04:46.9187670Z [WARNING] GET request to https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-enforcer-plugin/3.7.0/maven-enforcer-plugin-3.7.0.pom failed (attempt 6 of 7) due to status 429. Retrying in 60000 ms (due to retryInterval 10000 ms
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:46.9522301Z [INFO] ------------------------------------------------------------------------
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:46.9526885Z [ERROR] BUILD FAILURE
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:46.9527293Z [INFO] ------------------------------------------------------------------------
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:46.9527638Z [INFO] Total time:  03:30 min
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:46.9527862Z [INFO] Finished at: 2026-11-24T23:05:46Z
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:46.9528157Z [INFO] ------------------------------------------------------------------------
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:46.9530839Z [ERROR] Plugin org.apache.maven.plugins:maven-enforcer-plugin:3.7.0 or one of its dependencies could not be resolved:
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:46.9532135Z [ERROR] 	The following artifacts could not be resolved: org.apache.maven.plugins:maven-enforcer-plugin:pom:3.7.0 (absent): Could not transfer artifact org.apache.maven.plugins:maven-enforcer-plugin:pom:3.7.0 from/to central (https://repo.mav
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:46.9533065Z [ERROR] -> [Help 1]
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:46.9533673Z [ERROR] 
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:46.9534074Z [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:46.9534676Z [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:46.9535105Z [ERROR] 
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:46.9535485Z [ERROR] For more information about the errors and possible solutions, please read the following articles:
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:46.9536007Z [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/PluginResolutionException
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:46.9622442Z ##[error]Process completed with exit code 1.
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:46.9764298Z Post job cleanup.
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:47.0523863Z Post job cleanup.
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:47.1202838Z [command]/usr/bin/git version
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:47.1234954Z git version 2.56.1
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:47.1258738Z Temporarily overriding HOME='/home/runner/work/_temp/64cbfe2d-87c9-4cc8-8552-bb1428eb8e65' before making global git config changes
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:47.1259796Z Adding repository directory to the temporary git global config as a safe directory
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:47.1264428Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/links-notation/links-notation
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:47.1287049Z Removing SSH command configuration
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:47.1292357Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:47.1335405Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:47.1532714Z Removing HTTP extra header
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:47.1536438Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:47.1560248Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:47.1761247Z Removing includeIf entries pointing to credentials config files
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:47.1764956Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:47.1791010Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+java / test (25)	UNKNOWN STEP	2026-11-24T23:05:47.2091511Z Cleaning up orphan processes

@@ -1,0 +1,5 @@
+release_audit / audit	UNKNOWN STEP	2026-11-24T01:10:06.7363558Z Commit: b8a594ea514ff44cadb5342986c68b1eac6e22ed
+release_audit / audit	UNKNOWN STEP	2026-11-24T01:10:09.5242910Z ##[group]Run actions/setup-node@v7.1.0
+release_audit / audit	UNKNOWN STEP	2026-11-24T01:10:15.4546180Z ##[error]java: registry/release verification failed: GET https://repo1.maven.org/maven2/io/github/link-foundation/links-notation/0.31.8/links-notation-0.31.8.pom: HTTP 429
+release_audit / audit	UNKNOWN STEP	2026-11-24T01:10:17.3799009Z ##[error]kotlin: registry/release verification failed: GET https://repo1.maven.org/maven2/io/github/link-foundation/kotlin/links-notation/0.31.8/links-notation-0.31.8.pom: HTTP 429
+release_audit / audit	UNKNOWN STEP	2026-11-24T01:10:17.3871148Z ##[error]Process completed with exit code 1.

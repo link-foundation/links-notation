@@ -48,12 +48,27 @@ updates:
     commit-message:
       prefix: "chore(deps)"
 
-  - package-ecosystem: "pip"
+  # Projects locked by uv.lock use the uv ecosystem: the pip one bumps
+  # pyproject.toml without regenerating uv.lock, which failed every such
+  # pull request (#432, #433) on `uv lock --check` (issue #437).
+  - package-ecosystem: "uv"
     directories:
       - "/dev/log/issues/330/pulls/331/templates/python"
-      - "/dev/log/issues/377/pulls/378/templates/cpp/scripts"
       - "/dev/log/issues/377/pulls/378/templates/python"
       - "/python"
+    schedule:
+      interval: "daily"
+    groups:
+      uv-minor-and-patch:
+        update-types: ["minor", "patch"]
+    open-pull-requests-limit: 10
+    labels: ["dependencies", "python"]
+    commit-message:
+      prefix: "chore(deps)"
+
+  - package-ecosystem: "pip"
+    directories:
+      - "/dev/log/issues/377/pulls/378/templates/cpp/scripts"
       - "/benchmarks/python"
       - "/scripts/ci"
       - "/cpp/tools"

@@ -18,3 +18,10 @@ on every `./mvnw spotless:check` / `spotless:apply`, and JDK 16+ turns the same 
 (the [Maven Wrapper](https://maven.apache.org/tools/wrapper/), `only-script` type), with the
 SHA-256 the wrapper checks the download against. `scripts/ci/check-dependencies.py` fails CI once a
 newer Maven or wrapper is released.
+
+`maven.config` widens Maven Resolver's HTTP retry budget. Maven Central answers bursts of CI
+downloads with HTTP 429 (Too Many Requests); with the default three retries 5 s apart, every Java job
+of the Dependabot pull requests in [#437](https://github.com/link-foundation/links-notation/issues/437)
+failed to resolve a plugin. Six retries at 10 s, 20 s, … 60 s ride out the limit while a persistent
+outage still fails within a few minutes. The keys are documented in the
+[Maven Resolver configuration](https://maven.apache.org/resolver/configuration.html).

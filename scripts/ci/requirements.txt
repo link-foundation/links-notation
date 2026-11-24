@@ -1,8 +1,8 @@
 # Shared build and workflow validation tools; checked against PyPI daily.
 build>=1.6.1
 twine>=7.0.0
-pypi-attestations>=0.0.31
-zizmor==1.32.0
+pypi-attestations>=0.0.32
+zizmor==1.33.1
 
 # Native resolver for reproducible Python project and requirements locks.
-uv==0.13.9
+uv==0.13.10

@@ -1,0 +1,15 @@
+java / maven-floor	UNKNOWN STEP	2026-11-24T00:25:02.3932028Z Commit: b8a594ea514ff44cadb5342986c68b1eac6e22ed
+java / maven-floor	UNKNOWN STEP	2026-11-24T00:25:04.8588553Z Uses: link-foundation/links-notation/.github/workflows/java.yml@refs/pull/429/merge (8002ccd49ef1c41c7fc4687585a1d6139cb8cb42)
+java / maven-floor	UNKNOWN STEP	2026-11-24T00:25:09.7998429Z ##[group]Fetching the repository
+java / maven-floor	UNKNOWN STEP	2026-11-24T00:25:09.8002872Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +8002ccd49ef1c41c7fc4687585a1d6139cb8cb42:refs/remotes/pull/429/merge
+java / maven-floor	UNKNOWN STEP	2026-11-24T00:25:10.8835681Z  * [new ref]         8002ccd49ef1c41c7fc4687585a1d6139cb8cb42 -> pull/429/merge
+java / maven-floor	UNKNOWN STEP	2026-11-24T00:25:10.8925061Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/429/merge
+java / maven-floor	UNKNOWN STEP	2026-11-24T00:25:11.1340479Z Note: switching to 'refs/remotes/pull/429/merge'.
+java / maven-floor	UNKNOWN STEP	2026-11-24T00:25:11.3210429Z   set-default: true
+java / maven-floor	UNKNOWN STEP	2026-11-24T00:25:13.2354060Z curl: (22) The requested URL returned error: 429
+java / maven-floor	UNKNOWN STEP	2026-11-24T00:25:14.2423079Z curl: (22) The requested URL returned error: 429
+java / maven-floor	UNKNOWN STEP	2026-11-24T00:25:16.2490555Z curl: (22) The requested URL returned error: 429
+java / maven-floor	UNKNOWN STEP	2026-11-24T00:25:20.2551705Z curl: (22) The requested URL returned error: 429
+java / maven-floor	UNKNOWN STEP	2026-11-24T00:25:20.2581947Z ##[error]Process completed with exit code 22.
+Java	UNKNOWN STEP	2026-11-24T01:09:45.8011052Z Commit: b8a594ea514ff44cadb5342986c68b1eac6e22ed
+Java	UNKNOWN STEP	2026-11-24T01:09:45.9513985Z ##[error]Process completed with exit code 1.

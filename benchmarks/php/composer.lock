@@ -8,18 +8,18 @@
     "packages": [
         {
             "name": "link-foundation/links-notation",
-            "version": "0.31.8",
+            "version": "0.31.9",
             "dist": {
                 "type": "path",
                 "url": "../../php",
-                "reference": "f85dcc9495f330127307811138aa5a40bd7a5f4a"
+                "reference": "44b270ce24f6f5c17c1cc1aacbd8f3fc25d25aff"
             },
             "require": {
                 "ext-mbstring": "*",
                 "php": ">=8.4"
             },
             "require-dev": {
-                "phpunit/phpunit": "^13.4.7",
+                "phpunit/phpunit": "^13.4.8",
                 "squizlabs/php_codesniffer": "^4.0.4"
             },
             "type": "library",
