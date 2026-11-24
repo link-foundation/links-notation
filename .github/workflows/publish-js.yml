@@ -49,7 +49,7 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2.2.0
         with:
-          bun-version: 1.4.4
+          bun-version: 1.4.5
       # npm itself does the publishing: trusted publishing needs npm >= 11.5.1,
       # and setup-node writes the registry entry ~/.npmrc that npm reads.
       - name: Setup Node
