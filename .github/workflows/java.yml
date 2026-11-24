@@ -132,7 +132,9 @@ jobs:
         run: |
           set -euo pipefail
           archive="apache-maven-$MAVEN_FLOOR-bin.tar.gz"
-          curl -fsSL --retry 3 -o "$RUNNER_TEMP/$archive" \
+          # Maven Central rate-limits CI bursts with HTTP 429 (issue #437);
+          # wait 15 s between six tries instead of the 1-4 s default backoff.
+          curl -fsSL --retry 6 --retry-delay 15 -o "$RUNNER_TEMP/$archive" \
             "https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/$MAVEN_FLOOR/$archive"
           echo "$MAVEN_FLOOR_SHA256  $RUNNER_TEMP/$archive" | sha256sum --check -
           tar -xzf "$RUNNER_TEMP/$archive" -C "$RUNNER_TEMP"

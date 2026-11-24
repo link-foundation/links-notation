@@ -1,0 +1,8 @@
+python / lint	UNKNOWN STEP	2026-11-24T00:11:50.5654374Z Commit: b8a594ea514ff44cadb5342986c68b1eac6e22ed
+python / lint	UNKNOWN STEP	2026-11-24T00:11:51.8429578Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/links-notation/links-notation/.git.path /home/runner/work/_temp/git-credentials-c9280ad3-38a4-481b-b3e2-6b44568f015b.config
+python / lint	UNKNOWN STEP	2026-11-24T00:11:53.9484429Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+python / lint	UNKNOWN STEP	2026-11-24T00:11:54.1489429Z ^[[36;1mpython -m pip install --upgrade pip==26.3^[[0m
+python / lint	UNKNOWN STEP	2026-11-24T00:12:12.9193025Z error: The lockfile at `uv.lock` needs to be updated, but `--check` was provided.
+python / lint	UNKNOWN STEP	2026-11-24T00:12:12.9235508Z ##[error]Process completed with exit code 1.
+Python	UNKNOWN STEP	2026-11-24T00:28:52.0555654Z Commit: b8a594ea514ff44cadb5342986c68b1eac6e22ed
+Python	UNKNOWN STEP	2026-11-24T00:28:52.3361962Z ##[error]Process completed with exit code 1.
