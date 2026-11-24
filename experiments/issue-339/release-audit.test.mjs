@@ -213,6 +213,42 @@ test("the Swift GitHub release is the bare version tag", async () => {
     ),
   );
 });
+test("a Maven Central rate limit is retried, honouring Retry-After (issue #437)", async () => {
+  let attempts = 0;
+  const waits = [];
+  const fetcher = mockFetch();
+  const result = await audit({
+    versions,
+    log: () => {},
+    pause: async (milliseconds) => waits.push(milliseconds),
+    fetcher: async (url, options) => {
+      if (url.includes("repo1.maven.org") && ++attempts <= 2)
+        return new Response("", {
+          status: 429,
+          headers: attempts === 1 ? { "retry-after": "2" } : {},
+        });
+      return fetcher(url, options);
+    },
+  });
+  assert.deepEqual(waits, [2000, 10000]);
+  assert.equal(result.failures, 0);
+});
+test("a persistent Maven Central rate limit fails after five attempts", async () => {
+  let attempts = 0;
+  const result = await audit({
+    versions,
+    log: () => {},
+    pause: async () => {},
+    fetcher: mockFetch((url) => {
+      if (url.includes("repo1.maven.org/maven2/io/github/link-foundation/links-notation/")) {
+        attempts++;
+        return new Response("", { status: 429 });
+      }
+    }),
+  });
+  assert.equal(attempts, 5);
+  assert.equal(result.failures, 1);
+});
 test("registry outages fail instead of being reported as absence", async () =>
   assert.equal(
     (

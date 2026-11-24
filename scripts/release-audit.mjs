@@ -144,13 +144,26 @@ export async function audit({
   pause = (milliseconds) =>
     new Promise((resolve) => setTimeout(resolve, milliseconds)),
 }) {
-  // Registry connection resets are transient. HTTP failures and invalid
-  // metadata still fail immediately; an exhausted transport retry also fails.
+  // Registry connection resets and rate limits (HTTP 429, which Maven
+  // Central returns under load: issue #437) are transient. Other HTTP failures
+  // and invalid metadata still fail immediately; an exhausted retry also fails.
   const transport = fetcher;
   fetcher = async (url, options) => {
     for (let attempt = 1; ; attempt++) {
       try {
-        return await transport(url, options);
+        const response = await transport(url, options);
+        if (attempt < 5 && response?.status === 429) {
+          const after = Number(response.headers?.get?.("retry-after"));
+          const wait =
+            Number.isFinite(after) && after > 0
+              ? Math.min(after, 60) * 1000
+              : attempt * 5000;
+          if (verbose)
+            log(`GET ${url}: HTTP ${response.status}; retry ${attempt}/4`);
+          await pause(wait);
+          continue;
+        }
+        return response;
       } catch (error) {
         const code = error.cause?.code;
         if (
