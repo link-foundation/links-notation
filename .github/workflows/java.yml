@@ -41,7 +41,7 @@ jobs:
           distribution: "temurin"
           cache: maven
       - name: Build with Maven
-        run: ./mvnw -B compile --file pom.xml
+        run: .mvn/ci/mvn-with-mirror.sh ./mvnw -B compile --file pom.xml
 
   test:
     needs: [build]
@@ -69,7 +69,7 @@ jobs:
           distribution: "temurin"
           cache: maven
       - name: Test with Maven
-        run: ./mvnw -B test --file pom.xml
+        run: .mvn/ci/mvn-with-mirror.sh ./mvnw -B test --file pom.xml
 
   format:
     runs-on: ubuntu-26.04
@@ -91,7 +91,7 @@ jobs:
           distribution: "temurin"
           cache: maven
       - name: Check Google Java formatting and whitespace
-        run: ./mvnw -B spotless:check --file pom.xml
+        run: .mvn/ci/mvn-with-mirror.sh ./mvnw -B spotless:check --file pom.xml
 
   # pom.xml's maven-enforcer-plugin declares Maven 3.6.3, the oldest the build
   # plugins accept, while ./mvnw runs the newest. This job keeps that floor a
@@ -148,4 +148,4 @@ jobs:
           MAVEN_OPTS: --enable-native-access=ALL-UNNAMED --sun-misc-unsafe-memory-access=allow
         run: |
           "$RUNNER_TEMP/apache-maven-$MAVEN_FLOOR/bin/mvn" --version
-          "$RUNNER_TEMP/apache-maven-$MAVEN_FLOOR/bin/mvn" -B test spotless:check --file pom.xml
+          .mvn/ci/mvn-with-mirror.sh "$RUNNER_TEMP/apache-maven-$MAVEN_FLOOR/bin/mvn" -B test spotless:check --file pom.xml
