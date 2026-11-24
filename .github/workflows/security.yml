@@ -53,13 +53,13 @@ jobs:
           persist-credentials: false
           submodules: true
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v4.39.4
+        uses: github/codeql-action/init@v4.39.5
         with:
           languages: ${{ matrix.language }}
           build-mode: ${{ matrix.build-mode }}
           config-file: ./.github/codeql/codeql-config.yml
       - name: Analyze
-        uses: github/codeql-action/analyze@v4.39.4
+        uses: github/codeql-action/analyze@v4.39.5
         with:
           category: /language:${{ matrix.language }}
 
@@ -104,7 +104,7 @@ jobs:
           path: ./
           # The action ref pins the wrapper; this pins the scanner itself,
           # which otherwise resolves to the `latest` image on every run.
-          version: 3.99.9
+          version: 3.100.1
           # --results=verified only reports credentials that the issuing
           # service confirmed are live, which is what makes this safe to fail
           # the build on. Do not add --no-update here: the action already
