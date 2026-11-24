@@ -80,7 +80,7 @@
     "semver": "^7.8.6",
     "browser-commander": "0.35.0",
     "playwright": "1.65.1",
-    "command-stream": "^2.6.0",
+    "command-stream": "^3.0.0",
     "lino-arguments": "^0.4.1"
   },
   "lint-staged": {
