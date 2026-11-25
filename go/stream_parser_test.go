@@ -170,9 +170,11 @@ func stringsAfter(value string, delimiter byte) []string {
 }
 
 func TestWaitsForTheLineThatClosesAnEvenRunOfQuotes(t *testing.T) {
-	// "" is the empty reference only when nothing closes it, and here the next
-	// line does, so the first line cannot be emitted on its own (issue #377).
-	input := "a \"\" b\n\"\" c\n"
+	// ""b opens a reference that only a later line can close, and here the
+	// next line does, so the first line cannot be emitted on its own (issue
+	// #377). (A "" followed by whitespace and the end of its line is the empty
+	// reference whatever follows, issue #443.)
+	input := "a \"\"b\n\"\" c\n"
 	stream := NewStreamParser()
 	for _, symbol := range input {
 		emitted, err := stream.Feed(string(symbol))

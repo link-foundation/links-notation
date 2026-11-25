@@ -317,7 +317,9 @@ func isSubstantiveBody(content string) bool {
 // quote sequence. A run of an even number of delimiters that does not open a
 // reference with a substantive body is the empty reference: the shortest
 // reading, a bare delimiter pair enclosing nothing, wins over a longer n-quote
-// delimiter.
+// delimiter. So is an even run followed by whitespace when a line break comes
+// before the run that closes it, or nothing closes it: an empty value at the end
+// of a line never swallows the lines after it (issue #443).
 //
 // It returns the decoded value and the position right after the closing quotes,
 // or ok == false when text does not start a delimited reference.
@@ -328,14 +330,24 @@ func parseQuotedStringAt(text string, start int) (value string, end int, ok bool
 // parseQuotedStringWithin parses the delimited reference starting at start, as
 // parseQuotedStringAt does, reading no further than stop.
 func parseQuotedStringWithin(text string, start, stop int) (value string, end int, ok bool) {
+	value, end, _, ok = readQuotedString(text, start, stop)
+	return value, end, ok
+}
+
+// readQuotedString reads the delimited reference starting at start, reading no
+// further than stop, as parseQuotedStringWithin does. closed tells whether the
+// reading is final: it is false only for an even run that nothing closes yet,
+// which a closing run written later would turn into a reference holding what
+// follows.
+func readQuotedString(text string, start, stop int) (value string, end int, closed bool, ok bool) {
 	text = text[:stop]
 	if start >= len(text) {
-		return "", 0, false
+		return "", 0, false, false
 	}
 
 	quoteChar := text[start]
 	if quoteChar != '"' && quoteChar != '\'' && quoteChar != '`' {
-		return "", 0, false
+		return "", 0, false, false
 	}
 
 	quoteCount := 0
@@ -346,6 +358,7 @@ func parseQuotedStringWithin(text string, start, stop int) (value string, end in
 	}
 
 	isEvenRun := quoteCount%2 == 0
+	bodyStart := pos
 	openClose := strings.Repeat(string(quoteChar), quoteCount)
 	escapeSeq := strings.Repeat(string(quoteChar), quoteCount*2)
 	var content strings.Builder
@@ -360,10 +373,10 @@ func parseQuotedStringWithin(text string, start, stop int) (value string, end in
 			afterClose := pos + quoteCount
 			if afterClose >= len(text) || text[afterClose] != quoteChar {
 				body := content.String()
-				if isEvenRun && !isSubstantiveBody(body) {
-					return "", start + quoteCount, true
+				if isEvenRun && (staysOnItsLine(text, bodyStart, afterClose) || !isSubstantiveBody(body)) {
+					return "", start + quoteCount, true, true
 				}
-				return body, afterClose, true
+				return body, afterClose, true, true
 			}
 		}
 		content.WriteByte(text[pos])
@@ -371,10 +384,28 @@ func parseQuotedStringWithin(text string, start, stop int) (value string, end in
 	}
 
 	if isEvenRun {
-		return "", start + quoteCount, true
+		// Nothing closes the run: it is the empty reference, which a later
+		// closing run would still turn into one holding what follows, unless
+		// whitespace follows it (issue #443).
+		return "", start + quoteCount, staysOnItsLine(text, bodyStart, -1), true
 	}
 
-	return "", 0, false
+	return "", 0, false, false
+}
+
+// staysOnItsLine reports whether an even run whose body starts at bodyStart
+// has to be read as the empty reference because its n-quoted reading would
+// leave the line without opening a multiline reference: whitespace follows the
+// run directly, and a line break comes before the closing run that ends at end
+// (or end is -1: no run closes it at all).
+func staysOnItsLine(text string, bodyStart, end int) bool {
+	if bodyStart < len(text) && !isWhitespace(rune(text[bodyStart])) {
+		return false
+	}
+	if end < 0 {
+		return true
+	}
+	return strings.ContainsAny(text[bodyStart:end], "\n\r")
 }
 
 // quotedAt reads the delimited reference at start of text, a part of the
@@ -685,29 +716,74 @@ func (p *Parser) parseNestedDocument(inner string, offset int) []*internalLink {
 }
 
 // findColonOutsideQuotes finds a colon that is not inside quotes or
-// parentheses, text starting at offset in the document.
+// parentheses, text starting at offset in the document. A run of colons inside
+// a bare reference, as in 12:30 or std::string, is part of the reference and
+// is passed over (issue #444).
 func (p *Parser) findColonOutsideQuotes(text string, offset int) int {
 	parenDepth := 0
 	i := 0
+	// Whether the byte before i is part of a bare reference.
+	inBareReference := false
 
 	for i < len(text) {
 		char := text[i]
 		if char == '"' || char == '\'' || char == '`' {
 			if end := p.skipQuotedString(text, i, offset); end > i {
 				i = end
+				inBareReference = false
 				continue
 			}
 		} else if char == '(' {
 			parenDepth++
 		} else if char == ')' {
 			parenDepth--
-		} else if char == ':' && parenDepth == 0 {
-			return i
+		} else if char == ':' {
+			if inBareReference {
+				if end := innerColonsEnd(text, i); end >= 0 {
+					i = end
+					continue
+				}
+			}
+			if parenDepth == 0 {
+				return i
+			}
+		} else if !inBareReference {
+			if end := referenceLiteralEnd(text, i); end >= 0 {
+				i = end
+				continue
+			}
 		}
+		inBareReference = strings.IndexByte(separators, char) < 0
 		i++
 	}
 
 	return -1
+}
+
+// notAfterInnerColons lists what cannot start a bare reference after colons
+// inside one: what ends a bare reference, and the quotes.
+const notAfterInnerColons = " \t\n\r(:)\"'`"
+
+// innerColonsEnd is the position just past the run of colons at start of text
+// when the run belongs to the bare reference it is written in, or -1 when it
+// ends the reference. The byte before start must be part of a bare reference.
+// The run belongs to the reference when a character that could start a bare
+// reference follows it, and that is not the start of a versioned literal:
+// 12:30, std::string and https://example.com are each one reference, while
+// a: b, a:(b), a:"b" and a:~1{62} still separate an ID from its values
+// (issue #444).
+func innerColonsEnd(text string, start int) int {
+	after := start
+	for after < len(text) && text[after] == ':' {
+		after++
+	}
+	if after == start || after >= len(text) || strings.IndexByte(notAfterInnerColons, text[after]) >= 0 {
+		return -1
+	}
+	if literalPrefix.MatchString(text[after:]) {
+		return -1
+	}
+	return after
 }
 
 // parseValues parses a space separated list of values; offset is where in the

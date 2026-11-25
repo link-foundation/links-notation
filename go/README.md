@@ -180,6 +180,29 @@ func FormatWithConfig(links []*Link, config *FormatConfig) string
 
 Formats Links using the specified FormatConfig.
 
+#### QuoteReference and NeedsQuoting
+
+```go
+func QuoteReference(reference string) string
+func NeedsQuoting(reference string) bool
+```
+
+`QuoteReference` writes one reference so that a parser reads it back as exactly
+that text, in the ID or value position of any link, the way `Format` writes
+every reference: text that needs no delimiters is returned as it is, anything
+else is quoted, or written as a versioned literal (`~1{...}`) when it is empty
+or holds a control character. `NeedsQuoting` reports whether `QuoteReference`
+changes the text. Both are conservative: a colon, whitespace, a parenthesis, a
+quote and a leading `#` are always quoted, so the text reads back with older
+releases too.
+
+```go
+lino.QuoteReference("plain")    // plain
+lino.QuoteReference("12:30")    // '12:30'
+lino.QuoteReference("#release") // '#release'
+lino.NeedsQuoting("plain")      // false
+```
+
 ### Link Methods
 
 #### NewRef
@@ -253,7 +276,12 @@ links, _ := lino.Parse(`(papa has car)
 links, _ := lino.Parse(`("New York": city state)`)
 
 // Special characters
-links, _ := lino.Parse(`('key:with:colons': 'value')`)
+links, _ := lino.Parse(`('key with: colons': 'value')`)
+
+// Colons between the characters of a bare reference belong to it, so times,
+// URLs and qualified names need no quotes; a colon followed by whitespace, a
+// parenthesis, a quote or a versioned literal still ends an ID
+links, _ = lino.Parse("time 12:30\nurl https://example.com/a#b\nstd::string: type")
 ```
 
 ### Indented Syntax
@@ -377,7 +405,11 @@ deploy: staging # only staging, for now
 Both comments are gone by the time the document is read, leaving the single
 link `(deploy: staging)`. A `#` only opens a comment where a reference could
 begin, so a `#` inside a token (`issue#1047`) and a `#` inside a delimited
-reference (`"#"`) stay ordinary characters.
+reference (`"#"`) stay ordinary characters. Where a reference could begin, a
+`#` opens a comment when only indentation stands before it on its line, or when
+whitespace, `(`, `)`, `:` or the end of the document follows it. Otherwise it
+starts a value: `tag #release` is the link of `tag` and `#release`, while
+`a: b # why`, `a: b #` and a line that starts with `#release` hold comments.
 
 A formatter keeps the same rule from the other side: a reference that begins
 with a `#` is written quoted (`'#tag'`), so a document it writes reads back as
