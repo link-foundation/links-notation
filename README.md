@@ -360,16 +360,16 @@ All ten language implementations (C#, JavaScript, Rust, Python, Go, Java, PHP, C
 <!-- test-counts:start -->
 | Language | Tests | Test categories |
 | --- | --- | --- |
-| Python | 281 | 28 |
-| JavaScript | 351 | 34 |
-| Rust | 430 | 32 |
-| C# | 325 | 30 |
-| Go | 167 | 20 |
-| Java | 214 | 19 |
-| PHP | 265 | 26 |
-| C++ | 380 | 32 |
-| Swift | 349 | 35 |
-| Kotlin | 358 | 33 |
+| Python | 310 | 31 |
+| JavaScript | 378 | 37 |
+| Rust | 456 | 35 |
+| C# | 353 | 33 |
+| Go | 189 | 23 |
+| Java | 242 | 22 |
+| PHP | 293 | 29 |
+| C++ | 408 | 35 |
+| Swift | 376 | 38 |
+| Kotlin | 385 | 36 |
 <!-- test-counts:end -->
 
 The table is written by `scripts/create-test-case-comparison.mjs`, which reads the test files
