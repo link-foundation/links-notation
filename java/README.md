@@ -226,6 +226,20 @@ List<Link> links = new Parser().parse(input);
 System.out.println(links.get(0).format(false)); // (value ((id 1) (label one)))
 ```
 
+### Colons Inside References
+
+A colon between two characters of a bare reference belongs to it, so times,
+URLs and qualified names need no quotes. A colon followed by whitespace, a
+parenthesis, a quote or a versioned literal still ends an ID:
+
+```java
+List<Link> links = new Parser().parse("time 12:30\nurl https://example.com/a#b\nstd::string: type\n");
+System.out.println(Link.formatLinks(links));
+// (time '12:30')
+// (url 'https://example.com/a#b')
+// ('std::string': type)
+```
+
 ### Comments
 
 A `#` hides the rest of the line it stands on, so a document can carry prose
@@ -239,7 +253,11 @@ deploy: staging # only staging, for now
 Both comments are gone by the time the document is read, leaving the single
 link `(deploy: staging)`. A `#` only opens a comment where a reference could
 begin, so a `#` inside a token (`issue#1047`) and a `#` inside a delimited
-reference (`"#"`) stay ordinary characters.
+reference (`"#"`) stay ordinary characters. Where a reference could begin, a
+`#` opens a comment when only indentation stands before it on its line, or when
+whitespace, `(`, `)`, `:` or the end of the document follows it. Otherwise it
+starts a value: `tag #release` is the link of `tag` and `#release`, while
+`a: b # why`, `a: b #` and a line that starts with `#release` hold comments.
 
 A formatter keeps the same rule from the other side: a reference that begins
 with a `#` is written quoted (`'#tag'`), so a document it writes reads back as
@@ -346,6 +364,16 @@ Represents a single link with ID and values.
 - `getQuote()` - `'`, `"` or `` ` `` when `getRawId()` is quoted, otherwise `null`
 - `static referenceQuote(String raw)` - The delimiter of one complete quoted
   reference as written, otherwise `null`
+- `static quoteReference(String reference)` - Write one reference so that a
+  parser reads it back as exactly this text in the ID or value position of any
+  link: bare when it needs no delimiters, otherwise quoted, or a versioned
+  literal (`~1{...}`) when it is empty or holds a control character. It is
+  conservative: a colon, whitespace, a parenthesis, a quote and a leading `#`
+  are always quoted, so the text also reads back with older releases
+  (`quoteReference("12:30")` is `'12:30'`, `quoteReference("#release")` is
+  `'#release'`)
+- `static needsQuoting(String reference)` - Whether `quoteReference` changes the
+  text
 
 #### `CstNode` and `CstKind`
 

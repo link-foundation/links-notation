@@ -93,9 +93,11 @@ class StreamParserTest {
 
   @Test
   void waitsForTheLineThatClosesAnEvenRunOfQuotes() throws Exception {
-    // `""` is the empty reference only when nothing closes it, and here the
+    // `""b` opens a reference that only a later line can close, and here the
     // next line does, so the first line cannot be emitted on its own (issue #377).
-    String input = "a \"\" b\n\"\" c\n";
+    // (A `""` followed by whitespace and the end of its line is the empty
+    // reference whatever follows, issue #443.)
+    String input = "a \"\"b\n\"\" c\n";
     StreamParser stream = new StreamParser();
     for (int index = 0; index < input.length(); index++) {
       assertEquals(List.of(), stream.write(input.substring(index, index + 1)));

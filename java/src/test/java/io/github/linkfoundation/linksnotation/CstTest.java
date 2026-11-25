@@ -87,11 +87,17 @@ class CstTest {
 
   @Test
   void withoutCommentSupportHashIsPartOfReferences() throws Exception {
-    String input = "a #b";
+    // `a #b` would read `#b` as a value either way (issue #444).
+    String input = "a # b";
     CstNode cst = new Parser(false).parseCst(input);
     assertEquals(input, cst.toString());
     assertEquals(
-        List.of(CstKind.REFERENCE, CstKind.WHITESPACE, CstKind.REFERENCE),
+        List.of(
+            CstKind.REFERENCE,
+            CstKind.WHITESPACE,
+            CstKind.REFERENCE,
+            CstKind.WHITESPACE,
+            CstKind.REFERENCE),
         cst.tokens().stream().map(CstNode::getKind).toList());
     assertEquals(
         List.of(CstKind.REFERENCE, CstKind.WHITESPACE, CstKind.COMMENT),

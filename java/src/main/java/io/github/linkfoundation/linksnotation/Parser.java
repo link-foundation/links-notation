@@ -242,9 +242,20 @@ public class Parser {
     final String value;
     final int end;
 
+    /**
+     * Whether the reading is final: false only for an even run that nothing closes yet, which a
+     * closing run written later would turn into a reference holding what follows.
+     */
+    final boolean closed;
+
     QuotedString(String value, int end) {
+      this(value, end, true);
+    }
+
+    QuotedString(String value, int end, boolean closed) {
       this.value = value;
       this.end = end;
+      this.closed = closed;
     }
   }
 
@@ -254,7 +265,9 @@ public class Parser {
    * <p>Any number N of quotes opens and closes the string, 2*N quotes are an escaped quote
    * sequence. A run of an even number of delimiters that does not open a reference with a
    * substantive body is the empty reference: the shortest reading, a bare delimiter pair enclosing
-   * nothing, wins over a longer n-quote delimiter.
+   * nothing, wins over a longer n-quote delimiter. So is an even run followed by whitespace when a
+   * line break comes before the run that closes it, or nothing closes it: an empty value at the end
+   * of a line never swallows the lines after it (issue #443).
    *
    * <p>Returns null when text does not start a delimited reference.
    */
@@ -285,7 +298,7 @@ public class Parser {
     }
 
     boolean isEvenRun = quoteCount % 2 == 0;
-    QuotedString emptyReference = isEvenRun ? new QuotedString("", start + quoteCount) : null;
+    int bodyStart = pos;
 
     String openClose = repeatChar(quoteChar, quoteCount);
     String escapeSeq = repeatChar(quoteChar, quoteCount * 2);
@@ -301,8 +314,10 @@ public class Parser {
         int afterClose = pos + quoteCount;
         if (afterClose >= length || text.charAt(afterClose) != quoteChar) {
           String value = content.toString();
-          if (isEvenRun && !isSubstantiveBody(value)) {
-            return emptyReference;
+          if (isEvenRun
+              && (staysOnItsLine(text, length, bodyStart, afterClose)
+                  || !isSubstantiveBody(value))) {
+            return new QuotedString("", start + quoteCount);
           }
           return new QuotedString(value, afterClose);
         }
@@ -311,7 +326,42 @@ public class Parser {
       pos++;
     }
 
-    return emptyReference;
+    if (!isEvenRun) {
+      return null;
+    }
+    // Nothing closes the run: it is the empty reference, which a later closing
+    // run would still turn into one holding what follows, unless whitespace
+    // follows it (issue #443).
+    return new QuotedString("", start + quoteCount, staysOnItsLine(text, length, bodyStart, -1));
+  }
+
+  /**
+   * Report whether an even run whose body starts at bodyStart has to be read as the empty reference
+   * because its n-quoted reading would leave the line without opening a multiline reference:
+   * whitespace follows the run directly, and a line break comes before the closing run that ends at
+   * end (or end is -1: no run closes it at all).
+   *
+   * @param length how much of text may be read
+   */
+  private static boolean staysOnItsLine(String text, int length, int bodyStart, int end) {
+    if (bodyStart < length && !isLineSpace(text.charAt(bodyStart))) {
+      return false;
+    }
+    if (end < 0) {
+      return true;
+    }
+    for (int position = bodyStart; position < end; position++) {
+      char character = text.charAt(position);
+      if (character == '\n' || character == '\r') {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /** Report whether character is a space, a tab or a line break. */
+  private static boolean isLineSpace(char character) {
+    return character == ' ' || character == '\t' || character == '\n' || character == '\r';
   }
 
   /**
@@ -663,11 +713,14 @@ public class Parser {
 
   /**
    * Find position of colon that's not inside quotes or parentheses, text starting at offset in the
-   * document.
+   * document. A run of colons inside a bare reference, as in {@code 12:30} or {@code std::string},
+   * is part of the reference and is passed over (issue #444).
    */
   private int findColonOutsideQuotes(String text, int offset) {
     int parenDepth = 0;
     int i = 0;
+    // Whether the character before i is part of a bare reference.
+    boolean inBareReference = false;
 
     while (i < text.length()) {
       char c = text.charAt(i);
@@ -675,19 +728,67 @@ public class Parser {
         int end = skipQuotedString(text, i, offset);
         if (end > i) {
           i = end;
+          inBareReference = false;
           continue;
         }
       } else if (c == '(') {
         parenDepth++;
       } else if (c == ')') {
         parenDepth--;
-      } else if (c == ':' && parenDepth == 0) {
-        return i;
+      } else if (c == ':') {
+        if (inBareReference) {
+          int end = innerColonsEnd(text, i);
+          if (end >= 0) {
+            i = end;
+            continue;
+          }
+        }
+        if (parenDepth == 0) {
+          return i;
+        }
+      } else if (!inBareReference) {
+        // A versioned literal is a whole token, so a colon right after it
+        // separates, as after a delimited reference.
+        int end = ReferenceLiteral.end(text, i);
+        if (end >= 0) {
+          i = end;
+          continue;
+        }
       }
+      inBareReference = Comments.SEPARATORS.indexOf(c) < 0;
       i++;
     }
 
     return -1;
+  }
+
+  /** What cannot start a bare reference after colons inside one: what ends one, and the quotes. */
+  private static final String NOT_AFTER_INNER_COLONS = " \t\n\r(:)\"'`";
+
+  /**
+   * Find the end of the run of colons at start of text when the run belongs to the bare reference
+   * it is written in.
+   *
+   * <p>The character before start must be part of a bare reference. The run belongs to it when a
+   * character that could start a bare reference follows the run, and that is not the start of a
+   * versioned literal: {@code 12:30}, {@code std::string} and {@code https://example.com} are each
+   * one reference, while {@code a: b}, {@code a:(b)}, {@code a:"b"} and {@code a:~1{62}} still
+   * separate an ID from its values (issue #444).
+   *
+   * @return the position just past the run, or -1 when the run ends the reference
+   */
+  static int innerColonsEnd(String text, int start) {
+    int after = start;
+    while (after < text.length() && text.charAt(after) == ':') {
+      after++;
+    }
+    if (after == start
+        || after >= text.length()
+        || NOT_AFTER_INNER_COLONS.indexOf(text.charAt(after)) >= 0
+        || ReferenceLiteral.hasPrefixAt(text, after)) {
+      return -1;
+    }
+    return after;
   }
 
   /**

@@ -44,10 +44,8 @@ class SharedTextParityTest {
       String formatted = decode(columns[3]);
       List<Link> parsed = new Parser().parse(input);
       assertEquals(columns[2], tree(parsed), columns[0]);
-      assertEquals(
-          formatted,
-          parsed.stream().map(link -> link.format(false)).collect(Collectors.joining()),
-          columns[0]);
+      // Formatted as formatLinks writes a document: one link per line.
+      assertEquals(formatted, Link.formatLinks(parsed), columns[0]);
       assertEquals(columns[2], tree(new Parser().parse(formatted)), columns[0]);
       StreamParser stream = new StreamParser();
       for (int character : input.codePoints().toArray()) {

@@ -18,6 +18,19 @@ public final class ReferenceLiteral {
     return PREFIX.matcher(text).find();
   }
 
+  /** Report whether the versioned literal prefix {@code ~<digits>{} starts at start of text. */
+  static boolean hasPrefixAt(String text, int start) {
+    int length = text.length();
+    if (start >= length || text.charAt(start) != '~') {
+      return false;
+    }
+    int index = start + 1;
+    while (index < length && text.charAt(index) >= '0' && text.charAt(index) <= '9') {
+      index++;
+    }
+    return index > start + 1 && index < length && text.charAt(index) == '{';
+  }
+
   /**
    * Find where the versioned literal {@code ~<digits>{<payload>}} that starts at start of text
    * ends. The payload holds no {@code }}, space, tab, line break or parenthesis. A single forward
