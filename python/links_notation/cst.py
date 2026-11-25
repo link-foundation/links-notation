@@ -19,7 +19,7 @@ import re
 from typing import List, Optional, Tuple
 
 from .comments import strip_comments
-from .parser import ParseError
+from .parser import ParseError, inner_colons_end
 from .quotes import QUOTE_CHARS, _parse_quoted_string_at
 from .reference_literal import decode_reference_literal, reference_literal_end
 
@@ -243,7 +243,16 @@ def _reference(input_text: str, prepared: str, start: int) -> Tuple[CstNode, int
             reference = CstNode(CstKind.REFERENCE, text=input_text[start:end], value=value, quote=input_text[start])
             return reference, end
     end = start + 1
-    while end < len(prepared) and prepared[end] not in _BARE_REFERENCE_END:
+    while end < len(prepared):
+        if prepared[end] == ":":
+            # Colons belong to the reference when a bare reference continues
+            # after them, as in ``12:30`` (issue #444).
+            after = inner_colons_end(prepared, end)
+            if after == -1:
+                break
+            end = after
+        elif prepared[end] in _BARE_REFERENCE_END:
+            break
         end += 1
     text = input_text[start:end]
     return CstNode(CstKind.REFERENCE, text=text, value=text), end

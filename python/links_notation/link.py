@@ -310,3 +310,50 @@ class Link:
         for v in self.values:
             lines.append(config.indent_string + self.format_value(v))
         return "\n".join(lines)
+
+
+def quote_reference(reference: Optional[str]) -> str:
+    """
+    Write one reference so that a parser reads it back as exactly this text, in
+    the ID or value position of any link: the name :meth:`Link.escape_reference`
+    gives the same function to code that thinks in quoting rather than escaping.
+    Text that needs no delimiters is returned as it is; anything else is quoted,
+    or written as a versioned literal when it is empty or holds a control
+    character. None is written as the empty string.
+
+    The answer is deliberately conservative, so the text also reads back with
+    releases older than the one that made bare ``12:30`` and ``tag #release``
+    legal (issue #444): a colon, a whitespace character, a parenthesis, a quote,
+    and a ``#`` that starts the text still ask for quotes.
+
+    >>> quote_reference("plain")
+    'plain'
+    >>> quote_reference("has space")
+    "'has space'"
+    >>> quote_reference("#release")
+    "'#release'"
+    >>> quote_reference("")
+    '~1{}'
+    """
+    return Link.escape_reference(reference)
+
+
+def needs_quoting(reference: str) -> bool:
+    """
+    Report whether one reference has to be quoted (or written as a versioned
+    literal) to read back as exactly this text, that is whether
+    :func:`quote_reference` changes it.
+
+    Raises:
+        TypeError: If ``reference`` is not a string
+
+    >>> needs_quoting("plain")
+    False
+    >>> needs_quoting("12:30")
+    True
+    >>> needs_quoting("")
+    True
+    """
+    if not isinstance(reference, str):
+        raise TypeError("Reference must be a string")
+    return quote_reference(reference) != reference

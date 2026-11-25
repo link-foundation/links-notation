@@ -1,10 +1,18 @@
 """
 Comments, and the rule that decides where one starts.
 
-``#`` starts a comment when it opens a token: at the start of the document or
-after a space, a tab or a line break. A ``#`` written inside a token
-(``issue#1047``) or inside a delimited reference (``"# not a comment"``) is an
-ordinary character.
+``#`` starts a comment when it opens a token and is not a value:
+
+- at the start of a line, after any indentation, a ``#`` always starts one;
+- later on a line, after a space or a tab, a ``#`` starts one only when no
+  character that could continue a bare reference follows it, that is when
+  whitespace, the end of the document, ``(``, ``)`` or ``:`` comes next. So
+  ``a: b # why`` and ``a: b #`` hold a comment, while ``tag #release`` is the
+  link of ``tag`` and ``#release`` (issue #444): a value is never silently
+  dropped.
+
+A ``#`` written inside a token (``issue#1047``) or inside a delimited reference
+(``"# not a comment"``) is an ordinary character.
 
 :func:`strip_comments` replaces every character of every comment with a space
 rather than removing it, so every later character keeps the position it had in
@@ -28,6 +36,37 @@ SEPARATORS = (" ", "\t", "\n", "\r", "(", ":", ")")
 #: What a comment may start after.
 BEFORE_COMMENT = (" ", "\t", "\n", "\r")
 
+#: Indentation: what may stand between the start of a line and a comment.
+INDENTATION = (" ", "\t")
+
+
+def opens_comment(document: str, position: int) -> bool:
+    """
+    Report whether the ``#`` at ``position`` starts a comment: it opens a token,
+    and either only indentation stands before it on its line or no character
+    that could continue a bare reference follows it.
+
+    >>> opens_comment("# note", 0)
+    True
+    >>> opens_comment("a #", 2)
+    True
+    >>> opens_comment("a # why", 2)
+    True
+    >>> opens_comment("tag #release", 4)
+    False
+    >>> opens_comment("issue#1047", 5)
+    False
+    """
+    if document[position] != COMMENT or not _follows(document, position, BEFORE_COMMENT):
+        return False
+    before = position - 1
+    while before >= 0 and document[before] in INDENTATION:
+        before -= 1
+    if before < 0 or document[before] in ("\n", "\r"):
+        return True
+    following = position + 1
+    return following >= len(document) or document[following] in SEPARATORS
+
 
 def strip_comments(document: str) -> str:
     """
@@ -39,6 +78,8 @@ def strip_comments(document: str) -> str:
 
     >>> strip_comments("a: b # why\\n")
     'a: b      \\n'
+    >>> strip_comments("tag #release\\n")
+    'tag #release\\n'
     >>> strip_comments('"# kept"\\n')
     '"# kept"\\n'
     >>> strip_comments("issue#1047\\n")
@@ -53,7 +94,7 @@ def strip_comments(document: str) -> str:
     while position < len(document):
         char = document[position]
 
-        if char == COMMENT and _follows(document, position, BEFORE_COMMENT):
+        if char == COMMENT and opens_comment(document, position):
             if blanked is None:
                 blanked = list(document)
             while position < len(document) and document[position] not in ("\n", "\r"):

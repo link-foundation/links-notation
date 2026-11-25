@@ -3,9 +3,10 @@
 from dataclasses import dataclass
 from typing import AsyncIterable, AsyncIterator, Callable, Iterable, Iterator, List, Optional
 
+from .comments import opens_comment
 from .link import Link
 from .parser import DEFAULT_MAX_DEPTH, ParseError, Parser
-from .quotes import QUOTE_CHARS, _closing_run_follows, _parse_quoted_string_at
+from .quotes import QUOTE_CHARS, _read_delimited
 from .reference_literal import reference_literal_end
 
 
@@ -231,12 +232,10 @@ def _structurally_complete(document: str, comments: bool) -> bool:
     position = 0
     token_start = True
     separators = " \t\n\r(:)"
-    before_comment = " \t\n\r"
 
     while position < len(document):
         character = document[position]
-        previous = None if position == 0 else document[position - 1]
-        if comments and character == "#" and (previous is None or previous in before_comment):
+        if comments and opens_comment(document, position):
             newline = document.find("\n", position)
             if newline < 0:
                 break
@@ -253,9 +252,10 @@ def _structurally_complete(document: str, comments: bool) -> bool:
         if token_start and character in QUOTE_CHARS:
             # A reference nothing closes yet may be closed by a later line,
             # which changes what it holds: an even run is the empty reference
-            # only when no run in the whole document closes it.
-            parsed = _parse_quoted_string_at(document, position)
-            if parsed is None or not _closing_run_follows(document, position):
+            # only when no run in the whole document closes it, or when
+            # whitespace and a line break follow it (issue #443).
+            parsed = _read_delimited(document, position)
+            if parsed is None or not parsed[2]:
                 return False
             position = parsed[1]
             continue

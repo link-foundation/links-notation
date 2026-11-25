@@ -9,7 +9,7 @@ shared with the Rust, JavaScript, Go, C#, Java and PHP suites, so a document
 written by one implementation reads the same in all of them.
 """
 
-from links_notation import Link, Parser, format_links, strip_comments
+from links_notation import Link, Parser, StreamParser, format_links, strip_comments
 
 
 def render(node):
@@ -135,7 +135,7 @@ class TestReferencesTheCommentReaderSkips:
 
     def test_a_hash_inside_a_reference_that_follows_another_reference_is_content(self):
         assert rendered("\"x\"' #y'\n") == "(<x> < #y>)"
-        assert rendered('```q```"" #c\n"""\n') == '(<q> < #c\n">)'
+        assert rendered('```q```""x # c\n"""\n') == '(<q> <x # c\n">)'
 
     def test_a_hash_inside_a_reference_that_follows_a_literal_is_content(self):
         assert rendered('~1{62}" #b"\n') == "(<b> < #b>)"
@@ -150,4 +150,37 @@ class TestReferencesTheCommentReaderSkips:
         assert strip_comments('(a)" #b"\n') == '(a)" #b"\n'
         assert strip_comments("\"x\"' #y'\n") == "\"x\"' #y'\n"
         assert strip_comments('~1{62}" #b"\n') == '~1{62}" #b"\n'
-        assert strip_comments('a"b #c"\n') == 'a"b    \n'
+        assert strip_comments('a"b # c"\n') == 'a"b     \n'
+
+
+class TestHashValues:
+    """
+    Issue #444: a ``#`` that opens a token later on a line and is followed by a
+    character that could continue a bare reference is a value, so a value is
+    never dropped as a comment. At the start of a line it is still a comment.
+    """
+
+    def test_a_hash_that_opens_a_value_later_on_a_line_is_the_value(self):
+        assert rendered("tag #release\n") == "(<tag> <#release>)"
+        assert rendered("root:\n  tag #release\n  next 1\n") == rendered('root:\n  tag "#release"\n  next 1\n')
+        assert rendered("colour #ff0000 # a note\n") == "(<colour> <#ff0000>)"
+
+    def test_a_hash_followed_by_a_space_a_parenthesis_or_nothing_opens_a_comment(self):
+        assert rendered("a: b #\n") == "(<a>: <b>)"
+        assert rendered("a: b #\tnote\n") == "(<a>: <b>)"
+        assert rendered("a b #(note)\n") == "(<a> <b>)"
+        assert rendered("a b #:note\n") == "(<a> <b>)"
+
+    def test_a_hash_at_the_start_of_a_line_opens_a_comment_whatever_follows_it(self):
+        assert rendered("#release\na\n") == "(<a>)"
+        assert rendered("root\n  #release\n  a\n") == rendered("root\n  a\n")
+
+    def test_the_comment_reader_keeps_a_hash_that_opens_a_value(self):
+        assert strip_comments("tag #release # note\n") == "tag #release       \n"
+
+    def test_the_stream_reads_a_hash_value_as_the_parser_does(self):
+        document = "tag #release\ncolour #ff0000 # a note\n"
+        stream = StreamParser()
+        for character in document:
+            stream.write(character)
+        assert format_links(stream.finish()) == format_links(Parser().parse(document))
