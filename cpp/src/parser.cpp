@@ -230,8 +230,21 @@ class Grammar {
       out = std::move(reading->value);
       return ok_at(input + reading->length);
     }
+    // A bare reference never starts with a colon, and a run of colons inside
+    // one belongs to it only when the reference goes on after the run
+    // (issue #444). The test reads ahead without recording any expectation,
+    // so a colon that ends the reference never moves the position or the
+    // expected tokens a parse error reports.
     std::size_t end = input;
-    while (!at_end(end) && is_reference_byte(document_[end])) ++end;
+    while (!at_end(end)) {
+      if (is_reference_byte(document_[end])) {
+        ++end;
+        continue;
+      }
+      const auto inner = end > input ? detail::inner_colons_end(document_, end) : std::nullopt;
+      if (!inner) break;
+      end = *inner;
+    }
     if (end > input) {
       out.assign(document_.substr(input, end - input));
       return ok_at(end);

@@ -3,7 +3,8 @@
 // A reference opened by a run of N delimiters (`"`, `'` or `` ` ``) closes at
 // the next run of exactly N, and a run of 2N inside it is that delimiter
 // escaped. An even run that encloses nothing substantive is the empty
-// reference. This is a port of rust/links-notation/src/quotes.rs.
+// reference, and so is an even run followed by whitespace up to its line break
+// (issue #443). This is a port of rust/links-notation/src/quotes.rs.
 
 #ifndef LINKS_NOTATION_SRC_QUOTES_HPP
 #define LINKS_NOTATION_SRC_QUOTES_HPP
@@ -80,6 +81,23 @@ std::optional<std::size_t> reference_literal_end(std::string_view text, std::siz
 /// reads it. `references` are those of `document`.
 std::optional<std::size_t> delimited_token_end(std::string_view document, std::size_t start,
                                                const DelimitedReferences& references);
+
+/// Where a bare reference that has reached the colon at byte `position` of
+/// `text` goes on: just past the run of colons there when a character that can
+/// start a bare reference follows that run, which makes `12:30`, `std::string`
+/// and `https://example.com/a#b` one reference each (issue #444). Nothing when
+/// the run ends the input, or whitespace, a parenthesis, a colon, a quote or a
+/// versioned literal prefix `~[0-9]+{` follows it: then the colon ends the
+/// reference, so `a: b`, `a:(b)`, `a:"b"` and `a:~1{62}` still separate an ID
+/// from its values.
+std::optional<std::size_t> inner_colons_end(std::string_view text, std::size_t position);
+
+/// Whether the `#` at byte `position` of `document` starts a comment: it opens
+/// a token, and either only indentation stands before it on its line or no
+/// character that could continue a bare reference follows it (issue #444).
+/// The comment reader, the stream parser and the syntax tree all judge a `#`
+/// with this one rule. Defined in comments.cpp.
+bool opens_comment(std::string_view document, std::size_t position);
 
 }  // namespace links_notation::detail
 

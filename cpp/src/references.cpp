@@ -77,6 +77,16 @@ std::string escape_reference(const std::optional<std::string>& reference, bool m
   return escape_reference(std::string_view(*reference), minimal);
 }
 
+std::string quote_reference(std::string_view reference, bool minimal) { return escape_reference(reference, minimal); }
+
+std::string quote_reference(const std::optional<std::string>& reference, bool minimal) {
+  return escape_reference(reference, minimal);
+}
+
+bool needs_quoting(std::string_view reference, bool minimal) {
+  return quote_reference(reference, minimal) != reference;
+}
+
 std::string unescape_reference(std::string_view reference) {
   if (has_reference_literal_prefix(reference)) return decode_reference_literal(reference);
   if (reference.empty() || !detail::is_quote(reference[0])) return std::string(reference);

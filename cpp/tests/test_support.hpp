@@ -97,6 +97,44 @@ inline std::vector<std::uint8_t> bytes_of(const std::string& text) {
   return std::vector<std::uint8_t>(text.begin(), text.end());
 }
 
+/// Text as a JSON string, so a test can compare trees the way the JavaScript
+/// tests compare JSON.stringify results.
+inline std::string json_string(const std::string& text) {
+  static const char digits[] = "0123456789abcdef";
+  std::string out = "\"";
+  for (const char character : text) {
+    const auto byte = static_cast<unsigned char>(character);
+    if (character == '"' || character == '\\') {
+      out += '\\';
+      out += character;
+    } else if (byte < 0x20) {
+      out += "\\u00";
+      out += digits[byte >> 4];
+      out += digits[byte & 15];
+    } else {
+      out += character;
+    }
+  }
+  return out + '"';
+}
+
+/// The tree of parsed links as JSON: every link is an array of its id (or
+/// null) followed by the trees of its values, as the JavaScript tests write
+/// `links.map((link) => [link.id, ...tree(link.values)])`.
+inline std::string tree_of(const std::vector<links_notation::Link>& links) {
+  std::string out = "[";
+  for (std::size_t index = 0; index < links.size(); ++index) {
+    if (index > 0) out += ',';
+    const links_notation::Link& link = links[index];
+    out += '[';
+    out += link.id ? json_string(*link.id) : "null";
+    const std::string values = tree_of(link.values);
+    if (values.size() > 2) out += ',' + values.substr(1, values.size() - 2);
+    out += ']';
+  }
+  return out + ']';
+}
+
 }  // namespace links_notation_test
 
 #endif  // LINKS_NOTATION_TEST_SUPPORT_HPP

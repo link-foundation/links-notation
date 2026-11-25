@@ -120,7 +120,18 @@ CstNode build_cst(std::string_view input, bool comments) {
       end = position + quoted->length;
       add(CstNode::token(CstKind::reference, slice(position, end), quoted->value, character));
     } else {
-      while (end < prepared.size() && !ends_bare_reference(prepared[end])) ++end;
+      while (end < prepared.size()) {
+        if (prepared[end] == ':') {
+          // Colons belong to the reference when a bare reference continues
+          // after them, as in `12:30` (issue #444).
+          const auto inner = detail::inner_colons_end(prepared, end);
+          if (!inner) break;
+          end = *inner;
+        } else if (ends_bare_reference(prepared[end])) {
+          break;
+        }
+        ++end;
+      }
       add(CstNode::token(CstKind::reference, slice(position, end), slice(position, end)));
     }
     position = end;

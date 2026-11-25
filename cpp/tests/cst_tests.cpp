@@ -95,7 +95,11 @@ TEST(CstTests, WithoutCommentSupportHashIsPartOfReferences) {
   const CstNode cst = Parser(options).parse_cst(input);
   EXPECT_EQ(cst.to_string(), input);
   EXPECT_EQ(kinds(cst.tokens()), (std::vector<CstKind>{CstKind::reference, CstKind::whitespace, CstKind::reference}));
+  // With comments on, `#b` later on a line is a value too (issue #444), and
+  // a `#` followed by a space opens a comment.
   EXPECT_EQ(kinds(Parser().parse_cst(input).tokens()),
+            (std::vector<CstKind>{CstKind::reference, CstKind::whitespace, CstKind::reference}));
+  EXPECT_EQ(kinds(Parser().parse_cst("a # b").tokens()),
             (std::vector<CstKind>{CstKind::reference, CstKind::whitespace, CstKind::comment}));
 }
 

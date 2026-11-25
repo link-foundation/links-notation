@@ -23,7 +23,24 @@ constexpr std::string_view separators = " \t\n\r(:)";
 // so `issue#1047` is a reference.
 constexpr std::string_view before_comment = " \t\n\r";
 
+// Indentation: what may stand between the start of a line and a comment.
+constexpr std::string_view indentation = " \t";
+
 }  // namespace
+
+namespace detail {
+
+bool opens_comment(std::string_view document, std::size_t position) {
+  if (position >= document.size() || document[position] != comment_character) return false;
+  if (!follows(document, position, before_comment)) return false;
+  std::size_t before = position;
+  while (before > 0 && indentation.find(document[before - 1]) != std::string_view::npos) --before;
+  if (before == 0 || document[before - 1] == '\n' || document[before - 1] == '\r') return true;
+  const std::size_t next = position + 1;
+  return next >= document.size() || separators.find(document[next]) != std::string_view::npos;
+}
+
+}  // namespace detail
 
 std::string strip_comments(std::string_view document) {
   std::string bytes(document);
@@ -38,7 +55,7 @@ std::string strip_comments(std::string_view document) {
   while (position < bytes.size()) {
     const char byte = bytes[position];
 
-    if (byte == comment_character && follows(bytes, position, before_comment)) {
+    if (byte == comment_character && detail::opens_comment(document, position)) {
       while (position < bytes.size() && bytes[position] != '\n' && bytes[position] != '\r') {
         bytes[position] = ' ';
         ++position;
