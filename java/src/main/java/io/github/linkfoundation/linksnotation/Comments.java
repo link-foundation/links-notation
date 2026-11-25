@@ -3,9 +3,19 @@ package io.github.linkfoundation.linksnotation;
 /**
  * Comments, and the rule that decides where one starts.
  *
- * <p>{@code #} starts a comment when it opens a token: at the start of the document or after a
- * space, a tab or a line break. A {@code #} written inside a token ({@code issue#1047}) or inside a
- * delimited reference ({@code "# not a comment"}) is an ordinary character.
+ * <p>{@code #} starts a comment when it opens a token and is not a value:
+ *
+ * <ul>
+ *   <li>at the start of a line, after any indentation, a {@code #} always starts one;
+ *   <li>later on a line, after a space or a tab, a {@code #} starts one only when no character that
+ *       could continue a bare reference follows it, that is when whitespace, the end of the
+ *       document, {@code (}, {@code )} or {@code :} comes next. So {@code a: b # why} and {@code a:
+ *       b #} hold a comment, while {@code tag #release} is the link of {@code tag} and {@code
+ *       #release} (issue #444): a value is never silently dropped.
+ * </ul>
+ *
+ * <p>A {@code #} written inside a token ({@code issue#1047}) or inside a delimited reference
+ * ({@code "# not a comment"}) is an ordinary character.
  *
  * <p>{@link #stripComments(String)} replaces every character of every comment with a space rather
  * than removing it, so every later character keeps the position it had in the document the caller
@@ -26,7 +36,45 @@ public final class Comments {
   /** What a comment may start after. */
   private static final String BEFORE_COMMENT = " \t\n\r";
 
+  /** Indentation: what may stand between the start of a line and a comment. */
+  private static final String INDENTATION = " \t";
+
   private Comments() {}
+
+  /**
+   * Report whether the {@code #} at position starts a comment: it opens a token, and either only
+   * indentation stands before it on its line or no character that could continue a bare reference
+   * follows it.
+   *
+   * <pre>{@code
+   * opensComment("# note", 0);       // true: the start of a line
+   * opensComment("a #", 2);          // true: nothing follows it
+   * opensComment("a # why", 2);      // true: a space follows it
+   * opensComment("tag #release", 4); // false: a value
+   * opensComment("issue#1047", 5);   // false: inside a token
+   * }</pre>
+   *
+   * @param document the document being read
+   * @param position position of the character being judged
+   * @return true when a comment starts at position
+   */
+  static boolean opensComment(String document, int position) {
+    if (position < 0 || position >= document.length() || document.charAt(position) != COMMENT) {
+      return false;
+    }
+    if (!follows(document, position, BEFORE_COMMENT)) {
+      return false;
+    }
+    int before = position - 1;
+    while (before >= 0 && INDENTATION.indexOf(document.charAt(before)) >= 0) {
+      before--;
+    }
+    if (before < 0 || document.charAt(before) == '\n' || document.charAt(before) == '\r') {
+      return true;
+    }
+    int next = position + 1;
+    return next >= document.length() || SEPARATORS.indexOf(document.charAt(next)) >= 0;
+  }
 
   /**
    * Return the document with every comment blanked out.
@@ -34,7 +82,9 @@ public final class Comments {
    * <p>The result has the same length as the document it was given. The document is read token by
    * token, the way the parser reads it, so a {@code #} inside a delimited reference that starts
    * right after a group, another reference or a literal is content, as it is in one that starts
-   * after a space (issue #377).
+   * after a space (issue #377). Where a comment starts is decided by {@link #opensComment(String,
+   * int)}, so {@code stripComments("tag #release # note\n")} keeps {@code #release} and blanks
+   * {@code # note}.
    *
    * @param document text in Lino notation
    * @return the same text with the characters of every comment replaced by spaces
@@ -48,7 +98,7 @@ public final class Comments {
     while (position < document.length()) {
       char character = document.charAt(position);
 
-      if (character == COMMENT && follows(document, position, BEFORE_COMMENT)) {
+      if (character == COMMENT && opensComment(document, position)) {
         if (blanked == null) {
           blanked = document.toCharArray();
         }

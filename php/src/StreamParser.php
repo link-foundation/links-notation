@@ -12,7 +12,6 @@ use LogicException;
 class StreamParser
 {
     private const DEFAULT_MAX_BUFFER_SIZE = 10 * 1024 * 1024;
-    private const BEFORE_COMMENT = " \t\n\r";
 
     private Parser $parser;
     private mixed $onLink;
@@ -269,11 +268,7 @@ class StreamParser
         $length = strlen($document);
         for ($position = 0; $position < $length; $position++) {
             $character = $document[$position];
-            if (
-                $comments
-                && $character === Comments::COMMENT
-                && self::follows($document, $position, self::BEFORE_COMMENT)
-            ) {
+            if ($comments && Comments::opensComment($document, $position)) {
                 $newline = strpos($document, "\n", $position);
                 if ($newline === false) {
                     break;
@@ -294,9 +289,13 @@ class StreamParser
             if ($tokenStart && self::isQuote($character)) {
                 // A reference nothing closes yet may be closed by a later
                 // line, which changes what it holds: an even run is the empty
-                // reference only when no run in the whole document closes it.
+                // reference only when no run in the whole document closes it,
+                // or when whitespace follows it directly (issue #443).
                 $end = Parser::quotedReferenceEnd($document, $position);
-                if ($end < 0 || !self::closingRunFollows($document, $position)) {
+                if (
+                    $end < 0
+                    || (!self::closingRunFollows($document, $position) && !self::endsItsLine($document, $position))
+                ) {
                     return false;
                 }
                 $position = $end - 1;
@@ -337,13 +336,22 @@ class StreamParser
         return false;
     }
 
+    /**
+     * Report whether the run of delimiters opening at $start is an even run
+     * followed directly by whitespace or the end of the document: the empty
+     * reference, whatever a later line holds, when nothing closes it on its
+     * own line (issue #443).
+     */
+    private static function endsItsLine(string $document, int $start): bool
+    {
+        $count = strspn($document, $document[$start], $start);
+        $after = $start + $count;
+
+        return $count % 2 === 0 && ($after >= strlen($document) || str_contains(" \t\n\r", $document[$after]));
+    }
+
     private static function isQuote(string $character): bool
     {
         return $character === '"' || $character === "'" || $character === '`';
-    }
-
-    private static function follows(string $document, int $position, string $allowed): bool
-    {
-        return $position === 0 || str_contains($allowed, $document[$position - 1]);
     }
 }

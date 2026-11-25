@@ -66,6 +66,19 @@ class CstTest {
         val cst = Parser(ParserOptions(comments = false)).parseCst(input)
         assertEquals(input, cst.toString())
         assertEquals(listOf("reference", "whitespace", "reference"), cst.tokens().map { it.kind.value })
+        // With comments, a `#` that opens a value later on a line is still part
+        // of the reference (issue #444); one followed by a space opens a comment.
+        assertEquals(listOf("reference", "whitespace", "reference"), Parser().parseCst(input).tokens().map { it.kind.value })
+        assertEquals(listOf("reference", "whitespace", "comment"), Parser().parseCst("a # b").tokens().map { it.kind.value })
+    }
+
+    @Test
+    fun aBareReferenceHoldsItsInnerColons() {
+        // Issue #444: colons a bare-reference character follows are part of it.
+        val cst = Parser().parseCst("time 12:30\na:b: c")
+        assertEquals("time 12:30\na:b: c", cst.toString())
+        val references = cst.tokens().filter { it.kind == CstKind.REFERENCE }.map { it.toString() }
+        assertEquals(listOf("time", "12:30", "a:b", "c"), references)
     }
 
     @Test

@@ -4,7 +4,11 @@
 //! the next run of exactly N, and a run of 2N inside it is that delimiter
 //! escaped. An even run that encloses nothing substantive is the empty
 //! reference: the shortest reading, a bare delimiter pair enclosing nothing,
-//! wins over a longer n-quote delimiter.
+//! wins over a longer n-quote delimiter. An even run followed by whitespace
+//! up to the end of its line is the empty reference whatever later lines hold,
+//! so an empty value at the end of a line never swallows the lines after it
+//! (issue #443); a run followed directly by text (`""x`) may still open a
+//! reference that reaches across lines.
 //!
 //! A run of R delimiters in a body is read as a whole: each 2N of it in turn are
 //! an escaped N, and the R % 2N left over close the reference when there are at
@@ -139,6 +143,12 @@ fn reading(rest: &str, quote: u8, count: usize, end: Option<usize>) -> Option<Re
             closed,
         })
     };
+    if count.is_multiple_of(2) && stays_on_its_line(rest, count, end) {
+        // A pair, or a longer even run, that ends its line (or is followed by
+        // whitespace up to a line break before anything closes it) is the empty
+        // reference however later lines continue (issue #443).
+        return empty_reference(true);
+    }
     let Some(end) = end else {
         // Nothing closes the run: an even one is the empty reference, which a
         // later closing run would still turn into one holding what follows.
@@ -174,6 +184,27 @@ fn reading(rest: &str, quote: u8, count: usize, end: Option<usize>) -> Option<Re
         length: end,
         closed: true,
     })
+}
+
+/// Whether an even run whose body starts at `body_start` of `rest` has to be
+/// read as the empty reference because its n-quoted reading would leave the
+/// line without opening a multiline reference: whitespace follows the run
+/// directly, and a line break comes before the closing run that ends at `end`
+/// (or no run closes it at all).
+fn stays_on_its_line(rest: &str, body_start: usize, end: Option<usize>) -> bool {
+    let bytes = rest.as_bytes();
+    if bytes
+        .get(body_start)
+        .is_some_and(|&byte| !matches!(byte, b' ' | b'\t' | b'\n' | b'\r'))
+    {
+        return false;
+    }
+    match end {
+        None => true,
+        Some(end) => bytes[body_start..end]
+            .iter()
+            .any(|&byte| byte == b'\n' || byte == b'\r'),
+    }
 }
 
 /// The number of `quote` delimiters in a row from `start` of `text`.

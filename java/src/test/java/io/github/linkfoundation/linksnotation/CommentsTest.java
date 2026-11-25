@@ -1,6 +1,7 @@
 package io.github.linkfoundation.linksnotation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
@@ -162,7 +163,7 @@ class CommentsTest {
   @Test
   void aHashInsideAReferenceThatFollowsAnotherReferenceIsContent() throws ParseException {
     assertParsesAs("\"x\"' #y'\n", "(<x> < #y>)");
-    assertParsesAs("```q```\"\" #c\n\"\"\"\n", "(<q> < #c\n\">)");
+    assertParsesAs("```q```\"\"x # c\n\"\"\"\n", "(<q> <x # c\n\">)");
   }
 
   @Test
@@ -183,7 +184,7 @@ class CommentsTest {
     assertEquals("(a)\" #b\"\n", Comments.stripComments("(a)\" #b\"\n"));
     assertEquals("\"x\"' #y'\n", Comments.stripComments("\"x\"' #y'\n"));
     assertEquals("~1{62}\" #b\"\n", Comments.stripComments("~1{62}\" #b\"\n"));
-    assertEquals("a\"b    \n", Comments.stripComments("a\"b #c\"\n"));
+    assertEquals("a\"b     \n", Comments.stripComments("a\"b # c\"\n"));
   }
 
   @Test
@@ -201,5 +202,46 @@ class CommentsTest {
     assertEquals("issue#1047", Link.escapeReference("issue#1047"));
     assertEquals("'#'", Link.escapeReference("#"));
     assertEquals("'#ff0000'", Link.escapeReference("#ff0000"));
+  }
+
+  // Issue #444: a `#` that opens a token later on a line and is followed by a
+  // character that could continue a bare reference is a value, so a value is
+  // never dropped as a comment. At the start of a line it is still a comment.
+
+  @Test
+  void aHashThatOpensAValueLaterOnALineIsTheValue() throws ParseException {
+    assertParsesAs("tag #release\n", "(<tag> <#release>)");
+    assertParsesAs(
+        "root:\n  tag #release\n  next 1\n", rendered("root:\n  tag \"#release\"\n  next 1\n"));
+    assertParsesAs("colour #ff0000 # a note\n", "(<colour> <#ff0000>)");
+  }
+
+  @Test
+  void aHashFollowedByASpaceAParenthesisOrNothingOpensAComment() throws ParseException {
+    assertParsesAs("a: b #\n", "(<a>: <b>)");
+    assertParsesAs("a: b #\tnote\n", "(<a>: <b>)");
+    assertParsesAs("a b #(note)\n", "(<a> <b>)");
+    assertParsesAs("a b #:note\n", "(<a> <b>)");
+  }
+
+  @Test
+  void aHashAtTheStartOfALineOpensACommentWhateverFollowsIt() throws ParseException {
+    assertParsesAs("#release\na\n", "(<a>)");
+    assertParsesAs("root\n  #release\n  a\n", rendered("root\n  a\n"));
+  }
+
+  @Test
+  void theCommentReaderKeepsAHashThatOpensAValue() {
+    assertEquals("tag #release       \n", Comments.stripComments("tag #release # note\n"));
+  }
+
+  @Test
+  void opensCommentJudgesEveryHashWithTheSameRule() {
+    assertTrue(Comments.opensComment("# note", 0));
+    assertTrue(Comments.opensComment("a #", 2));
+    assertTrue(Comments.opensComment("a # why", 2));
+    assertTrue(Comments.opensComment("  #release", 2));
+    assertFalse(Comments.opensComment("tag #release", 4));
+    assertFalse(Comments.opensComment("issue#1047", 5));
   }
 }

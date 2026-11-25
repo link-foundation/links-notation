@@ -14,7 +14,7 @@ Add this to your `Cargo.toml`:
 [dependencies]
 links-notation = { path = "." }  # For local development
 # Or from a registry:
-# links-notation = "0.31.9"
+# links-notation = "0.32.0"
 ```
 
 ### From Source
@@ -537,11 +537,40 @@ deploy: staging # only staging, for now
 Both comments are gone by the time the document is read, leaving the single
 link `(deploy: staging)`. A `#` only opens a comment where a reference could
 begin, so a `#` inside a token (`issue#1047`) and a `#` inside a delimited
-reference (`"#"`) stay ordinary characters.
+reference (`"#"`) stay ordinary characters. At the start of a line, after any
+indentation, a `#` always opens a comment. Later on a line it opens one only
+when whitespace, `(`, `)`, `:` or the end of the document follows it, so
+`deploy: staging #` and `a b #(note)` hold a comment while `tag #release` is the
+link of `tag` and `#release`: a value is never silently dropped.
 
 A formatter keeps the same rule from the other side: a reference that begins
 with a `#` is written quoted (`'#tag'`), so a document it writes reads back as
 itself.
+
+### Colons inside references
+
+A run of colons between two characters of a bare reference belongs to the
+reference, so `12:30`, `https://example.com/a#b` and `std::string` are one
+reference each, and `a:b: c` is a link whose ID is `a:b`. A colon followed by
+whitespace, a parenthesis, a quote or a versioned literal still separates an ID
+from its values, so `a: b`, `a:"b"`, `a:(b c)` and `a:~1{62}` read as before.
+
+### Quoting a reference
+
+`quote_reference(text)` writes one reference so a parser reads it back as
+exactly `text`, quoting it (or writing a versioned literal) only when it has
+to; `needs_quoting(text)` says whether it has to. Both stay conservative, so
+the result also reads back with older releases: a colon, whitespace, a
+parenthesis, a quote and a leading `#` are always quoted.
+
+```rust
+use links_notation::{needs_quoting, quote_reference};
+
+assert_eq!(quote_reference("plain"), "plain");
+assert_eq!(quote_reference("12:30"), "'12:30'");
+assert_eq!(quote_reference(""), "~1{}");
+assert!(needs_quoting("#release"));
+```
 
 Comments are on by default, and a parser can be told to read `#` as an ordinary
 character again, for documents written before comments existed:

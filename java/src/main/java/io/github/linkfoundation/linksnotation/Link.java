@@ -209,6 +209,55 @@ public class Link {
   }
 
   /**
+   * Write one reference so that a parser reads it back as exactly this text, in the ID or value
+   * position of any link: the name {@link #escapeReference(String)} gives the same function to code
+   * that thinks in quoting rather than escaping. Text that needs no delimiters is returned as it
+   * is; anything else is quoted, or written as a versioned literal when it is empty or holds a
+   * control character.
+   *
+   * <p>The answer is deliberately conservative, so the text also reads back with releases older
+   * than the one that made bare {@code 12:30} and {@code tag #release} legal (issue #444): a colon,
+   * a whitespace character, a parenthesis, a quote, and a {@code #} that starts the text still ask
+   * for quotes.
+   *
+   * <pre>{@code
+   * Link.quoteReference("plain");     // plain
+   * Link.quoteReference("has space"); // 'has space'
+   * Link.quoteReference("#release");  // '#release'
+   * Link.quoteReference("");          // ~1{}
+   * }</pre>
+   *
+   * @param reference the text of one reference; null is written as the empty string, as {@link
+   *     #escapeReference(String)} writes it
+   * @return the reference as it should be written
+   * @throws IllegalArgumentException if the reference is not well-formed Unicode text
+   */
+  public static String quoteReference(String reference) {
+    return escapeReference(reference);
+  }
+
+  /**
+   * Report whether one reference has to be quoted (or written as a versioned literal) to read back
+   * as exactly this text, that is whether {@link #quoteReference(String)} changes it.
+   *
+   * <pre>{@code
+   * Link.needsQuoting("plain"); // false
+   * Link.needsQuoting("12:30"); // true
+   * Link.needsQuoting("");      // true
+   * }</pre>
+   *
+   * @param reference the text of one reference
+   * @return true when the text cannot be written bare
+   * @throws IllegalArgumentException if the reference is null or not well-formed Unicode text
+   */
+  public static boolean needsQuoting(String reference) {
+    if (reference == null) {
+      throw new IllegalArgumentException("Reference must not be null");
+    }
+    return !quoteReference(reference).equals(reference);
+  }
+
+  /**
    * Convert to string using either just ID or full format.
    *
    * @return string representation

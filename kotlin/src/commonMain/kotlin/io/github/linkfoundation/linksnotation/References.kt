@@ -149,6 +149,51 @@ fun escapeReference(
     return quote + reference.replace(quote.toString(), doubled) + quote
 }
 
+/**
+ * Write one reference so that a parser reads it back as exactly this text, in
+ * the ID or value position of any link, like JavaScript `quoteReference`: the
+ * name [escapeReference] gives the same function to code that thinks in
+ * quoting rather than escaping. Text that needs no delimiters is returned as
+ * it is; anything else is quoted, or written as a versioned literal when it is
+ * empty or holds a control character. [minimal] is as for [escapeReference].
+ *
+ * The answer is deliberately conservative, so the text also reads back with
+ * releases older than the one that made bare `12:30` and `tag #release` legal
+ * (issue #444): a colon, a whitespace character, a parenthesis, a quote, and a
+ * `#` that starts the text still ask for quotes.
+ *
+ * ```
+ * quoteReference("plain")     // "plain"
+ * quoteReference("has space") // "'has space'"
+ * quoteReference("#release")  // "'#release'"
+ * quoteReference("")          // "~1{}"
+ * ```
+ *
+ * @throws IllegalArgumentException when [reference] holds a lone surrogate.
+ */
+fun quoteReference(
+    reference: String?,
+    minimal: Boolean = false,
+): String = escapeReference(reference, minimal)
+
+/**
+ * Whether one reference has to be quoted (or written as a versioned literal) to
+ * read back as exactly this text, like JavaScript `needsQuoting`: whether
+ * [quoteReference] changes it. [minimal] is as for [escapeReference].
+ *
+ * ```
+ * needsQuoting("plain") // false
+ * needsQuoting("12:30") // true
+ * needsQuoting("")      // true
+ * ```
+ *
+ * @throws IllegalArgumentException when [reference] holds a lone surrogate.
+ */
+fun needsQuoting(
+    reference: String,
+    minimal: Boolean = false,
+): Boolean = quoteReference(reference, minimal) != reference
+
 /** Port of the `needsQuoting` test of minimal `escapeReference`. */
 private fun needsMinimalQuoting(reference: String): Boolean {
     for (index in reference.indices) {

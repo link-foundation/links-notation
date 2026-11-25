@@ -52,7 +52,8 @@ final class CstBuilder {
       int end = position + 1;
 
       if (comments && character == Comments.COMMENT && prepared.charAt(position) != '#') {
-        // A blanked # opens a comment, which runs to the line ending.
+        // A blanked # opens a comment, which runs to the line ending: the
+        // comment reader judged it with Comments.opensComment.
         while (end < input.length() && input.charAt(end) != '\n' && input.charAt(end) != '\r') {
           end++;
         }
@@ -94,7 +95,19 @@ final class CstBuilder {
           value = quoted.value;
           quote = String.valueOf(character);
         } else {
-          while (end < prepared.length() && BARE_REFERENCE_END.indexOf(prepared.charAt(end)) < 0) {
+          while (end < prepared.length()) {
+            char next = prepared.charAt(end);
+            if (next == ':') {
+              // Colons belong to the reference when a bare reference continues
+              // after them, as in 12:30 (issue #444).
+              int after = Parser.innerColonsEnd(prepared, end);
+              if (after < 0) {
+                break;
+              }
+              end = after;
+            } else if (BARE_REFERENCE_END.indexOf(next) >= 0) {
+              break;
+            }
             end++;
           }
           value = input.substring(position, end);

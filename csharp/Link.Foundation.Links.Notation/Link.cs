@@ -166,6 +166,52 @@ namespace Link.Foundation.Links.Notation
         }
 
         /// <summary>
+        /// Writes one reference so that a parser reads it back as exactly this text, in the
+        /// ID or value position of any link: the name <see cref="EscapeReference"/> gives
+        /// the same function to code that thinks in quoting rather than escaping. Text that
+        /// needs no delimiters is returned as it is; anything else is quoted, or written as
+        /// a versioned literal when it is empty or holds a control character.
+        /// </summary>
+        /// <remarks>
+        /// The answer is deliberately conservative, so the text also reads back with
+        /// releases older than the one that made bare <c>12:30</c> and <c>tag #release</c>
+        /// legal (issue #444): a colon, a whitespace character, a parenthesis, a quote, and
+        /// a <c>#</c> that starts the text still ask for quotes.
+        /// </remarks>
+        /// <param name="reference">The text of one reference.</param>
+        /// <returns>The reference as it should be written; <c>""</c> for <see langword="null"/>.</returns>
+        /// <example>
+        /// <code>
+        /// Link&lt;string&gt;.QuoteReference("plain");     // plain
+        /// Link&lt;string&gt;.QuoteReference("has space"); // 'has space'
+        /// Link&lt;string&gt;.QuoteReference("#release");  // '#release'
+        /// Link&lt;string&gt;.QuoteReference("");          // ~1{}
+        /// </code>
+        /// </example>
+        public static string QuoteReference(string? reference) => EscapeReference(reference);
+
+        /// <summary>
+        /// Reports whether one reference has to be quoted (or written as a versioned
+        /// literal) to read back as exactly this text, that is whether
+        /// <see cref="QuoteReference"/> changes it.
+        /// </summary>
+        /// <param name="reference">The text of one reference.</param>
+        /// <returns><see langword="true"/> when the text cannot be written bare.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="reference"/> is <see langword="null"/>.</exception>
+        /// <example>
+        /// <code>
+        /// Link&lt;string&gt;.NeedsQuoting("plain"); // false
+        /// Link&lt;string&gt;.NeedsQuoting("12:30"); // true
+        /// Link&lt;string&gt;.NeedsQuoting("");      // true
+        /// </code>
+        /// </example>
+        public static bool NeedsQuoting(string reference)
+        {
+            ArgumentNullException.ThrowIfNull(reference);
+            return QuoteReference(reference) != reference;
+        }
+
+        /// <summary>
         /// Reads the delimiter a reference was written between from the reference as it was
         /// written.
         /// </summary>

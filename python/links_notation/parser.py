@@ -38,6 +38,41 @@ _COLON_OR_QUOTE = re.compile("[:\"'`]")
 #: open a quoted string.
 _PAREN_RUN_OR_QUOTE = re.compile("\\(+|\\)+|[\"'`]")
 
+#: What ends a bare reference: what separates tokens.
+_BARE_REFERENCE_END = frozenset(" \t\n\r(:)")
+
+#: What cannot start a bare reference after colons inside one.
+_NOT_AFTER_INNER_COLONS = _BARE_REFERENCE_END | frozenset("\"'`")
+
+#: The start of a versioned literal.
+_REFERENCE_LITERAL_PREFIX = re.compile(r"~[0-9]+\{")
+
+
+def inner_colons_end(text: str, position: int) -> int:
+    """
+    Where the run of colons at ``position`` ends when it belongs to the bare
+    reference written before it, or -1 when it separates an ID from its values.
+
+    A bare reference may hold colons between its characters, so ``12:30``,
+    ``std::string`` and ``https://example.com/a#b`` are each one reference
+    (issue #444). A run of colons belongs to the reference only when a character
+    that could start a bare reference follows it: ``a: b``, ``a:(b)``,
+    ``a:"b"`` and ``a:~1{62}`` still separate an ID from its values. The caller
+    makes sure a bare reference character comes right before the run, as a
+    bare reference never starts with a colon.
+    """
+    after = position
+    while after < len(text) and text[after] == ":":
+        after += 1
+    if (
+        after == position
+        or after == len(text)
+        or text[after] in _NOT_AFTER_INNER_COLONS
+        or _REFERENCE_LITERAL_PREFIX.match(text, after)
+    ):
+        return -1
+    return after
+
 
 class ParseError(Exception):
     """
@@ -561,6 +596,8 @@ class Parser:
         paren_depth = 0
         counted = 0
         position = 0
+        # Where the last delimited reference skipped ends: a token starts there.
+        token_floor = 0
 
         while True:
             found = _COLON_OR_QUOTE.search(text, position)
@@ -571,13 +608,41 @@ class Parser:
 
             if text[i] == ":":
                 if paren_depth == 0:
-                    # Only return colon if it's outside quotes AND at parenthesis depth 0
-                    return i
-                position = i + 1
+                    inner_end = self._inner_colons_end(text, i, token_floor)
+                    if inner_end == -1:
+                        # Only return colon if it's outside quotes AND at parenthesis depth 0
+                        return i
+                    position = inner_end
+                else:
+                    position = i + 1
             else:
                 end = self._skip_quoted_string(text, i, offset)
-                position = end if end > i else i + 1
+                if end > i:
+                    position = end
+                    token_floor = end
+                else:
+                    position = i + 1
             counted = position
+
+    @staticmethod
+    def _inner_colons_end(text: str, position: int, token_floor: int) -> int:
+        """
+        Where the run of colons at ``position`` of ``text`` ends when it belongs
+        to a bare reference, as in ``12:30`` (issue #444), or -1 when it
+        separates an ID from its values. A delimited reference that ends at
+        ``token_floor`` was read before it, so a token starts there.
+
+        The colons belong to a bare reference only when one is written right
+        before them: not a delimited reference, and not a versioned literal.
+        """
+        if position == 0 or position == token_floor or text[position - 1] in _BARE_REFERENCE_END:
+            return -1
+        token_start = position - 1
+        while token_start > token_floor and text[token_start - 1] not in _BARE_REFERENCE_END:
+            token_start -= 1
+        if reference_literal_end(text, token_start) == position:
+            return -1
+        return inner_colons_end(text, position)
 
     def _parse_values(self, text: str, offset: int) -> List[Dict]:
         """Parse a space-separated list of values, which starts at ``offset``."""

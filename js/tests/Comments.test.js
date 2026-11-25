@@ -169,7 +169,7 @@ test('a hash inside a reference that follows a group is content', () => {
 
 test('a hash inside a reference that follows another reference is content', () => {
   expect(parsesAs('"x"\' #y\'\n')).toBe('(<x> < #y>)');
-  expect(parsesAs('```q```"" #c\n"""\n')).toBe('(<q> < #c\n">)');
+  expect(parsesAs('```q```""x # c\n"""\n')).toBe('(<q> <x # c\n">)');
 });
 
 test('a hash inside a reference that follows a literal is content', () => {
@@ -187,5 +187,33 @@ test('the comment reader skips the references the grammar reads', () => {
   expect(stripComments('(a)" #b"\n')).toBe('(a)" #b"\n');
   expect(stripComments('"x"\' #y\'\n')).toBe('"x"\' #y\'\n');
   expect(stripComments('~1{62}" #b"\n')).toBe('~1{62}" #b"\n');
-  expect(stripComments('a"b #c"\n')).toBe('a"b    \n');
+  expect(stripComments('a"b # c"\n')).toBe('a"b     \n');
+});
+
+// Issue #444: a `#` that opens a token later on a line and is followed by a
+// character that could continue a bare reference is a value, so a value is
+// never dropped as a comment. At the start of a line it is still a comment.
+
+test('a hash that opens a value later on a line is the value', () => {
+  expect(parsesAs('tag #release\n')).toBe('(<tag> <#release>)');
+  expect(parsesAs('root:\n  tag #release\n  next 1\n')).toBe(
+    parsesAs('root:\n  tag "#release"\n  next 1\n')
+  );
+  expect(parsesAs('colour #ff0000 # a note\n')).toBe('(<colour> <#ff0000>)');
+});
+
+test('a hash followed by a space, a parenthesis or nothing opens a comment', () => {
+  expect(parsesAs('a: b #\n')).toBe('(<a>: <b>)');
+  expect(parsesAs('a: b #\tnote\n')).toBe('(<a>: <b>)');
+  expect(parsesAs('a b #(note)\n')).toBe('(<a> <b>)');
+  expect(parsesAs('a b #:note\n')).toBe('(<a> <b>)');
+});
+
+test('a hash at the start of a line opens a comment whatever follows it', () => {
+  expect(parsesAs('#release\na\n')).toBe('(<a>)');
+  expect(parsesAs('root\n  #release\n  a\n')).toBe(parsesAs('root\n  a\n'));
+});
+
+test('the comment reader keeps a hash that opens a value', () => {
+  expect(stripComments('tag #release # note\n')).toBe('tag #release       \n');
 });

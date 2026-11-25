@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "30996e8d321e3061f71e6181a91822e2",
+    "content-hash": "0760a59285127df1e33db476d362b68b",
     "packages": [
         {
             "name": "link-foundation/links-notation",
-            "version": "0.31.9",
+            "version": "0.32.0",
             "dist": {
                 "type": "path",
                 "url": "../../php",
-                "reference": "44b270ce24f6f5c17c1cc1aacbd8f3fc25d25aff"
+                "reference": "6161760ed1ea5a6df4446573afaf6f39a491ba40"
             },
             "require": {
                 "ext-mbstring": "*",

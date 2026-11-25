@@ -140,6 +140,22 @@ export function escapeReference(
 export function unescapeReference(reference: string): string;
 
 /**
+ * Write one reference so a parser reads it back as exactly this text, in an ID
+ * or a value: the same function as `escapeReference`. Conservative: a colon, a
+ * whitespace character, a parenthesis, a quote, and a leading `#` are quoted.
+ */
+export function quoteReference(
+  reference: string | null | undefined,
+  options?: EscapeReferenceOptions
+): string;
+
+/** Whether `quoteReference` changes the text: it cannot be written bare. */
+export function needsQuoting(
+  reference: string,
+  options?: EscapeReferenceOptions
+): boolean;
+
+/**
  * The delimiter one reference was written between, read from the reference as
  * written: `'`, `"` or `` ` `` for a complete quoted reference, otherwise null.
  */

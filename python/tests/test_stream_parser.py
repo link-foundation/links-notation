@@ -84,9 +84,11 @@ def test_rejects_writes_after_finish():
 
 
 def test_waits_for_the_line_that_closes_an_even_run_of_quotes():
-    # ``""`` is the empty reference only when nothing closes it, and here the
-    # next line does, so the first line cannot be emitted on its own (#377).
-    document = 'a "" b\n"" c\n'
+    # ``""b`` opens a reference that only a later line can close, and here the
+    # next line does, so the first line cannot be emitted on its own (#377). (A
+    # ``""`` followed by whitespace and the end of its line is the empty
+    # reference whatever follows, issue #443.)
+    document = 'a ""b\n"" c\n'
     stream = StreamParser()
     for character in document:
         assert stream.write(character) == []

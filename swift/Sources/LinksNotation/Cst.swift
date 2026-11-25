@@ -223,7 +223,23 @@ private func referenceEnd(
         return end
     }
     var end = start + 1
-    while end < prepared.count && !" \t\r\n(:)".unicodeScalars.contains(prepared[end]) {
+    while end < prepared.count {
+        if prepared[end] == ":" {
+            // Colons belong to the reference when a bare reference continues
+            // after them, as in `12:30` (issue #444).
+            var after = end
+            while after < prepared.count && prepared[after] == ":" {
+                after += 1
+            }
+            if after == prepared.count || !isBareReferenceStart(prepared[after])
+                || hasReferenceLiteralPrefix(prepared, at: after)
+            {
+                break
+            }
+            end = after
+        } else if tokenSeparators.contains(prepared[end]) {
+            break
+        }
         end += 1
     }
     return end

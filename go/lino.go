@@ -300,6 +300,41 @@ func escapeReference(reference string) string {
 	return formatReference(reference)
 }
 
+// QuoteReference writes one reference so that a parser reads it back as
+// exactly this text, in the ID or value position of any link. It is the
+// function Format uses to write every reference (the same as
+// FormatBinaryReference): text that needs no delimiters is returned as it is;
+// anything else is quoted, or written as a versioned literal when it is empty
+// or holds a control character.
+//
+// The answer is deliberately conservative, so the text also reads back with
+// releases older than the one that made bare 12:30 and tag #release legal
+// (issue #444): a colon, a whitespace character, a parenthesis, a quote, and a
+// # that starts the text still ask for quotes.
+//
+//	QuoteReference("plain")     // plain
+//	QuoteReference("has space") // 'has space'
+//	QuoteReference("#release")  // '#release'
+//	QuoteReference("")          // ~1{}
+//
+// It panics when reference is not valid UTF-8.
+func QuoteReference(reference string) string {
+	return escapeReference(reference)
+}
+
+// NeedsQuoting reports whether one reference has to be quoted (or written as a
+// versioned literal) to read back as exactly this text, that is whether
+// QuoteReference changes it.
+//
+//	NeedsQuoting("plain") // false
+//	NeedsQuoting("12:30") // true
+//	NeedsQuoting("")      // true
+//
+// It panics when reference is not valid UTF-8.
+func NeedsQuoting(reference string) bool {
+	return QuoteReference(reference) != reference
+}
+
 // hasLoneNestedValue reports whether the link holds exactly one link that has
 // values. The parentheses of an anonymous link are what nest such a value:
 // "((b c))" without them is "(b c)", a different link, so LessParentheses has to

@@ -88,9 +88,32 @@ namespace Link.Foundation.Links.Notation.Tests
             Assert.Equal(
                 new[] { CstKind.Reference, CstKind.Whitespace, CstKind.Reference },
                 cst.Tokens().Select(token => token.Kind).ToArray());
+            // With comments on, `#b` later on a line is a value too (issue #444), and a
+            // `#` followed by a space opens a comment.
+            Assert.Equal(
+                new[] { CstKind.Reference, CstKind.Whitespace, CstKind.Reference },
+                new Parser().ParseCst(input).Tokens().Select(token => token.Kind).ToArray());
             Assert.Equal(
                 new[] { CstKind.Reference, CstKind.Whitespace, CstKind.Comment },
-                new Parser().ParseCst(input).Tokens().Select(token => token.Kind).ToArray());
+                new Parser().ParseCst("a # b").Tokens().Select(token => token.Kind).ToArray());
+        }
+
+        [Fact]
+        public static void ColonsInsideABareReferenceBelongToIt()
+        {
+            // Issue #444: the tokens agree with what the grammar reads.
+            var tokens = new Parser().ParseCst("a:b: 12:30 (x:\"y\")").Tokens()
+                .Select(token => (token.Kind, token.Text))
+                .ToArray();
+            Assert.Equal(
+                new (CstKind, string)[]
+                {
+                    (CstKind.Reference, "a:b"), (CstKind.Colon, ":"), (CstKind.Whitespace, " "),
+                    (CstKind.Reference, "12:30"), (CstKind.Whitespace, " "),
+                    (CstKind.OpenParen, "("), (CstKind.Reference, "x"), (CstKind.Colon, ":"),
+                    (CstKind.Reference, "\"y\""), (CstKind.CloseParen, ")"),
+                },
+                tokens);
         }
 
         [Fact]

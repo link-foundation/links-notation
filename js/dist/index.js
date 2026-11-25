@@ -66,6 +66,9 @@ function readReference(document, start) {
   return reading(document, start, quote, count, end);
 }
 function reading(document, start, quote, count, end) {
+  if (count % 2 === 0 && staysOnItsLine(document, start + count, end)) {
+    return { value: "", length: count, closed: true };
+  }
   if (end === null) {
     return count % 2 === 0 ? { value: "", length: count, closed: false } : null;
   }
@@ -88,6 +91,22 @@ function reading(document, start, quote, count, end) {
   }
   return { value, length: end - start, closed: true };
 }
+function staysOnItsLine(document, bodyStart, end) {
+  if (bodyStart < document.length && !WHITESPACE.has(document[bodyStart])) {
+    return false;
+  }
+  if (end === null)
+    return true;
+  for (let position = bodyStart;position < end; position++) {
+    if (document[position] === `
+` || document[position] === "\r") {
+      return true;
+    }
+  }
+  return false;
+}
+var WHITESPACE = new Set([" ", "\t", `
+`, "\r"]);
 function runLength(text, start, quote) {
   let end = start;
   while (end < text.length && text[end] === quote) {
@@ -257,6 +276,15 @@ function referenceQuote(raw) {
     return null;
   const reading = readReference(raw, 0);
   return reading !== null && reading.length === raw.length ? raw[0] : null;
+}
+function quoteReference(reference, options = {}) {
+  return escapeReference(reference, options);
+}
+function needsQuoting(reference, options = {}) {
+  if (typeof reference !== "string") {
+    throw new TypeError("Reference must be a string");
+  }
+  return quoteReference(reference, options) !== reference;
 }
 
 // src/Link.js
@@ -503,6 +531,22 @@ var SEPARATORS = [" ", "\t", `
 `, "\r", "(", ":", ")"];
 var BEFORE_COMMENT = [" ", "\t", `
 `, "\r"];
+var INDENTATION = [" ", "\t"];
+function opensComment(document, position) {
+  if (document[position] !== COMMENT)
+    return false;
+  if (!follows(document, position, BEFORE_COMMENT))
+    return false;
+  let before = position - 1;
+  while (before >= 0 && INDENTATION.includes(document[before]))
+    before--;
+  if (before < 0 || document[before] === `
+` || document[before] === "\r") {
+    return true;
+  }
+  const next = position + 1;
+  return next >= document.length || SEPARATORS.includes(document[next]);
+}
 function stripComments(document) {
   let blanked = null;
   let position = 0;
@@ -510,7 +554,7 @@ function stripComments(document) {
   const references = new DelimitedReferences(document);
   while (position < document.length) {
     const character = document[position];
-    if (character === COMMENT && follows(document, position, BEFORE_COMMENT)) {
+    if (character === COMMENT && opensComment(document, position)) {
       blanked = blanked ?? document.split("");
       while (position < document.length && document[position] !== `
 ` && document[position] !== "\r") {
@@ -605,6 +649,7 @@ function quoteText(text) {
 }
 var BARE_REFERENCE_END = new Set([" ", "\t", "\r", `
 `, "(", ":", ")"]);
+var NOT_AFTER_INNER_COLONS = new Set([...BARE_REFERENCE_END, '"', "'", "`"]);
 function buildCst(input, { comments = true } = {}) {
   const prepared = comments ? stripComments(input) : input;
   const references = new DelimitedReferences(input);
@@ -680,8 +725,20 @@ function referenceEnd(prepared, start, references) {
       return end;
   }
   let end = start + 1;
-  while (end < prepared.length && !BARE_REFERENCE_END.has(prepared[end]))
+  while (end < prepared.length) {
+    if (prepared[end] === ":") {
+      let after = end;
+      while (prepared[after] === ":")
+        after++;
+      if (after === prepared.length || NOT_AFTER_INNER_COLONS.has(prepared[after]) || hasReferenceLiteralPrefix(prepared, after)) {
+        break;
+      }
+      end = after;
+    } else if (BARE_REFERENCE_END.has(prepared[end])) {
+      break;
+    }
     end++;
+  }
   return end;
 }
 function isLiteral(prepared, start, end) {
@@ -929,13 +986,15 @@ function peg$parse(input, options) {
   const peg$e9 = peg$classExpectation(["}", " ", "\t", "\r", `
 `, "(", ")"], true, false, false);
   const peg$e10 = peg$literalExpectation("}", false);
-  const peg$e11 = peg$literalExpectation('"', false);
-  const peg$e12 = peg$literalExpectation("'", false);
-  const peg$e13 = peg$literalExpectation("`", false);
-  const peg$e14 = peg$literalExpectation(" ", false);
-  const peg$e15 = peg$classExpectation([" ", "\t", `
-`, "\r"], false, false, false);
+  const peg$e11 = peg$classExpectation([" ", "\t", `
+`, "\r", "(", ":", ")", '"', "'", "`"], true, false, false);
+  const peg$e12 = peg$literalExpectation('"', false);
+  const peg$e13 = peg$literalExpectation("'", false);
+  const peg$e14 = peg$literalExpectation("`", false);
+  const peg$e15 = peg$literalExpectation(" ", false);
   const peg$e16 = peg$classExpectation([" ", "\t", `
+`, "\r"], false, false, false);
+  const peg$e17 = peg$classExpectation([" ", "\t", `
 `, "\r", "(", ":", ")"], true, false, false);
   function peg$f0() {
     return resetState();
@@ -1046,7 +1105,7 @@ function peg$parse(input, options) {
     return !hasReferenceLiteralPrefix(input, offset());
   }
   function peg$f33(chars) {
-    return chars.join("");
+    return chars;
   }
   function peg$f34() {
     const pos = offset();
@@ -2099,7 +2158,7 @@ function peg$parse(input, options) {
     return s0;
   }
   function peg$parsesimpleReference() {
-    let s0, s1, s2, s3;
+    let s0, s1, s2, s3, s4, s5, s6;
     s0 = peg$currPos;
     peg$savedPos = peg$currPos;
     s1 = peg$f32();
@@ -2109,9 +2168,117 @@ function peg$parse(input, options) {
       s1 = peg$FAILED;
     }
     if (s1 !== peg$FAILED) {
+      s2 = peg$currPos;
+      s3 = peg$currPos;
+      s4 = peg$parsereferenceSymbol();
+      if (s4 !== peg$FAILED) {
+        s5 = [];
+        for (;; ) {
+          s6 = peg$parsereferenceSymbol();
+          if (s6 === peg$FAILED) {
+            s6 = peg$parseinnerColons();
+          }
+          if (s6 === peg$FAILED) {
+            break;
+          }
+          s5.push(s6);
+        }
+        s4 = [s4, s5];
+        s3 = s4;
+      } else {
+        peg$currPos = s3;
+        s3 = peg$FAILED;
+      }
+      if (s3 !== peg$FAILED) {
+        s2 = input.substring(s2, peg$currPos);
+      } else {
+        s2 = s3;
+      }
+      if (s2 !== peg$FAILED) {
+        peg$savedPos = s0;
+        s0 = peg$f33(s2);
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+    return s0;
+  }
+  function peg$parseinnerColons() {
+    let s0, s1, s2, s3, s4, s5;
+    s0 = peg$currPos;
+    s1 = peg$currPos;
+    peg$silentFails++;
+    s2 = peg$currPos;
+    s3 = [];
+    for (;; ) {
+      if (input.charCodeAt(peg$currPos) === 58) {
+        s4 = peg$c2;
+        peg$currPos++;
+      } else {
+        s4 = peg$FAILED;
+        if (peg$silentFails === 0) {
+          peg$fail(peg$e5);
+        }
+      }
+      if (s4 === peg$FAILED) {
+        break;
+      }
+      s3.push(s4);
+    }
+    if (s3.length < 1) {
+      s3 = peg$FAILED;
+    }
+    if (s3 !== peg$FAILED) {
+      s4 = peg$currPos;
+      peg$silentFails++;
+      s5 = peg$parsereferenceLiteralPrefix();
+      peg$silentFails--;
+      if (s5 === peg$FAILED) {
+        s4 = undefined;
+      } else {
+        peg$currPos = s4;
+        s4 = peg$FAILED;
+      }
+      if (s4 !== peg$FAILED) {
+        s5 = peg$parsebareReferenceStart();
+        if (s5 !== peg$FAILED) {
+          s3 = [s3, s4, s5];
+          s2 = s3;
+        } else {
+          peg$currPos = s2;
+          s2 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s2;
+        s2 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s2;
+      s2 = peg$FAILED;
+    }
+    peg$silentFails--;
+    if (s2 !== peg$FAILED) {
+      peg$currPos = s1;
+      s1 = undefined;
+    } else {
+      s1 = peg$FAILED;
+    }
+    if (s1 !== peg$FAILED) {
       s2 = [];
       for (;; ) {
-        s3 = peg$parsereferenceSymbol();
+        if (input.charCodeAt(peg$currPos) === 58) {
+          s3 = peg$c2;
+          peg$currPos++;
+        } else {
+          s3 = peg$FAILED;
+          if (peg$silentFails === 0) {
+            peg$fail(peg$e5);
+          }
+        }
         if (s3 === peg$FAILED) {
           break;
         }
@@ -2121,8 +2288,80 @@ function peg$parse(input, options) {
         s2 = peg$FAILED;
       }
       if (s2 !== peg$FAILED) {
-        peg$savedPos = s0;
-        s0 = peg$f33(s2);
+        s1 = [s1, s2];
+        s0 = s1;
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+    return s0;
+  }
+  function peg$parsebareReferenceStart() {
+    let s0;
+    s0 = input.charAt(peg$currPos);
+    if (s0 !== "" && !(peg$charCode = s0.charCodeAt(0), peg$charCode === 32 || peg$charCode === 9 || peg$charCode === 10 || peg$charCode === 13 || peg$charCode === 40 || peg$charCode === 58 || peg$charCode === 41 || peg$charCode === 34 || peg$charCode === 39 || peg$charCode === 96)) {
+      peg$currPos++;
+    } else {
+      s0 = peg$FAILED;
+      if (peg$silentFails === 0) {
+        peg$fail(peg$e11);
+      }
+    }
+    return s0;
+  }
+  function peg$parsereferenceLiteralPrefix() {
+    let s0, s1, s2, s3;
+    s0 = peg$currPos;
+    if (input.charCodeAt(peg$currPos) === 126) {
+      s1 = peg$c3;
+      peg$currPos++;
+    } else {
+      s1 = peg$FAILED;
+      if (peg$silentFails === 0) {
+        peg$fail(peg$e6);
+      }
+    }
+    if (s1 !== peg$FAILED) {
+      s2 = [];
+      for (;; ) {
+        s3 = input.charAt(peg$currPos);
+        if (peg$charCode = s3.charCodeAt(0), peg$charCode >= 48 && peg$charCode <= 57) {
+          peg$currPos++;
+        } else {
+          s3 = peg$FAILED;
+          if (peg$silentFails === 0) {
+            peg$fail(peg$e7);
+          }
+        }
+        if (s3 === peg$FAILED) {
+          break;
+        }
+        s2.push(s3);
+      }
+      if (s2.length < 1) {
+        s2 = peg$FAILED;
+      }
+      if (s2 !== peg$FAILED) {
+        if (input.charCodeAt(peg$currPos) === 123) {
+          s3 = peg$c4;
+          peg$currPos++;
+        } else {
+          s3 = peg$FAILED;
+          if (peg$silentFails === 0) {
+            peg$fail(peg$e8);
+          }
+        }
+        if (s3 !== peg$FAILED) {
+          s1 = [s1, s2, s3];
+          s0 = s1;
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
       } else {
         peg$currPos = s0;
         s0 = peg$FAILED;
@@ -2155,7 +2394,7 @@ function peg$parse(input, options) {
     } else {
       s2 = peg$FAILED;
       if (peg$silentFails === 0) {
-        peg$fail(peg$e11);
+        peg$fail(peg$e12);
       }
     }
     peg$silentFails--;
@@ -2265,7 +2504,7 @@ function peg$parse(input, options) {
     } else {
       s2 = peg$FAILED;
       if (peg$silentFails === 0) {
-        peg$fail(peg$e12);
+        peg$fail(peg$e13);
       }
     }
     peg$silentFails--;
@@ -2375,7 +2614,7 @@ function peg$parse(input, options) {
     } else {
       s2 = peg$FAILED;
       if (peg$silentFails === 0) {
-        peg$fail(peg$e13);
+        peg$fail(peg$e14);
       }
     }
     peg$silentFails--;
@@ -2494,7 +2733,7 @@ function peg$parse(input, options) {
       } else {
         s2 = peg$FAILED;
         if (peg$silentFails === 0) {
-          peg$fail(peg$e14);
+          peg$fail(peg$e15);
         }
       }
       if (s2 === peg$FAILED) {
@@ -2518,7 +2757,7 @@ function peg$parse(input, options) {
       } else {
         s2 = peg$FAILED;
         if (peg$silentFails === 0) {
-          peg$fail(peg$e14);
+          peg$fail(peg$e15);
         }
       }
       if (s2 === peg$FAILED) {
@@ -2553,7 +2792,7 @@ function peg$parse(input, options) {
       } else {
         s2 = peg$FAILED;
         if (peg$silentFails === 0) {
-          peg$fail(peg$e14);
+          peg$fail(peg$e15);
         }
       }
       if (s2 === peg$FAILED) {
@@ -2790,7 +3029,7 @@ function peg$parse(input, options) {
     } else {
       s0 = peg$FAILED;
       if (peg$silentFails === 0) {
-        peg$fail(peg$e15);
+        peg$fail(peg$e16);
       }
     }
     return s0;
@@ -2803,7 +3042,7 @@ function peg$parse(input, options) {
     } else {
       s0 = peg$FAILED;
       if (peg$silentFails === 0) {
-        peg$fail(peg$e16);
+        peg$fail(peg$e17);
       }
     }
     return s0;
@@ -3430,15 +3669,12 @@ function structurallyComplete(document, comments) {
   const quotes = ['"', "'", "`"];
   const separators = [" ", "\t", `
 `, "\r", "(", ":", ")"];
-  const beforeComment = [" ", "\t", `
-`, "\r"];
   const references = new DelimitedReferences(document);
   let depth = 0;
   let tokenStart = true;
   for (let position = 0;position < document.length; position++) {
     const character = document[position];
-    const previous = position === 0 ? null : document[position - 1];
-    if (comments && character === "#" && (previous === null || beforeComment.includes(previous))) {
+    if (comments && opensComment(document, position)) {
       const newline = document.indexOf(`
 `, position);
       if (newline === -1)
@@ -4127,7 +4363,9 @@ export {
   formatIndentedDocument,
   formatLinks,
   formatNested,
+  needsQuoting,
   parseIndentedDocument,
+  quoteReference,
   referenceQuote,
   stripComments,
   unescapeReference

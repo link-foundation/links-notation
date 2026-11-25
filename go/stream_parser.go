@@ -301,7 +301,7 @@ func structurallyComplete(document string, comments bool) bool {
 	tokenStart := true
 	for position := 0; position < len(document); position++ {
 		character := document[position]
-		if comments && character == Comment && follows(document, position, beforeComment) {
+		if comments && opensComment(document, position) {
 			if newline := strings.IndexByte(document[position:], '\n'); newline >= 0 {
 				position += newline
 				tokenStart = true
@@ -321,9 +321,10 @@ func structurallyComplete(document string, comments bool) bool {
 		if tokenStart && isQuote(character) {
 			// A reference nothing closes yet may be closed by a later line,
 			// which changes what it holds: an even run is the empty reference
-			// only when no run in the whole document closes it.
-			_, end, ok := parseQuotedStringAt(document, position)
-			if !ok || !closingRunFollows(document, position) {
+			// only when no run in the whole document closes it, or when
+			// whitespace follows it up to its line break (issue #443).
+			_, end, closed, ok := readQuotedString(document, position, len(document))
+			if !ok || !closed {
 				return false
 			}
 			position = end - 1
@@ -338,32 +339,4 @@ func structurallyComplete(document string, comments bool) bool {
 		tokenStart = false
 	}
 	return depth == 0
-}
-
-// closingRunFollows reports whether a run of delimiters after the one opening
-// at start closes it: a run of R closes a reference opened by N exactly when
-// R / N is odd. An even run nothing closes is the empty reference, until a
-// closing run is written after it.
-func closingRunFollows(document string, start int) bool {
-	quote := document[start]
-	count := 0
-	for start+count < len(document) && document[start+count] == quote {
-		count++
-	}
-	position := start + count
-	for {
-		next := strings.IndexByte(document[position:], quote)
-		if next < 0 {
-			return false
-		}
-		position += next
-		length := 0
-		for position+length < len(document) && document[position+length] == quote {
-			length++
-		}
-		if (length/count)%2 == 1 {
-			return true
-		}
-		position += length
-	}
 }

@@ -176,7 +176,7 @@ func TestAHashInsideAReferenceThatFollowsAGroupIsContent(t *testing.T) {
 
 func TestAHashInsideAReferenceThatFollowsAnotherReferenceIsContent(t *testing.T) {
 	assertParsesAs(t, "\"x\"' #y'\n", "(<x> < #y>)")
-	assertParsesAs(t, "```q```\"\" #c\n\"\"\"\n", "(<q> < #c\n\">)")
+	assertParsesAs(t, "```q```\"\"x # c\n\"\"\"\n", "(<q> <x # c\n\">)")
 }
 
 func TestAHashInsideAReferenceThatFollowsALiteralIsContent(t *testing.T) {
@@ -195,11 +195,65 @@ func TestTheCommentReaderSkipsTheReferencesTheParserReads(t *testing.T) {
 		"(a)\" #b\"\n":    "(a)\" #b\"\n",
 		"\"x\"' #y'\n":    "\"x\"' #y'\n",
 		"~1{62}\" #b\"\n": "~1{62}\" #b\"\n",
-		"a\"b #c\"\n":     "a\"b    \n",
+		"a\"b # c\"\n":    "a\"b     \n",
 	}
 	for document, expected := range cases {
 		if got := StripComments(document); got != expected {
 			t.Errorf("StripComments(%q) = %q, want %q", document, got, expected)
 		}
+	}
+}
+
+// Issue #444: a # that opens a token later on a line and is followed by a
+// character that could continue a bare reference is a value, so a value is
+// never dropped as a comment. At the start of a line it is still a comment.
+
+func TestAHashThatOpensAValueLaterOnALineIsTheValue(t *testing.T) {
+	assertParsesAs(t, "tag #release\n", "(<tag> <#release>)")
+	assertParsesAs(t, "root:\n  tag #release\n  next 1\n", rendered(t, "root:\n  tag \"#release\"\n  next 1\n"))
+	assertParsesAs(t, "colour #ff0000 # a note\n", "(<colour> <#ff0000>)")
+}
+
+func TestAHashFollowedByASpaceAParenthesisOrNothingOpensAComment(t *testing.T) {
+	assertParsesAs(t, "a: b #\n", "(<a>: <b>)")
+	assertParsesAs(t, "a: b #\tnote\n", "(<a>: <b>)")
+	assertParsesAs(t, "a b #(note)\n", "(<a> <b>)")
+	assertParsesAs(t, "a b #:note\n", "(<a> <b>)")
+}
+
+func TestAHashAtTheStartOfALineOpensACommentWhateverFollowsIt(t *testing.T) {
+	assertParsesAs(t, "#release\na\n", "(<a>)")
+	assertParsesAs(t, "root\n  #release\n  a\n", rendered(t, "root\n  a\n"))
+}
+
+func TestTheCommentReaderKeepsAHashThatOpensAValue(t *testing.T) {
+	if got := StripComments("tag #release # note\n"); got != "tag #release       \n" {
+		t.Errorf("StripComments = %q", got)
+	}
+}
+
+func TestTheStreamReadsAHashThatOpensAValue(t *testing.T) {
+	// #x is a reference, not a comment, so the group after it is open until the
+	// next line closes it, and the first line cannot be emitted on its own.
+	input := "a #x (\nb)\nc\n"
+	stream := NewStreamParser()
+	for _, symbol := range input {
+		if _, err := stream.Feed(string(symbol)); err != nil {
+			t.Fatal(err)
+		}
+	}
+	streamed, err := stream.Finish()
+	if err != nil {
+		t.Fatal(err)
+	}
+	expected, err := Parse(input)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got, want := Format(streamed), Format(expected); got != want {
+		t.Errorf("streamed %q, want %q", got, want)
+	}
+	if got := Format(expected); got != "(a '#x' (b))\n(c)" {
+		t.Errorf("parsed %q", got)
 	}
 }

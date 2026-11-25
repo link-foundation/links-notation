@@ -114,9 +114,11 @@ namespace Link.Foundation.Links.Notation.Tests
         [Fact]
         public static void WaitsForTheLineThatClosesAnEvenRunOfQuotes()
         {
-            // `""` is the empty reference only when nothing closes it, and here the next
-            // line does, so the first line cannot be emitted on its own (issue #377).
-            const string input = "a \"\" b\n\"\" c\n";
+            // `""b` opens a reference that only a later line can close, and here the next
+            // line does, so the first line cannot be emitted on its own (issue #377). (A
+            // `""` followed by whitespace and the end of its line is the empty reference
+            // whatever follows, issue #443.)
+            const string input = "a \"\"b\n\"\" c\n";
             var stream = new StreamParser();
             foreach (var character in input)
             {

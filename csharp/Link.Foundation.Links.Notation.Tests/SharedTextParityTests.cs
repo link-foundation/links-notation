@@ -25,7 +25,8 @@ public static class SharedTextParityTests
             var expected = fixture.GetProperty("expected");
             var parsed = new Parser().Parse(input);
             Assert.True(JsonElement.DeepEquals(expected, JsonSerializer.SerializeToElement(Tree(parsed))));
-            Assert.Equal(formatted, string.Concat(parsed.Select(link => link.ToString())));
+            // Formatted as a document is written: one link per line.
+            Assert.Equal(formatted, string.Join("\n", parsed.Select(link => link.ToString())));
             Assert.True(JsonElement.DeepEquals(expected, JsonSerializer.SerializeToElement(Tree(new Parser().Parse(formatted)))));
             var stream = new StreamParser();
             foreach (var character in input) stream.Write(character.ToString());

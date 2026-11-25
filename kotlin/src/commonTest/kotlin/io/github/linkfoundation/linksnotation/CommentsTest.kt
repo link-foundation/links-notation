@@ -116,7 +116,7 @@ class CommentsTest {
     @Test
     fun aHashInsideAReferenceThatFollowsAnotherReferenceIsContent() {
         assertEquals("(<x> < #y>)", parsesAs("\"x\"' #y'\n"))
-        assertEquals("(<q> < #c\n\">)", parsesAs("```q```\"\" #c\n\"\"\"\n"))
+        assertEquals("(<q> <x # c\n\">)", parsesAs("```q```\"\"x # c\n\"\"\"\n"))
     }
 
     @Test
@@ -136,6 +136,34 @@ class CommentsTest {
         assertEquals("(a)\" #b\"\n", stripComments("(a)\" #b\"\n"))
         assertEquals("\"x\"' #y'\n", stripComments("\"x\"' #y'\n"))
         assertEquals("~1{62}\" #b\"\n", stripComments("~1{62}\" #b\"\n"))
-        assertEquals("a\"b    \n", stripComments("a\"b #c\"\n"))
+        assertEquals("a\"b     \n", stripComments("a\"b # c\"\n"))
     }
+
+    // Issue #444: a `#` that opens a token later on a line and is followed by a
+    // character that could continue a bare reference is a value, so a value is
+    // never dropped as a comment. At the start of a line it is still a comment.
+
+    @Test
+    fun aHashThatOpensAValueLaterOnALineIsTheValue() {
+        assertEquals("(<tag> <#release>)", parsesAs("tag #release\n"))
+        assertEquals(parsesAs("root:\n  tag \"#release\"\n  next 1\n"), parsesAs("root:\n  tag #release\n  next 1\n"))
+        assertEquals("(<colour> <#ff0000>)", parsesAs("colour #ff0000 # a note\n"))
+    }
+
+    @Test
+    fun aHashFollowedByASpaceAParenthesisOrNothingOpensAComment() {
+        assertEquals("(<a>: <b>)", parsesAs("a: b #\n"))
+        assertEquals("(<a>: <b>)", parsesAs("a: b #\tnote\n"))
+        assertEquals("(<a> <b>)", parsesAs("a b #(note)\n"))
+        assertEquals("(<a> <b>)", parsesAs("a b #:note\n"))
+    }
+
+    @Test
+    fun aHashAtTheStartOfALineOpensACommentWhateverFollowsIt() {
+        assertEquals("(<a>)", parsesAs("#release\na\n"))
+        assertEquals(parsesAs("root\n  a\n"), parsesAs("root\n  #release\n  a\n"))
+    }
+
+    @Test
+    fun theCommentReaderKeepsAHashThatOpensAValue() = assertEquals("tag #release       \n", stripComments("tag #release # note\n"))
 }

@@ -15,7 +15,7 @@ Or add the dependency to your `composer.json`:
 ```json
 {
     "require": {
-        "link-foundation/links-notation": "^0.31"
+        "link-foundation/links-notation": "^0.32"
     }
 }
 ```
@@ -296,9 +296,19 @@ deploy: staging # only staging, for now
 ```
 
 Both comments are gone by the time the document is read, leaving the single
-link `(deploy: staging)`. A `#` only opens a comment where a reference could
-begin, so a `#` inside a token (`issue#1047`) and a `#` inside a delimited
-reference (`"#"`) stay ordinary characters.
+link `(deploy: staging)`. A `#` opens a comment at the start of a line, and
+later on a line when it follows whitespace and is followed by whitespace, a
+parenthesis, a colon or the end of the document. Every other `#` is an
+ordinary character: inside a token (`issue#1047`), inside a delimited
+reference (`"#"`), and at the start of a value (`tag #release` reads as the
+link of `tag` and `#release`). `Comments::stripComments($document)` blanks
+exactly the comments the parser skips.
+
+A bare reference may hold colons between its characters (`12:30`,
+`std::string`, `https://x/y`), so `meeting: 12:30` is the link `meeting` with
+the single value `12:30`. An even run of quotes followed by whitespace never
+reaches past its line, so `a ""` followed by `b ""` on the next line reads as
+two links, each holding the empty reference.
 
 A formatter keeps the same rule from the other side: a reference that begins
 with a `#` is written quoted (`'#tag'`), so a document it writes reads back as
@@ -366,6 +376,9 @@ Represents a single link with an id and values.
 - `getValuesString(): string` - format the values without the surrounding link
 - `toLinkOrIdString(): string` - format as an id when the link is a bare reference
 - `static escapeReference(?string $reference): string` - quote a reference when needed
+- `static quoteReference(?string $reference): string` - the same function as `escapeReference`, under the
+  name the other bindings share
+- `static needsQuoting(string $reference): bool` - `true` when `quoteReference` would change the reference
 - `getRawId(): ?string` / `setRawId(?string $rawId): void` - the ID exactly as the document wrote it
 - `getQuote(): ?string` - the quote character the ID was written between, or `null`
 - `static referenceQuote(?string $raw): ?string` - the quote character of one complete

@@ -134,6 +134,12 @@ export function readReference(document, start) {
  * by the run that ends at `end` when there is one.
  */
 function reading(document, start, quote, count, end) {
+  if (count % 2 === 0 && staysOnItsLine(document, start + count, end)) {
+    // A pair, or a longer even run, that ends its line (or is followed by
+    // whitespace up to a line break before anything closes it) is the empty
+    // reference however later lines continue (issue #443).
+    return { value: '', length: count, closed: true };
+  }
   if (end === null) {
     // Nothing closes the run: an even one is the empty reference, which a
     // later closing run would still turn into one holding what follows.
@@ -162,6 +168,32 @@ function reading(document, start, quote, count, end) {
   }
   return { value, length: end - start, closed: true };
 }
+
+/**
+ * Whether an even run whose body starts at `bodyStart` has to be read as the
+ * empty reference because its n-quoted reading would leave the line without
+ * opening a multiline reference: whitespace follows the run directly, and a
+ * line break comes before the closing run (or no run closes it at all).
+ * @param {string} document - The document being read
+ * @param {number} bodyStart - Position just past the opening run
+ * @param {number|null} end - Position just past the closing run, if any
+ * @returns {boolean} True when the run is the empty reference
+ */
+function staysOnItsLine(document, bodyStart, end) {
+  if (bodyStart < document.length && !WHITESPACE.has(document[bodyStart])) {
+    return false;
+  }
+  if (end === null) return true;
+  for (let position = bodyStart; position < end; position++) {
+    if (document[position] === '\n' || document[position] === '\r') {
+      return true;
+    }
+  }
+  return false;
+}
+
+/** What may follow an even run that does not open a multiline reference. */
+const WHITESPACE = new Set([' ', '\t', '\n', '\r']);
 
 /** The number of `quote` delimiters in a row from `start` of `text`. */
 function runLength(text, start, quote) {

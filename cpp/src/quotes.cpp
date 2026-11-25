@@ -2,6 +2,8 @@
 
 #include <algorithm>
 
+#include "links_notation/references.hpp"
+
 namespace links_notation::detail {
 
 namespace {
@@ -33,9 +35,27 @@ bool is_substantive_body(std::string_view content) {
   return has_visible && depth == 0;
 }
 
+// Whether an even run whose body starts at `body_start` of `rest` has to be
+// read as the empty reference because its n-quoted reading would leave the
+// line without opening a multiline reference: whitespace follows the run
+// directly, and a line break comes before the closing run that ends at `end`
+// (or no run closes it at all).
+bool stays_on_its_line(std::string_view rest, std::size_t body_start, std::optional<std::size_t> end) {
+  if (body_start < rest.size() && !is_whitespace_byte(rest[body_start])) return false;
+  if (!end) return true;
+  const std::string_view body = rest.substr(body_start, *end - body_start);
+  return body.find_first_of("\n\r") != std::string_view::npos;
+}
+
 // The reading of a reference opened by `count` delimiters at the start of
 // `rest`, closed by the run that ends at `end` when there is one.
 std::optional<Reading> reading(std::string_view rest, char quote, std::size_t count, std::optional<std::size_t> end) {
+  if (count % 2 == 0 && stays_on_its_line(rest, count, end)) {
+    // A pair, or a longer even run, that ends its line (or is followed by
+    // whitespace up to a line break before anything closes it) is the empty
+    // reference however later lines continue (issue #443).
+    return Reading{std::string(), count, true};
+  }
   std::optional<Reading> empty_reference;
   if (count % 2 == 0) empty_reference = Reading{std::string(), count, true};
   if (!end) {
@@ -181,6 +201,16 @@ std::optional<std::size_t> reference_literal_end(std::string_view text, std::siz
     }
   }
   return std::nullopt;
+}
+
+std::optional<std::size_t> inner_colons_end(std::string_view text, std::size_t position) {
+  std::size_t after = position;
+  while (after < text.size() && text[after] == ':') ++after;
+  if (after == position || after >= text.size()) return std::nullopt;
+  const char next = text[after];
+  if (is_whitespace_byte(next) || next == '(' || next == ':' || next == ')' || is_quote(next)) return std::nullopt;
+  if (has_reference_literal_prefix(text.substr(after))) return std::nullopt;
+  return after;
 }
 
 std::optional<std::size_t> delimited_token_end(std::string_view document, std::size_t start,

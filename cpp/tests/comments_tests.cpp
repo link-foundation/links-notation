@@ -166,7 +166,7 @@ TEST(CommentsTests, AHashInsideAReferenceThatFollowsAGroupIsContent) {
 
 TEST(CommentsTests, AHashInsideAReferenceThatFollowsAnotherReferenceIsContent) {
   expect_parses_as("\"x\"' #y'\n", "(<x> < #y>)");
-  expect_parses_as("```q```\"\" #c\n\"\"\"\n", "(<q> < #c\n\">)");
+  expect_parses_as("```q```\"\"x # c\n\"\"\"\n", "(<q> <x # c\n\">)");
 }
 
 TEST(CommentsTests, AHashInsideAReferenceThatFollowsALiteralIsContent) {
@@ -184,5 +184,31 @@ TEST(CommentsTests, TheCommentReaderSkipsTheReferencesTheParserReads) {
   EXPECT_EQ(strip_comments("(a)\" #b\"\n"), "(a)\" #b\"\n");
   EXPECT_EQ(strip_comments("\"x\"' #y'\n"), "\"x\"' #y'\n");
   EXPECT_EQ(strip_comments("~1{62}\" #b\"\n"), "~1{62}\" #b\"\n");
-  EXPECT_EQ(strip_comments("a\"b #c\"\n"), "a\"b    \n");
+  EXPECT_EQ(strip_comments("a\"b # c\"\n"), "a\"b     \n");
+}
+
+// Issue #444: a `#` that opens a token later on a line and is followed by a
+// character that could continue a bare reference is a value, so a value is
+// never dropped as a comment. At the start of a line it is still a comment.
+
+TEST(CommentsTests, AHashThatOpensAValueLaterOnALineIsTheValue) {
+  expect_parses_as("tag #release\n", "(<tag> <#release>)");
+  EXPECT_EQ(rendered("root:\n  tag #release\n  next 1\n"), rendered("root:\n  tag \"#release\"\n  next 1\n"));
+  expect_parses_as("colour #ff0000 # a note\n", "(<colour> <#ff0000>)");
+}
+
+TEST(CommentsTests, AHashFollowedByASpaceAParenthesisOrNothingOpensAComment) {
+  expect_parses_as("a: b #\n", "(<a>: <b>)");
+  expect_parses_as("a: b #\tnote\n", "(<a>: <b>)");
+  expect_parses_as("a b #(note)\n", "(<a> <b>)");
+  expect_parses_as("a b #:note\n", "(<a> <b>)");
+}
+
+TEST(CommentsTests, AHashAtTheStartOfALineOpensACommentWhateverFollowsIt) {
+  expect_parses_as("#release\na\n", "(<a>)");
+  EXPECT_EQ(rendered("root\n  #release\n  a\n"), rendered("root\n  a\n"));
+}
+
+TEST(CommentsTests, TheCommentReaderKeepsAHashThatOpensAValue) {
+  EXPECT_EQ(strip_comments("tag #release # note\n"), "tag #release       \n");
 }

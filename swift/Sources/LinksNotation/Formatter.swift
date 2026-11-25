@@ -49,6 +49,38 @@ public func escapeReference(_ reference: String?, minimal: Bool = false) -> Stri
     return delimiter + text + delimiter
 }
 
+/// One reference written so that a parser reads it back as exactly this text,
+/// in the ID or value position of any link: the name `escapeReference(_:minimal:)`
+/// gives the same function to code that thinks in quoting rather than
+/// escaping (`quoteReference` of the JavaScript package). Text that needs no
+/// delimiters is returned as it is; anything else is quoted, or written as a
+/// versioned literal when it is empty or holds a control character.
+///
+/// The answer is deliberately conservative, so the text also reads back with
+/// releases older than the one that made bare `12:30` and `tag #release` legal
+/// (issue #444): a colon, a whitespace character, a parenthesis, a quote, and
+/// a `#` that starts the text still ask for quotes.
+///
+///     quoteReference("plain")      // "plain"
+///     quoteReference("has space")  // "'has space'"
+///     quoteReference("#release")   // "'#release'"
+///     quoteReference("")           // "~1{}"
+public func quoteReference(_ reference: String?, minimal: Bool = false) -> String {
+    escapeReference(reference, minimal: minimal)
+}
+
+/// Whether one reference has to be quoted (or written as a versioned literal)
+/// to read back as exactly this text, that is whether
+/// `quoteReference(_:minimal:)` changes it (`needsQuoting` of the JavaScript
+/// package).
+///
+///     needsQuoting("plain")  // false
+///     needsQuoting("12:30")  // true
+///     needsQuoting("")       // true
+public func needsQuoting(_ reference: String, minimal: Bool = false) -> Bool {
+    quoteReference(reference, minimal: minimal) != reference
+}
+
 /// Exact Unicode text as a version 1 reference literal: `~1{` followed by the
 /// lowercase hexadecimal UTF-8 bytes of the text and `}`.
 public func encodeReferenceLiteral(_ text: String) -> String {

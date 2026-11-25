@@ -18,8 +18,8 @@ release `cpp_VERSION`, together with its SHA-256 checksum.
 include(FetchContent)
 FetchContent_Declare(
   links_notation
-  URL https://github.com/link-foundation/links-notation/releases/download/cpp_0.31.9/links-notation-cpp-0.31.9.tar.gz
-  # Optional: the checksum from links-notation-cpp-0.31.9.tar.gz.sha256
+  URL https://github.com/link-foundation/links-notation/releases/download/cpp_0.32.0/links-notation-cpp-0.32.0.tar.gz
+  # Optional: the checksum from links-notation-cpp-0.32.0.tar.gz.sha256
   # URL_HASH SHA256=...
 )
 FetchContent_MakeAvailable(links_notation)
@@ -42,7 +42,7 @@ cmake --install build --prefix /usr/local
 Then use it from your project:
 
 ```cmake
-find_package(links_notation 0.31 REQUIRED CONFIG)
+find_package(links_notation 0.32 REQUIRED CONFIG)
 target_link_libraries(your_target PRIVATE links_notation::links_notation)
 ```
 
@@ -314,6 +314,31 @@ auto links = links_notation::parse(R"(("New York": city state))");
 
 // Special characters
 links = links_notation::parse("('key:with:colons': 'value')");
+
+// Colons between reference characters need no quotes: 12:30, std::string and
+// https://example.com/a#b are one reference each, and a:b: c has the ID a:b
+links = links_notation::parse("meeting: 12:30 https://example.com/a#b");
+```
+
+A run of colons belongs to a bare reference when the reference has started and
+a character that can start a bare reference follows the run. A colon followed
+by whitespace, a parenthesis, a quote or a versioned literal (`a: b`, `a:(b)`,
+`a:"b"`, `a:~1{62}`) still separates an ID from its values.
+
+An even run of quotes followed by whitespace up to the end of its line (`a ""`)
+is the empty reference, whatever later lines hold; an even run followed directly
+by text (`""x`) still opens a reference that may span lines.
+
+`quote_reference` writes one reference so a parser reads it back as exactly that
+text, and `needs_quoting` says whether it has to be quoted. Both are
+deliberately conservative: colons, whitespace, parentheses, quotes and a leading
+`#` are still quoted, so the text also reads back with older releases.
+
+```cpp
+links_notation::quote_reference("plain");  // plain
+links_notation::quote_reference("12:30");  // '12:30'
+links_notation::quote_reference("");       // ~1{}
+links_notation::needs_quoting("#release"); // true
 ```
 
 ### Indented Syntax
@@ -409,7 +434,11 @@ deploy: staging # only staging, for now
 Both comments are gone by the time the document is read, leaving the single
 link `(deploy: staging)`. A `#` only opens a comment where a reference could
 begin, so a `#` inside a token (`issue#1047`) and a `#` inside a delimited
-reference (`"#"`) stay ordinary characters.
+reference (`"#"`) stay ordinary characters. At the start of a line, after any
+indentation, a `#` always opens a comment; later on a line it opens one only
+when whitespace, `(`, `)`, `:` or the end of the document follows it. So
+`a: b # why` and `a: b #` hold a comment, while `tag #release` is the link of
+`tag` and `#release`: a value is never silently dropped.
 
 A formatter keeps the same rule from the other side: a reference that begins
 with a `#` is written quoted (`'#tag'`), so a document it writes reads back as

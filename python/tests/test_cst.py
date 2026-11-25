@@ -88,7 +88,11 @@ def test_without_comment_support_hash_is_part_of_references():
     cst = Parser(comments=False).parse_cst(text)
     assert str(cst) == text
     assert [token.kind for token in cst.tokens()] == ["reference", "whitespace", "reference"]
-    assert [token.kind for token in Parser().parse_cst(text).tokens()] == ["reference", "whitespace", "comment"]
+    # With comments, a "#" that a reference character follows later on a line
+    # is a value too (issue #444); one that a space follows opens a comment.
+    assert [token.kind for token in Parser().parse_cst(text).tokens()] == ["reference", "whitespace", "reference"]
+    commented = Parser().parse_cst("a # b").tokens()
+    assert [token.kind for token in commented] == ["reference", "whitespace", "comment"]
 
 
 def test_a_group_belongs_to_the_line_it_opens_on():

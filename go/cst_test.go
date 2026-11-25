@@ -83,7 +83,7 @@ func TestCstRecoversDocumentsExactly(t *testing.T) {
 func TestCstReadsHashAsReferenceTextWithoutComments(t *testing.T) {
 	parser := NewParser()
 	parser.Comments = false
-	input := "a #b"
+	input := "a # b"
 	cst := mustParseCst(t, parser, input)
 	if cst.String() != input {
 		t.Fatalf("text: %q", cst.String())
@@ -92,7 +92,7 @@ func TestCstReadsHashAsReferenceTextWithoutComments(t *testing.T) {
 	for _, token := range cst.Tokens() {
 		kinds = append(kinds, token.Kind)
 	}
-	if want := []CstKind{CstReference, CstWhitespace, CstReference}; !reflect.DeepEqual(kinds, want) {
+	if want := []CstKind{CstReference, CstWhitespace, CstReference, CstWhitespace, CstReference}; !reflect.DeepEqual(kinds, want) {
 		t.Fatalf("kinds: %v", kinds)
 	}
 	if got := mustParseCst(t, NewParser(), input).Tokens()[2].Kind; got != CstComment {

@@ -14,7 +14,6 @@ import java.util.stream.StreamSupport;
 /** Incrementally emits complete top-level Links Notation records. */
 public final class StreamParser {
   private static final int DEFAULT_MAX_BUFFER_SIZE = 10 * 1024 * 1024;
-  private static final String BEFORE_COMMENT = " \t\n\r";
 
   /** Point immediately after the last character written. */
   public record Position(int offset, int line, int column, int buffered) {}
@@ -261,7 +260,7 @@ public final class StreamParser {
     boolean tokenStart = true;
     for (int position = 0; position < text.length(); position++) {
       char character = text.charAt(position);
-      if (comments && character == Comments.COMMENT && follows(text, position, BEFORE_COMMENT)) {
+      if (comments && Comments.opensComment(text, position)) {
         int newline = text.indexOf('\n', position);
         if (newline < 0) {
           break;
@@ -282,12 +281,13 @@ public final class StreamParser {
       if (tokenStart && isQuote(character)) {
         // A reference nothing closes yet may be closed by a later line, which
         // changes what it holds: an even run is the empty reference only when
-        // no run in the whole document closes it.
-        int end = Parser.quotedReferenceEnd(text, position);
-        if (end < 0 || !closingRunFollows(text, position)) {
+        // no run in the whole document closes it, or when whitespace follows it
+        // up to its line break (issue #443).
+        Parser.QuotedString quoted = Parser.parseQuotedStringAt(text, position);
+        if (quoted == null || !quoted.closed) {
           return false;
         }
-        position = end - 1;
+        position = quoted.end - 1;
         continue;
       }
       if (tokenStart) {
@@ -302,36 +302,7 @@ public final class StreamParser {
     return depth == 0;
   }
 
-  /**
-   * Report whether a run of delimiters after the one opening at start closes it: a run of R closes
-   * a reference opened by N exactly when R / N is odd. An even run nothing closes is the empty
-   * reference, until a closing run is written after it.
-   */
-  private static boolean closingRunFollows(String document, int start) {
-    char quote = document.charAt(start);
-    int count = 0;
-    while (start + count < document.length() && document.charAt(start + count) == quote) {
-      count++;
-    }
-    int position = start + count;
-    while ((position = document.indexOf(quote, position)) >= 0) {
-      int run = 0;
-      while (position + run < document.length() && document.charAt(position + run) == quote) {
-        run++;
-      }
-      if ((run / count) % 2 == 1) {
-        return true;
-      }
-      position += run;
-    }
-    return false;
-  }
-
   private static boolean isQuote(char character) {
     return character == '"' || character == '\'' || character == '`';
-  }
-
-  private static boolean follows(String document, int position, String allowed) {
-    return position == 0 || allowed.indexOf(document.charAt(position - 1)) >= 0;
   }
 }

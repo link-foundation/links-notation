@@ -3,18 +3,60 @@ package io.github.linkfoundation.linksnotation
 /*
  * Comments: a port of `js/src/comments.js` of link-foundation/links-notation.
  *
- * `#` starts a comment when it opens a token: at the start of the document or
- * after a space, a tab or a line break. A `#` inside a token (`issue#1047`) or
- * inside a delimited reference (`"# not a comment"`) is an ordinary character.
+ * `#` starts a comment when it opens a token and is not a value:
+ *
+ * - at the start of a line, after any indentation, a `#` always starts one;
+ * - later on a line, after a space or a tab, a `#` starts one only when no
+ *   character that could continue a bare reference follows it, that is when
+ *   whitespace, the end of the document, `(`, `)` or `:` comes next. So
+ *   `a: b # why` and `a: b #` hold a comment, while `tag #release` is the link
+ *   of `tag` and `#release` (issue #444): a value is never silently dropped.
+ *
+ * A `#` inside a token (`issue#1047`) or inside a delimited reference
+ * (`"# not a comment"`) is an ordinary character.
  */
 
 /** What a comment may start after. */
 private const val BEFORE_COMMENT = " \t\n\r"
 
+/** Indentation: what may stand between the start of a line and a comment. */
+private const val INDENTATION = " \t"
+
+/**
+ * Whether the `#` at [position] of [document] starts a comment: it opens a
+ * token, and either only indentation stands before it on its line or no
+ * character that could continue a bare reference follows it.
+ *
+ * ```
+ * opensComment("# note", 0)        // true: the start of a line
+ * opensComment("a #", 2)           // true: nothing follows it
+ * opensComment("a # why", 2)       // true: a space follows it
+ * opensComment("tag #release", 4)  // false: a value
+ * opensComment("issue#1047", 5)    // false: inside a token
+ * ```
+ */
+internal fun opensComment(
+    document: String,
+    position: Int,
+): Boolean {
+    if (position >= document.length || document[position] != '#') return false
+    if (!follows(document, position, BEFORE_COMMENT)) return false
+    var before = position - 1
+    while (before >= 0 && document[before] in INDENTATION) before--
+    if (before < 0 || document[before] == '\n' || document[before] == '\r') return true
+    val next = position + 1
+    return next >= document.length || document[next] in TOKEN_SEPARATORS
+}
+
 /**
  * [document] with every character of every comment replaced by a space, so
  * every other character keeps its offset and a parse error points at the
  * position the reader can see.
+ *
+ * ```
+ * stripComments("a: b # why\n")   // "a: b      \n"
+ * stripComments("tag #release\n") // "tag #release\n"
+ * ```
  */
 fun stripComments(document: String): String {
     var blanked: CharArray? = null
@@ -29,7 +71,7 @@ fun stripComments(document: String): String {
     while (position < document.length) {
         val character = document[position]
 
-        if (character == '#' && follows(document, position, BEFORE_COMMENT)) {
+        if (character == '#' && opensComment(document, position)) {
             val chars = blanked ?: document.toCharArray().also { blanked = it }
             while (position < document.length && document[position] != '\n' && document[position] != '\r') {
                 chars[position] = ' '

@@ -241,8 +241,22 @@ referenceLiteral = &'~' &{
   return decodeReferenceLiteral(literal);
 }
 
+// A bare reference may hold colons between its characters, so `12:30`,
+// `std::string` and `https://example.com/a#b` are each one reference
+// (issue #444). A run of colons belongs to the reference only when a character
+// that could start a bare reference follows it: `a: b`, `a:(b)`, `a:"b"` and
+// `a:~1{62}` still separate an ID from its values, and a bare reference never
+// starts or ends with a colon.
 simpleReference = &{ return !hasReferenceLiteralPrefix(input, offset()); }
- chars:referenceSymbol+ { return chars.join(''); }
+ chars:$(referenceSymbol (referenceSymbol / innerColons)*) { return chars; }
+
+// The whole test is a lookahead, so a run of colons that ends the reference
+// leaves no trace in the error a document that fails to parse reports.
+innerColons = &(":"+ !referenceLiteralPrefix bareReferenceStart) ":"+
+
+bareReferenceStart = [^ \t\n\r(:)"'`]
+
+referenceLiteralPrefix = "~" [0-9]+ "{"
 
 // Universal quoted reference - handles any N quotes for all quote types
 // Uses procedural parsing with input/offset() for clean, simple logic

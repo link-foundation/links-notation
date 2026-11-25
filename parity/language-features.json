@@ -1714,6 +1714,105 @@
       }
     },
     {
+      "id": "reference-quoting-api",
+      "description": "quoteReference and needsQuoting write one reference so a parser reads it back as exactly that text, quoting it only when it has to; the round trip is checked in ID, value, indented and nested positions",
+      "contract": "native-suite",
+      "implementations": {
+        "js": {
+          "status": "implemented",
+          "implementation": [
+            "js/src/references.js"
+          ],
+          "evidence": [
+            "js/tests/QuoteReference.test.js"
+          ]
+        },
+        "rust": {
+          "status": "implemented",
+          "implementation": [
+            "rust/links-notation/src/lib.rs",
+            "rust/links-notation/src/reference_literal.rs"
+          ],
+          "evidence": [
+            "rust/links-notation/tests/quote_reference_tests.rs"
+          ]
+        },
+        "python": {
+          "status": "implemented",
+          "implementation": [
+            "python/links_notation/link.py"
+          ],
+          "evidence": [
+            "python/tests/test_quote_reference.py"
+          ]
+        },
+        "java": {
+          "status": "implemented",
+          "implementation": [
+            "java/src/main/java/io/github/linkfoundation/linksnotation/Link.java"
+          ],
+          "evidence": [
+            "java/src/test/java/io/github/linkfoundation/linksnotation/QuoteReferenceTest.java"
+          ]
+        },
+        "go": {
+          "status": "implemented",
+          "implementation": [
+            "go/lino.go"
+          ],
+          "evidence": [
+            "go/quote_reference_test.go"
+          ]
+        },
+        "csharp": {
+          "status": "implemented",
+          "implementation": [
+            "csharp/Link.Foundation.Links.Notation/Link.cs"
+          ],
+          "evidence": [
+            "csharp/Link.Foundation.Links.Notation.Tests/QuoteReferenceTests.cs"
+          ]
+        },
+        "php": {
+          "status": "implemented",
+          "implementation": [
+            "php/src/Link.php"
+          ],
+          "evidence": [
+            "php/tests/QuoteReferenceTest.php"
+          ]
+        },
+        "cpp": {
+          "status": "implemented",
+          "implementation": [
+            "cpp/include/links_notation/references.hpp",
+            "cpp/src/references.cpp"
+          ],
+          "evidence": [
+            "cpp/tests/quote_reference_tests.cpp"
+          ]
+        },
+        "swift": {
+          "status": "implemented",
+          "implementation": [
+            "swift/Sources/LinksNotation/Formatter.swift"
+          ],
+          "evidence": [
+            "swift/Tests/LinksNotationTests/QuoteReferenceTests.swift"
+          ]
+        },
+        "kotlin": {
+          "status": "implemented",
+          "implementation": [
+            "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/References.kt"
+          ],
+          "evidence": [
+            "kotlin/src/commonTest/kotlin/io/github/linkfoundation/linksnotation/QuoteReferenceTest.kt"
+          ]
+        }
+      }
+    },
+    {
       "id": "format-config-api",
       "description": "Configurable inline/grouped/indented formatting with language-specific options; anonymous threshold output retains its container using an inline fallback",
       "contract": "native-suite",
@@ -2500,7 +2599,7 @@
         "js/src/quotes.js",
         "js/src/references.js"
       ],
-      "sha256": "efa63844b433fd29830f17d422c631381e1014bbbba33c7501426b9a657d5679"
+      "sha256": "04b72f6fb760134c3d86abe87ee71e85df5a965ee9788d3a0a33bb9f34debdd4"
     },
     "rust": {
       "files": [
@@ -2523,7 +2622,7 @@
         "rust/links-notation/src/stream_parser.rs",
         "rust/links-notation/src/syntax.rs"
       ],
-      "sha256": "356cf2e036e78c20dfd93641008ded284283e3f9518a0f9dad2dd73de52b7174"
+      "sha256": "017608ac9b8213418d3a923d75f205751148ce859112dadcd00d9423d6643d73"
     },
     "python": {
       "files": [
@@ -2540,7 +2639,7 @@
         "python/links_notation/reference_literal.py",
         "python/links_notation/stream_parser.py"
       ],
-      "sha256": "c1c8140fe15d1a311ddd442d6adbd70be0631484cab1ae6cc2fc852ff916a686"
+      "sha256": "4016bc1c8a268e4bbddd3b41964a898cdca68a095917ceba2438549fbdcfb8c2"
     },
     "java": {
       "files": [
@@ -2560,7 +2659,7 @@
         "java/src/main/java/io/github/linkfoundation/linksnotation/StreamParseRuntimeException.java",
         "java/src/main/java/io/github/linkfoundation/linksnotation/StreamParser.java"
       ],
-      "sha256": "ba19a7b1bf55530b55704cb02d0700e0821e25793c95dbdf525dd6966407ea9e"
+      "sha256": "02781c1b829b01dce81acf8d2b3792bf730e8b241cd33c6e792fc66a9e7c5ec0"
     },
     "go": {
       "files": [
@@ -2574,7 +2673,7 @@
         "go/reference_literal.go",
         "go/stream_parser.go"
       ],
-      "sha256": "f91bf62c06132d96b4d0e6ce62e474d401ad493d7f10dd94c2dd4f9f785bc0bb"
+      "sha256": "cae3f8694eccd8c64fd0257015825b740cf097c6fda45b002a5460495170999b"
     },
     "csharp": {
       "files": [
@@ -2609,7 +2708,7 @@
         "csharp/Link.Foundation.Links.Notation/_.cs",
         "csharp/Link.Foundation.Links.Notation/id.cs"
       ],
-      "sha256": "222aaf5939a3e98f41dbc6b9d6a77d750ea052d25f399da418cc9956e93b2e06"
+      "sha256": "d6c06146f0c14fc5c6fbb94c46794fdb523c4ffa68e52214d60b30f9f3195bce"
     },
     "php": {
       "files": [
@@ -2637,7 +2736,7 @@
         "php/src/StreamParseException.php",
         "php/src/StreamParser.php"
       ],
-      "sha256": "24eaa5bad038afb8f72abc011fdf7b175ca517bdb0c9644c61328119592a04ba"
+      "sha256": "66f48a69c9a0fdde1a707b2f2541ce6fafbca23d76bdd039f3916eaf092837c1"
     },
     "cpp": {
       "files": [
@@ -2671,7 +2770,7 @@
         "cpp/src/unicode.cpp",
         "cpp/src/unicode.hpp"
       ],
-      "sha256": "82b05f8ff264fd15e5c55d8094e6fd09a04e843996e8e3b19921a9e1207806ca"
+      "sha256": "742788abac15e63abb0ffa502fb5eadca5f1bda62cf4348c4ad56091af0e0e4c"
     },
     "swift": {
       "files": [
@@ -2690,7 +2789,7 @@
         "swift/Sources/LinksNotation/Quotes.swift",
         "swift/Sources/LinksNotation/StreamParser.swift"
       ],
-      "sha256": "739fac540d39c00c94da7f920d925c055a05327ebe406ac3615472553ec1c451"
+      "sha256": "effd057f8c031d6be9141bae9c9a23234c02c49a3e0344f6e1a8972e13354a2d"
     },
     "kotlin": {
       "files": [
@@ -2713,7 +2812,7 @@
         "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/References.kt",
         "kotlin/src/commonMain/kotlin/io/github/linkfoundation/linksnotation/StreamParser.kt"
       ],
-      "sha256": "27250665af581e469bd53413c351411cfd4dc2ffe682c703d0f0a69b7ba0c935"
+      "sha256": "cb5de0df7efa6e09c62109ecca0628fa02fbed65fb49322dc722039a0b2661e8"
     }
   }
 }

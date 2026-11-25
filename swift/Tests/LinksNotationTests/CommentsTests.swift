@@ -167,7 +167,7 @@ final class CommentsTests: XCTestCase {
 
     func testAHashInsideAReferenceThatFollowsAnotherReferenceIsContent() throws {
         XCTAssertEqual(try parsesAs("\"x\"' #y'\n"), "(<x> < #y>)")
-        XCTAssertEqual(try parsesAs("```q```\"\" #c\n\"\"\"\n"), "(<q> < #c\n\">)")
+        XCTAssertEqual(try parsesAs("```q```\"\"x # c\n\"\"\"\n"), "(<q> <x # c\n\">)")
     }
 
     func testAHashInsideAReferenceThatFollowsALiteralIsContent() throws {
@@ -186,6 +186,33 @@ final class CommentsTests: XCTestCase {
         XCTAssertEqual(stripComments("(a)\" #b\"\n"), "(a)\" #b\"\n")
         XCTAssertEqual(stripComments("\"x\"' #y'\n"), "\"x\"' #y'\n")
         XCTAssertEqual(stripComments("~1{62}\" #b\"\n"), "~1{62}\" #b\"\n")
-        XCTAssertEqual(stripComments("a\"b #c\"\n"), "a\"b    \n")
+        XCTAssertEqual(stripComments("a\"b # c\"\n"), "a\"b     \n")
+    }
+
+    // Issue #444: a `#` that opens a token later on a line and is followed by a
+    // character that could continue a bare reference is a value, so a value is
+    // never dropped as a comment. At the start of a line it is still a comment.
+
+    func testAHashThatOpensAValueLaterOnALineIsTheValue() throws {
+        XCTAssertEqual(try parsesAs("tag #release\n"), "(<tag> <#release>)")
+        XCTAssertEqual(
+            try parsesAs("root:\n  tag #release\n  next 1\n"), try parsesAs("root:\n  tag \"#release\"\n  next 1\n"))
+        XCTAssertEqual(try parsesAs("colour #ff0000 # a note\n"), "(<colour> <#ff0000>)")
+    }
+
+    func testAHashFollowedByASpaceAParenthesisOrNothingOpensAComment() throws {
+        XCTAssertEqual(try parsesAs("a: b #\n"), "(<a>: <b>)")
+        XCTAssertEqual(try parsesAs("a: b #\tnote\n"), "(<a>: <b>)")
+        XCTAssertEqual(try parsesAs("a b #(note)\n"), "(<a> <b>)")
+        XCTAssertEqual(try parsesAs("a b #:note\n"), "(<a> <b>)")
+    }
+
+    func testAHashAtTheStartOfALineOpensACommentWhateverFollowsIt() throws {
+        XCTAssertEqual(try parsesAs("#release\na\n"), "(<a>)")
+        XCTAssertEqual(try parsesAs("root\n  #release\n  a\n"), try parsesAs("root\n  a\n"))
+    }
+
+    func testTheCommentReaderKeepsAHashThatOpensAValue() {
+        XCTAssertEqual(stripComments("tag #release # note\n"), "tag #release       \n")
     }
 }

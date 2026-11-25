@@ -225,6 +225,14 @@ Format a list of links into Links Notation.
 
 - `format_links(links: List[Link], less_parentheses: bool = False) -> str`
 
+### quote_reference and needs_quoting
+
+- `quote_reference(reference: Optional[str]) -> str`: one reference written so
+  a parser reads it back as exactly this text; the same as
+  `Link.escape_reference`
+- `needs_quoting(reference: str) -> bool`: whether `quote_reference` changes
+  the text; raises `TypeError` for anything but a string
+
 ## Examples
 
 ### Doublets (2-tuple)
@@ -256,6 +264,31 @@ links = parser.parse(text)
 # References with special characters need quotes
 text = '("has space": "value with: colon")'
 links = parser.parse(text)
+```
+
+A run of colons between two characters of a bare reference belongs to the
+reference, so `12:30`, `std::string` and `https://example.com/a#b` need no
+quotes, and `a:b: c` is a link whose ID is `a:b`. A colon followed by
+whitespace, a parenthesis, a quote or a versioned literal still separates an ID
+from its values (`a: b`, `a:(b c)`, `a:"b"`, `a:~1{62}`).
+
+An even run of quotes (`""`, `''`, ...) followed by whitespace up to the end of
+its line is the empty reference, so `a ""` on one line never reaches into the
+lines after it.
+
+`quote_reference(text)` writes one reference so that a parser reads it back as
+exactly `text` (it is `Link.escape_reference` under a quoting name), and
+`needs_quoting(text)` reports whether that changes the text. Both stay
+conservative: colons, whitespace, parentheses, quotes and a leading `#` are
+still quoted.
+
+```python
+from links_notation import needs_quoting, quote_reference
+
+quote_reference("plain")    # 'plain'
+quote_reference("12:30")    # "'12:30'"
+quote_reference("")         # '~1{}'
+needs_quoting("#release")   # True
 ```
 
 ### Multi-line Groups
@@ -298,7 +331,11 @@ deploy: staging # only staging, for now
 Both comments are gone by the time the document is read, leaving the single
 link `(deploy: staging)`. A `#` only opens a comment where a reference could
 begin, so a `#` inside a token (`issue#1047`) and a `#` inside a delimited
-reference (`"#"`) stay ordinary characters.
+reference (`"#"`) stay ordinary characters. At the start of a line, after any
+indentation, a `#` always opens a comment. Later on a line it opens one only
+when a space, a tab, a line break, `(`, `)`, `:` or the end of the document
+follows it, so a value is never dropped: `tag #release` is the link of `tag`
+and `#release`, while `a: b # why` and `a: b #` hold a comment.
 
 A formatter keeps the same rule from the other side: a reference that begins
 with a `#` is written quoted (`'#tag'`), so a document it writes reads back as

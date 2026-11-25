@@ -7,7 +7,11 @@ package io.github.linkfoundation.linksnotation
  * A reference opened by a run of N delimiters (`"`, `'` or `` ` ``) closes at
  * the next run whose length R has an odd `R / N`, and a run of 2N inside it is
  * that delimiter escaped. An even run that encloses nothing substantive is the
- * empty reference.
+ * empty reference. An even run followed by whitespace up to the end of its
+ * line is the empty reference whatever later lines hold, so an empty value at
+ * the end of a line never swallows the lines after it (issue #443); a run
+ * followed directly by text (`""x`) may still open a reference that reaches
+ * across lines.
  */
 
 /** The characters a reference can be written between. */
@@ -31,6 +35,48 @@ internal class Reading(
  * literal: the places the grammar reads a reference from.
  */
 internal const val TOKEN_SEPARATORS = " \t\n\r(:)"
+
+/** What cannot start a bare reference after colons inside one: `bareReferenceStart = [^ \t\n\r(:)"'`]`. */
+private const val NOT_AFTER_INNER_COLONS = "$TOKEN_SEPARATORS$QUOTES"
+
+/**
+ * Where the run of colons at [start] of [text] ends when it belongs to the bare
+ * reference it follows, or -1 when there is no such run (issue #444): a
+ * character that could start a bare reference follows it, and no versioned
+ * literal prefix does. Callers check that a bare reference has started.
+ */
+internal fun innerColonsEnd(
+    text: String,
+    start: Int,
+): Int {
+    var after = start
+    while (after < text.length && text[after] == ':') after++
+    if (after == start || after == text.length) return -1
+    if (text[after] in NOT_AFTER_INNER_COLONS || hasReferenceLiteralPrefix(text, after)) return -1
+    return after
+}
+
+/**
+ * Where the bare reference that starts at [start] of [text] ends: at the first
+ * separator, colons that a bare-reference character follows included.
+ */
+internal fun bareReferenceEnd(
+    text: String,
+    start: Int,
+): Int {
+    var end = start + 1
+    while (end < text.length) {
+        if (text[end] == ':') {
+            val after = innerColonsEnd(text, end)
+            if (after < 0) break
+            end = after
+        } else if (text[end] in TOKEN_SEPARATORS) {
+            break
+        }
+        end++
+    }
+    return end
+}
 
 /** What a versioned literal's payload cannot contain. */
 private const val LITERAL_PAYLOAD_END = "} \t\r\n()"
@@ -132,6 +178,12 @@ private fun reading(
     count: Int,
     end: Int?,
 ): Reading? {
+    if (count % 2 == 0 && staysOnItsLine(document, start + count, end)) {
+        // A pair, or a longer even run, that ends its line (or is followed by
+        // whitespace up to a line break before anything closes it) is the empty
+        // reference however later lines continue (issue #443).
+        return Reading("", count)
+    }
     val emptyReference = if (count % 2 == 0) Reading("", count) else null
     if (end == null) {
         // Nothing closes the run: an even one is the empty reference, which a
@@ -159,6 +211,29 @@ private fun reading(
     }
     return Reading(text, end - start)
 }
+
+/**
+ * Whether an even run whose body starts at [bodyStart] has to be read as the
+ * empty reference because its n-quoted reading would leave the line without
+ * opening a multiline reference: whitespace follows the run directly, and a
+ * line break comes before the closing run that ends at [end] (or no run closes
+ * it at all).
+ */
+private fun staysOnItsLine(
+    document: String,
+    bodyStart: Int,
+    end: Int?,
+): Boolean {
+    if (bodyStart < document.length && document[bodyStart] !in AFTER_EMPTY_RUN) return false
+    if (end == null) return true
+    for (position in bodyStart until end) {
+        if (document[position] == '\n' || document[position] == '\r') return true
+    }
+    return false
+}
+
+/** What may follow an even run that does not open a multiline reference. */
+private const val AFTER_EMPTY_RUN = " \t\n\r"
 
 /** The number of [quote] delimiters in a row from [start] of [text]. */
 private fun runLength(

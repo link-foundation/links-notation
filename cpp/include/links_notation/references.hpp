@@ -46,6 +46,48 @@ inline std::string escape_reference(const char* reference, bool minimal = false)
   return escape_reference(std::string_view(reference), minimal);
 }
 
+/// Writes one reference so that a parser reads it back as exactly this text,
+/// in the ID or value position of any link: the same function as
+/// escape_reference, under the name code that thinks in quoting rather than
+/// escaping looks for. Text that needs no delimiters is returned as it is;
+/// anything else is quoted, or written as a versioned literal when it is empty
+/// or holds a control character. `minimal` is as for escape_reference.
+///
+/// The answer is deliberately conservative, so the text also reads back with
+/// releases older than the one that made bare `12:30` and `tag #release` legal
+/// (issue #444): a colon, a whitespace character, a parenthesis, a quote, and
+/// a `#` that starts the text still ask for quotes.
+///
+///     quote_reference("plain");     // plain
+///     quote_reference("has space"); // 'has space'
+///     quote_reference("#release");  // '#release'
+///     quote_reference("");          // ~1{}
+///
+/// Throws std::invalid_argument when `reference` is not well-formed UTF-8.
+std::string quote_reference(std::string_view reference, bool minimal = false);
+
+/// quote_reference for an optional id: a missing id writes as "".
+std::string quote_reference(const std::optional<std::string>& reference, bool minimal = false);
+
+// Strings and literals convert to both of the above, so they pick one here.
+inline std::string quote_reference(const std::string& reference, bool minimal = false) {
+  return quote_reference(std::string_view(reference), minimal);
+}
+inline std::string quote_reference(const char* reference, bool minimal = false) {
+  return quote_reference(std::string_view(reference), minimal);
+}
+
+/// Whether one reference has to be quoted (or written as a versioned literal)
+/// to read back as exactly this text, that is whether quote_reference changes
+/// it. `minimal` is as for escape_reference.
+///
+///     needs_quoting("plain"); // false
+///     needs_quoting("12:30"); // true
+///     needs_quoting("");      // true
+///
+/// Throws std::invalid_argument when `reference` is not well-formed UTF-8.
+bool needs_quoting(std::string_view reference, bool minimal = false);
+
 /// Decodes one complete escaped reference. Text that is neither quoted nor a
 /// reference literal is returned unchanged.
 ///

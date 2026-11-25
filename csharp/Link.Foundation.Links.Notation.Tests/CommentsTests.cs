@@ -208,7 +208,7 @@ namespace Link.Foundation.Links.Notation.Tests
         public static void AHashInsideAReferenceThatFollowsAnotherReferenceIsContent()
         {
             AssertParsesAs("\"x\"' #y'\n", "(<x> < #y>)");
-            AssertParsesAs("```q```\"\" #c\n\"\"\"\n", "(<q> < #c\n\">)");
+            AssertParsesAs("```q```\"\"x # c\n\"\"\"\n", "(<q> <x # c\n\">)");
         }
 
         [Fact]
@@ -232,7 +232,43 @@ namespace Link.Foundation.Links.Notation.Tests
             Assert.Equal("(a)\" #b\"\n", Comments.StripComments("(a)\" #b\"\n"));
             Assert.Equal("\"x\"' #y'\n", Comments.StripComments("\"x\"' #y'\n"));
             Assert.Equal("~1{62}\" #b\"\n", Comments.StripComments("~1{62}\" #b\"\n"));
-            Assert.Equal("a\"b    \n", Comments.StripComments("a\"b #c\"\n"));
+            Assert.Equal("a\"b     \n", Comments.StripComments("a\"b # c\"\n"));
+        }
+
+        // Issue #444: a `#` that opens a token later on a line and is followed by a
+        // character that could continue a bare reference is a value, so a value is never
+        // dropped as a comment. At the start of a line it is still a comment.
+
+        [Fact]
+        public static void AHashThatOpensAValueLaterOnALineIsTheValue()
+        {
+            AssertParsesAs("tag #release\n", "(<tag> <#release>)");
+            Assert.Equal(
+                Rendered("root:\n  tag \"#release\"\n  next 1\n"),
+                Rendered("root:\n  tag #release\n  next 1\n"));
+            AssertParsesAs("colour #ff0000 # a note\n", "(<colour> <#ff0000>)");
+        }
+
+        [Fact]
+        public static void AHashFollowedByASpaceAParenthesisOrNothingOpensAComment()
+        {
+            AssertParsesAs("a: b #\n", "(<a>: <b>)");
+            AssertParsesAs("a: b #\tnote\n", "(<a>: <b>)");
+            AssertParsesAs("a b #(note)\n", "(<a> <b>)");
+            AssertParsesAs("a b #:note\n", "(<a> <b>)");
+        }
+
+        [Fact]
+        public static void AHashAtTheStartOfALineOpensACommentWhateverFollowsIt()
+        {
+            AssertParsesAs("#release\na\n", "(<a>)");
+            Assert.Equal(Rendered("root\n  a\n"), Rendered("root\n  #release\n  a\n"));
+        }
+
+        [Fact]
+        public static void TheCommentReaderKeepsAHashThatOpensAValue()
+        {
+            Assert.Equal("tag #release       \n", Comments.StripComments("tag #release # note\n"));
         }
     }
 }

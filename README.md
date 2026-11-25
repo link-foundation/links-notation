@@ -206,13 +206,44 @@ deploy: staging # only staging, for now
 ```
 
 That is the single link `(deploy: staging)`: both comments are gone by the time
-the document is read. A `#` only opens a comment where a reference could begin,
-so a `#` inside a token (`issue#1047`) and a `#` inside a delimited reference
-(`"#"`) stay ordinary characters.
+the document is read. A `#` opens a comment at the start of a line, and later
+on a line when it follows whitespace and is followed by whitespace, a
+parenthesis, a colon or the end of the document. Every other `#` is an
+ordinary character: inside a token (`issue#1047`), inside a delimited
+reference (`"#"`), and at the start of a value, so `tag #release` is the link
+of `tag` and `#release`.
 
 A formatter keeps the same rule from the other side: a reference that begins
 with a `#` is written quoted (`'#tag'`), so a document it writes reads back as
-itself.
+itself. Every implementation exposes that quoting as `quoteReference` and
+`needsQuoting` (in the naming style of its language).
+
+#### Colons inside references
+
+A colon between two characters of a reference belongs to it, so `12:30`,
+`std::string` and `https://example.com/a` are single references and need no
+quotes. A colon names a link only where no reference character follows it:
+
+```lino
+time: 12:30
+a:b: c
+```
+
+reads as `(time: 12:30)` and `(a:b: c)`, while `a: b`, `a:(b c)`, `a:"b"` and
+`a:~1{62}` are still links with the ID `a`.
+
+#### Empty quote pairs
+
+`""`, `''` and ``` `` ``` are the empty reference, and an even run of quotes
+followed by whitespace never reaches past its line, so
+
+```lino
+a ""
+b ""
+```
+
+is two links, `(a "")` and `(b "")`. The single character `"` is written
+`'"'`.
 
 Comments are on by default in every implementation, and every parser can be
 told to read `#` as an ordinary character again for documents written before
@@ -329,16 +360,16 @@ All ten language implementations (C#, JavaScript, Rust, Python, Go, Java, PHP, C
 <!-- test-counts:start -->
 | Language | Tests | Test categories |
 | --- | --- | --- |
-| Python | 281 | 28 |
-| JavaScript | 351 | 34 |
-| Rust | 430 | 32 |
-| C# | 325 | 30 |
-| Go | 167 | 20 |
-| Java | 214 | 19 |
-| PHP | 265 | 26 |
-| C++ | 380 | 32 |
-| Swift | 349 | 35 |
-| Kotlin | 358 | 33 |
+| Python | 310 | 31 |
+| JavaScript | 378 | 37 |
+| Rust | 456 | 35 |
+| C# | 353 | 33 |
+| Go | 189 | 23 |
+| Java | 242 | 22 |
+| PHP | 293 | 29 |
+| C++ | 408 | 35 |
+| Swift | 376 | 38 |
+| Kotlin | 385 | 36 |
 <!-- test-counts:end -->
 
 The table is written by `scripts/create-test-case-comparison.mjs`, which reads the test files

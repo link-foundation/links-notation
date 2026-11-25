@@ -173,9 +173,11 @@ last sees first"""
 
     @Test
     fun waitsForTheLineThatClosesAnEvenRunOfQuotes() {
-        // `""` is the empty reference only when nothing closes it, and here the
+        // `""b` opens a reference that only a later line can close, and here the
         // next line does, so the first line cannot be emitted on its own (#377).
-        val input = "a \"\" b\n\"\" c\n"
+        // (A `""` followed by whitespace and the end of its line is the empty
+        // reference whatever follows, issue #443.)
+        val input = "a \"\"b\n\"\" c\n"
         val stream = StreamParser()
         for (character in input) {
             assertEquals(emptyList(), stream.write(character.toString()), "after '$character'")

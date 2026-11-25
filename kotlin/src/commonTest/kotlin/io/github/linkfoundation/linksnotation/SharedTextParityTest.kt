@@ -40,7 +40,7 @@ class SharedTextParityTest {
 
     @Test
     fun sharedTextParity() {
-        assertEquals(31, PARITY_CASES.size)
+        assertEquals(42, PARITY_CASES.size)
         for (case in PARITY_CASES) {
             assertCase(case)
         }

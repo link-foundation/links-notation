@@ -181,7 +181,7 @@ class CommentsTest extends TestCase
     public function testAHashInsideAReferenceThatFollowsAnotherReferenceIsContent(): void
     {
         $this->assertParsesAs('(<x> < #y>)', "\"x\"' #y'\n");
-        $this->assertParsesAs("(<q> < #c\n\">)", "```q```\"\" #c\n\"\"\"\n");
+        $this->assertParsesAs("(<q> <x # c\n\">)", "```q```\"\"x # c\n\"\"\"\n");
     }
 
     public function testAHashInsideAReferenceThatFollowsALiteralIsContent(): void
@@ -203,7 +203,52 @@ class CommentsTest extends TestCase
         $this->assertSame("(a)\" #b\"\n", Comments::stripComments("(a)\" #b\"\n"));
         $this->assertSame("\"x\"' #y'\n", Comments::stripComments("\"x\"' #y'\n"));
         $this->assertSame("~1{62}\" #b\"\n", Comments::stripComments("~1{62}\" #b\"\n"));
-        $this->assertSame("a\"b    \n", Comments::stripComments("a\"b #c\"\n"));
+        $this->assertSame("a\"b     \n", Comments::stripComments("a\"b # c\"\n"));
+    }
+
+    // Issue #444: a `#` that opens a token later on a line and is followed by
+    // a character that could continue a bare reference is a value, so a value
+    // is never dropped as a comment. At the start of a line it is still a
+    // comment.
+
+    public function testAHashThatOpensAValueLaterOnALineIsTheValue(): void
+    {
+        $this->assertParsesAs('(<tag> <#release>)', "tag #release\n");
+        $this->assertSame(
+            $this->rendered("root:\n  tag \"#release\"\n  next 1\n"),
+            $this->rendered("root:\n  tag #release\n  next 1\n")
+        );
+        $this->assertParsesAs('(<colour> <#ff0000>)', "colour #ff0000 # a note\n");
+    }
+
+    public function testAHashFollowedByASpaceAParenthesisOrNothingOpensAComment(): void
+    {
+        $this->assertParsesAs('(<a>: <b>)', "a: b #\n");
+        $this->assertParsesAs('(<a>: <b>)', "a: b #\tnote\n");
+        $this->assertParsesAs('(<a> <b>)', "a b #(note)\n");
+        $this->assertParsesAs('(<a> <b>)', "a b #:note\n");
+    }
+
+    public function testAHashAtTheStartOfALineOpensACommentWhateverFollowsIt(): void
+    {
+        $this->assertParsesAs('(<a>)', "#release\na\n");
+        $this->assertSame($this->rendered("root\n  a\n"), $this->rendered("root\n  #release\n  a\n"));
+    }
+
+    public function testTheCommentReaderKeepsAHashThatOpensAValue(): void
+    {
+        $this->assertSame("tag #release       \n", Comments::stripComments("tag #release # note\n"));
+    }
+
+    public function testOpensCommentJudgesEveryHash(): void
+    {
+        $this->assertTrue(Comments::opensComment('# note', 0));
+        $this->assertTrue(Comments::opensComment('a #', 2));
+        $this->assertTrue(Comments::opensComment('a # why', 2));
+        $this->assertTrue(Comments::opensComment("a\n  #x", 4));
+        $this->assertFalse(Comments::opensComment('tag #release', 4));
+        $this->assertFalse(Comments::opensComment('issue#1047', 5));
+        $this->assertFalse(Comments::opensComment('a b', 1));
     }
 
     public function testAReferenceThatBeginsWithAHashIsWrittenQuoted(): void

@@ -2,7 +2,7 @@ use crate::quotes::{DelimitedReferences, QUOTES, Reading, read_reference};
 use nom::{
     IResult, Parser,
     branch::alt,
-    bytes::complete::{tag, take_while, take_while1},
+    bytes::complete::{tag, take_while},
     character::complete::{char, line_ending},
     combinator::eof,
     multi::{many0, many1},
@@ -419,11 +419,59 @@ fn whitespace(input: &str) -> IResult<&str, &str> {
     take_while(is_whitespace_char)(input)
 }
 
+/// A bare reference. It may hold colons between its characters, so `12:30`,
+/// `std::string` and `https://example.com/a#b` are each one reference
+/// (issue #444); see [`bare_reference_end`].
 fn simple_reference(input: &str) -> IResult<&str, String> {
-    take_while1(is_reference_char)
-        .map(|s: &str| s.to_string())
-        .parse(input)
+    if !input.chars().next().is_some_and(is_reference_char) {
+        return Err(nom::Err::Error(nom::error::Error::new(
+            input,
+            nom::error::ErrorKind::TakeWhile1,
+        )));
+    }
+    let end = bare_reference_end(input, 0);
+    Ok((&input[end..], input[..end].to_string()))
 }
+
+/// The byte offset just past the bare reference whose first character is at
+/// `start` of `text`.
+///
+/// A bare reference runs to whitespace, a parenthesis or a colon. A run of
+/// colons belongs to it only when a character that could start a bare
+/// reference follows the run and no versioned literal starts there: `a: b`,
+/// `a:(b)`, `a:"b"` and `a:~1{62}` still separate an ID from its values, and a
+/// bare reference never starts or ends with a colon. The parser and the
+/// concrete syntax tree both end a bare reference here, so they always agree.
+pub(crate) fn bare_reference_end(text: &str, start: usize) -> usize {
+    let bytes = text.as_bytes();
+    // Every byte that ends the reference is ASCII, so stepping a byte at a
+    // time always stops at a character boundary.
+    let mut end = start + 1;
+    while end < bytes.len() {
+        match bytes[end] {
+            b':' => {
+                let mut after = end;
+                while bytes.get(after) == Some(&b':') {
+                    after += 1;
+                }
+                let continues = bytes
+                    .get(after)
+                    .is_some_and(|next| !NOT_AFTER_INNER_COLONS.contains(next))
+                    && crate::reference_literal::prefix_end(&text[after..]).is_none();
+                if !continues {
+                    break;
+                }
+                end = after + 1;
+            }
+            b' ' | b'\t' | b'\n' | b'\r' | b'(' | b')' => break,
+            _ => end += 1,
+        }
+    }
+    end
+}
+
+/// What cannot start a bare reference after colons inside one.
+const NOT_AFTER_INNER_COLONS: &[u8] = b" \t\n\r(:)\"'`";
 
 /// The offset just past the delimited reference that starts at `start`, or
 /// `None` when nothing that far into `document` opens one.

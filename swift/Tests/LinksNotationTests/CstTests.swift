@@ -58,6 +58,24 @@ final class CstTests: XCTestCase {
         let cst = try Parser(options: ParserOptions(comments: false)).parseCst(input)
         XCTAssertEqual(cst.description, input)
         XCTAssertEqual(cst.tokens().map(\.kind.rawValue), ["reference", "whitespace", "reference"])
+
+        // With comments, a `#` that opens a value later on a line is still part
+        // of the reference (issue #444); one followed by a space opens a comment.
+        XCTAssertEqual(
+            try Parser().parseCst(input).tokens().map(\.kind.rawValue), ["reference", "whitespace", "reference"])
+        XCTAssertEqual(
+            try Parser().parseCst("a # b").tokens().map(\.kind.rawValue), ["reference", "whitespace", "comment"])
+    }
+
+    func testColonsInsideABareReferenceBelongToIt() throws {
+        // Issue #444: the tokenizer reads a bare reference as the grammar does.
+        XCTAssertEqual(
+            try Parser().parseCst("time 12:30").tokens().map(\.description), ["time", " ", "12:30"])
+        XCTAssertEqual(
+            try Parser().parseCst("a:b: c").tokens().map(\.description), ["a:b", ":", " ", "c"])
+        XCTAssertEqual(
+            try Parser().parseCst("a:~1{62}").tokens().map(\.description), ["a", ":", "~1{62}"])
+        XCTAssertEqual(try Parser().parseCst("a:\"b\"").tokens().map(\.description), ["a", ":", "\"b\""])
     }
 
     func testAGroupBelongsToTheLineItOpensOn() throws {

@@ -39,10 +39,11 @@ class StreamParserTest extends TestCase
 
     public function testWaitsForTheLineThatClosesAnEvenRunOfQuotes(): void
     {
-        // `""` is the empty reference only when nothing closes it, and here
+        // `""b` opens a reference that only a later line can close, and here
         // the next line does, so the first line cannot be emitted on its own
-        // (issue #377).
-        $input = "a \"\" b\n\"\" c\n";
+        // (issue #377). (A `""` followed by whitespace and the end of its line
+        // is the empty reference whatever follows, issue #443.)
+        $input = "a \"\"b\n\"\" c\n";
         $stream = new StreamParser();
         for ($index = 0; $index < strlen($input); $index++) {
             $this->assertSame([], $stream->write($input[$index]));

@@ -79,3 +79,46 @@ export function referenceQuote(raw) {
   const reading = readReference(raw, 0);
   return reading !== null && reading.length === raw.length ? raw[0] : null;
 }
+
+/**
+ * Write one reference so that a parser reads it back as exactly this text, in
+ * the ID or value position of any link: the name `escapeReference` gives the
+ * same function to code that thinks in quoting rather than escaping. Text that
+ * needs no delimiters is returned as it is; anything else is quoted, or written
+ * as a versioned literal when it is empty or holds a control character.
+ *
+ * The answer is deliberately conservative, so the text also reads back with
+ * releases older than the one that made bare `12:30` and `tag #release` legal
+ * (issue #444): a colon, a whitespace character, a parenthesis, a quote, and a
+ * `#` that starts the text still ask for quotes.
+ * @param {string|null|undefined} reference - The text of one reference
+ * @param {{minimal?: boolean}} [options] - As for {@link escapeReference}
+ * @returns {string} The reference as it should be written
+ * @example
+ * quoteReference('plain'); // 'plain'
+ * quoteReference('has space'); // "'has space'"
+ * quoteReference('#release'); // "'#release'"
+ * quoteReference(''); // '~1{}'
+ */
+export function quoteReference(reference, options = {}) {
+  return escapeReference(reference, options);
+}
+
+/**
+ * Whether one reference has to be quoted (or written as a versioned literal) to
+ * read back as exactly this text, that is whether {@link quoteReference}
+ * changes it.
+ * @param {string} reference - The text of one reference
+ * @param {{minimal?: boolean}} [options] - As for {@link escapeReference}
+ * @returns {boolean} True when the text cannot be written bare
+ * @example
+ * needsQuoting('plain'); // false
+ * needsQuoting('12:30'); // true
+ * needsQuoting(''); // true
+ */
+export function needsQuoting(reference, options = {}) {
+  if (typeof reference !== 'string') {
+    throw new TypeError('Reference must be a string');
+  }
+  return quoteReference(reference, options) !== reference;
+}

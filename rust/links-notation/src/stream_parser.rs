@@ -1,5 +1,6 @@
 //! Incremental parsing for long-lived Links Notation streams.
 
+use crate::comments::opens_comment;
 use crate::quotes::{DelimitedReferences, QUOTES};
 use crate::reference_literal::reference_literal_end;
 use crate::{
@@ -12,7 +13,6 @@ use std::fmt;
 const DEFAULT_MAX_BUFFER_SIZE: usize = 10 * 1024 * 1024;
 /// What ends a bare reference, so that a token starts after it.
 const SEPARATORS: &[u8] = b" \t\n\r(:)";
-const BEFORE_COMMENT: &[u8] = b" \t\n\r";
 
 /// The point immediately after the last character written to a stream parser.
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -515,10 +515,6 @@ fn leading_spaces(line: &str) -> usize {
     line.bytes().take_while(|byte| *byte == b' ').count()
 }
 
-fn follows(document: &[u8], position: usize, allowed: &[u8]) -> bool {
-    position == 0 || allowed.contains(&document[position - 1])
-}
-
 fn structurally_complete(document: &str, comments: bool) -> bool {
     // Tokens are read as the comment reader and the parser read them: a
     // reference may start after a separator, and right after a delimited
@@ -531,7 +527,7 @@ fn structurally_complete(document: &str, comments: bool) -> bool {
 
     while position < bytes.len() {
         let byte = bytes[position];
-        if comments && byte == b'#' && follows(bytes, position, BEFORE_COMMENT) {
+        if comments && opens_comment(bytes, position) {
             match document[position..].find('\n') {
                 Some(newline) => position += newline,
                 None => break,

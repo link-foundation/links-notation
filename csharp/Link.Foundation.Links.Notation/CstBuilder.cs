@@ -17,6 +17,9 @@ namespace Link.Foundation.Links.Notation
         /// <summary>What ends a bare reference.</summary>
         private const string BareReferenceEnd = " \t\r\n(:)";
 
+        /// <summary>What cannot start a bare reference after colons inside one.</summary>
+        private const string NotAfterInnerColons = BareReferenceEnd + "\"'`";
+
         /// <summary>An open container (the document or a group) and the line being filled in it.</summary>
         private sealed class Container
         {
@@ -145,8 +148,29 @@ namespace Link.Foundation.Links.Notation
                 return new CstNode(CstKind.Reference, input.Substring(start, length), value, input[start]);
             }
             end = start + 1;
-            while (end < prepared.Length && BareReferenceEnd.IndexOf(prepared[end]) < 0)
+            while (end < prepared.Length)
             {
+                if (prepared[end] == ':')
+                {
+                    // Colons belong to the reference when a bare reference continues after
+                    // them, as in `12:30` (issue #444).
+                    var after = end;
+                    while (after < prepared.Length && prepared[after] == ':')
+                    {
+                        after++;
+                    }
+                    if (after == prepared.Length ||
+                        NotAfterInnerColons.IndexOf(prepared[after]) >= 0 ||
+                        ReferenceLiteral.HasPrefix(prepared, after))
+                    {
+                        break;
+                    }
+                    end = after;
+                }
+                else if (BareReferenceEnd.IndexOf(prepared[end]) >= 0)
+                {
+                    break;
+                }
                 end++;
             }
             var bare = input.Substring(start, end - start);

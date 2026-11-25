@@ -267,7 +267,8 @@ func buildCst(input string, comments bool) (*CstNode, error) {
 // readCstReference reads the reference token that starts at start. A
 // versioned literal or a delimited reference is read, as the parser reads it,
 // in the document as written, so a comment never changes what a reference
-// holds (issue #377); a bare reference ends where it ends in prepared.
+// holds (issue #377); a bare reference ends where it ends in prepared, colons
+// followed by more of the reference included (issue #444).
 func readCstReference(input, prepared string, start int) *CstNode {
 	if end := referenceLiteralEnd(input, start); end >= 0 {
 		text := input[start:end]
@@ -285,7 +286,18 @@ func readCstReference(input, prepared string, start int) *CstNode {
 		}
 	}
 	end := start + 1
-	for end < len(prepared) && strings.IndexByte(bareReferenceEnd, prepared[end]) < 0 {
+	for end < len(prepared) {
+		if prepared[end] == ':' {
+			// Colons belong to the reference when a bare reference continues
+			// after them, as in 12:30 (issue #444).
+			after := innerColonsEnd(prepared, end)
+			if after < 0 {
+				break
+			}
+			end = after
+		} else if strings.IndexByte(bareReferenceEnd, prepared[end]) >= 0 {
+			break
+		}
 		end++
 	}
 	text := input[start:end]

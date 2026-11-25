@@ -15,16 +15,11 @@ namespace {
 
 // What ends a bare reference, so that a token starts after it.
 constexpr std::string_view separators = " \t\n\r(:)";
-constexpr std::string_view before_comment = " \t\n\r";
 
 std::size_t leading_spaces(std::string_view line) {
   std::size_t spaces = 0;
   while (spaces < line.size() && line[spaces] == ' ') ++spaces;
   return spaces;
-}
-
-bool follows(std::string_view document, std::size_t position, std::string_view allowed) {
-  return position == 0 || allowed.find(document[position - 1]) != std::string_view::npos;
 }
 
 // Whether every delimited reference and parenthesized group in `document` is
@@ -40,7 +35,7 @@ bool structurally_complete(std::string_view document, bool comments) {
 
   while (position < document.size()) {
     const char character = document[position];
-    if (comments && character == comment_character && follows(document, position, before_comment)) {
+    if (comments && detail::opens_comment(document, position)) {
       const std::size_t newline = document.find('\n', position);
       if (newline == std::string_view::npos) break;
       position = newline;

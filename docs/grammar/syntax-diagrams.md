@@ -29,7 +29,8 @@ Document ─────┬───────────┤ skip_empty_lines
 
 ## Comments
 
-A `#` written where a reference could begin hides the rest of the line it
+A `#` at the start of a line, or later on a line before whitespace, a
+parenthesis, a colon or the end of the document, hides the rest of the line it
 stands on.
 
 ```text
@@ -42,18 +43,19 @@ comment ──────┤ comment_start ├──┬──┤ any character 
                                  └──────────────────────────────────────▶
 ```
 
-A `#` opens a comment only at the start of the document or after a space, a
-tab or a newline, so a `#` inside a token (`issue#1047`) stays an ordinary
-character, as does a `#` inside a delimited reference (`"#"`).
+A `#` inside a token (`issue#1047`) stays an ordinary character, as does a
+`#` inside a delimited reference (`"#"`) and a `#` that starts a value later
+on a line (`tag #release`).
 
 ```text
                       ┌─────────────────────┐   ┌─────┐
-comment_start ───┬────┤  start of document  ├───┤  #  ├───┬───▶
-                 │    └─────────────────────┘   └─────┘   │
-                 │    ┌─────────────────────┐   ┌─────┐   │
-                 └────┤  space, tab or a    ├───┤  #  ├───┘
-                      │  newline (\n, \r)   │   └─────┘
-                      └─────────────────────┘
+comment_start ───┬────┤ start of a line and ├───┤  #  ├──────────────────────┬───▶
+                 │    │ any indentation     │   └─────┘                      │
+                 │    └─────────────────────┘                                │
+                 │    ┌─────────────────────┐   ┌─────┐   ┌───────────────┐  │
+                 └────┤    space or tab     ├───┤  #  ├───┤ whitespace, ( ├──┘
+                      └─────────────────────┘   └─────┘   │ : ) or the end│
+                                                          └───────────────┘
 ```
 
 A comment is blanked rather than removed: each of its characters becomes a
@@ -149,9 +151,15 @@ One or more reference symbols (non-whitespace, non-special characters).
 simple_reference ──┤   reference_symbol   ├────┬─────▶
                    └──────────────────────┘    │
                               ▲                │
-                              │                │
+                              │ ┌────────────┐ │
+                              ├─┤inner_colons├─┤
+                              │ └────────────┘ │
                               └────────────────┘
 ```
+
+Inner colons (`12:30`, `std::string`) are taken only when a character that
+can start a simple reference follows them: not whitespace, a parenthesis, a
+delimiter, the end of the document, or a reference literal `~N{`.
 
 ## N-Quoted Reference
 
@@ -174,7 +182,9 @@ reads as empty references instead.
 ## Empty Reference
 
 An even run of the same delimiter that does not open an n-quoted reference:
-`""` is one empty reference, `"" ""` is two of them.
+`""` is one empty reference, `"" ""` is two of them. An even run followed by
+whitespace that nothing closes on its own line is the empty reference too, so
+`a ""\nb ""` holds two empty references.
 
 ```text
                       ┌─────┐   ┌─────┐
