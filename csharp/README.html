@@ -222,6 +222,29 @@ collapses to a single link, so <code>(a b c)</code> is unchanged.</p>
 
 Console.WriteLine(links[0]); // (value ((id 1) (label one)))
 </code></pre>
+<h3 id="colons-empty-quotes-and-quoting-references">Colons, Empty Quotes and Quoting References</h3>
+<p>A run of colons belongs to a bare reference when the reference has started and
+a character that can start a bare reference follows the run, so times, URLs and
+qualified names need no quotes: <code>12:30</code>, <code>std::string</code> and
+<code>https://example.com/a#b</code> are one reference each, and <code>a:b: c</code> has the ID
+<code>a:b</code>. A colon followed by whitespace, a parenthesis, a quote or a versioned
+literal (<code>a: b</code>, <code>a:(b)</code>, <code>a:&quot;b&quot;</code>, <code>a:~1{62}</code>) still separates an ID from its
+values.</p>
+<p>An even run of quotes followed by whitespace up to the end of its line (<code>a &quot;&quot;</code>)
+is the empty reference, whatever later lines hold; an even run followed directly
+by text (<code>&quot;&quot;x</code>) still opens a reference that may span lines.</p>
+<p><code>Link&lt;T&gt;.QuoteReference</code> writes one reference so a parser reads it back as
+exactly that text, and <code>Link&lt;T&gt;.NeedsQuoting</code> says whether it has to be quoted.
+Both are deliberately conservative: colons, whitespace, parentheses, quotes and
+a leading <code>#</code> are still quoted, so the text also reads back with older releases.</p>
+<pre><code class="lang-csharp">var links = new Parser().Parse(&quot;meeting: 12:30 https://example.com/a#b\n&quot;);
+Console.WriteLine(links[0]); // (meeting: '12:30' 'https://example.com/a#b')
+
+Link&lt;string&gt;.QuoteReference(&quot;plain&quot;);  // plain
+Link&lt;string&gt;.QuoteReference(&quot;12:30&quot;);  // '12:30'
+Link&lt;string&gt;.QuoteReference(&quot;&quot;);       // ~1{}
+Link&lt;string&gt;.NeedsQuoting(&quot;#release&quot;); // true
+</code></pre>
 <h3 id="comments">Comments</h3>
 <p>A <code>#</code> hides the rest of the line it stands on, so a document can carry prose
 about itself:</p>
@@ -231,7 +254,11 @@ deploy: staging # only staging, for now
 <p>Both comments are gone by the time the document is read, leaving the single
 link <code>(deploy: staging)</code>. A <code>#</code> only opens a comment where a reference could
 begin, so a <code>#</code> inside a token (<code>issue#1047</code>) and a <code>#</code> inside a delimited
-reference (<code>&quot;#&quot;</code>) stay ordinary characters.</p>
+reference (<code>&quot;#&quot;</code>) stay ordinary characters. At the start of a line, after any
+indentation, a <code>#</code> always opens a comment; later on a line it opens one only
+when whitespace, <code>(</code>, <code>)</code>, <code>:</code> or the end of the document follows it. So
+<code>a: b # why</code> and <code>a: b #</code> hold a comment, while <code>tag #release</code> is the link of
+<code>tag</code> and <code>#release</code>: a value is never silently dropped.</p>
 <p>A formatter keeps the same rule from the other side: a reference that begins
 with a <code>#</code> is written quoted (<code>'#tag'</code>), so a document it writes reads back as
 itself.</p>

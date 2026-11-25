@@ -2059,6 +2059,24 @@ references:
   fullName.vb: Link.Foundation.Links.Notation.Link(Of TLinkAddress).Id
   nameWithType: Link<TLinkAddress>.Id
   nameWithType.vb: Link(Of TLinkAddress).Id
+- uid: Link.Foundation.Links.Notation.Link`1.NeedsQuoting(System.String)
+  name: NeedsQuoting(string)
+  href: api/Link.Foundation.Links.Notation.Link-1.html#Link_Foundation_Links_Notation_Link_1_NeedsQuoting_System_String_
+  commentId: M:Link.Foundation.Links.Notation.Link`1.NeedsQuoting(System.String)
+  name.vb: NeedsQuoting(String)
+  fullName: Link.Foundation.Links.Notation.Link<TLinkAddress>.NeedsQuoting(string)
+  fullName.vb: Link.Foundation.Links.Notation.Link(Of TLinkAddress).NeedsQuoting(String)
+  nameWithType: Link<TLinkAddress>.NeedsQuoting(string)
+  nameWithType.vb: Link(Of TLinkAddress).NeedsQuoting(String)
+- uid: Link.Foundation.Links.Notation.Link`1.NeedsQuoting*
+  name: NeedsQuoting
+  href: api/Link.Foundation.Links.Notation.Link-1.html#Link_Foundation_Links_Notation_Link_1_NeedsQuoting_
+  commentId: Overload:Link.Foundation.Links.Notation.Link`1.NeedsQuoting
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Link<TLinkAddress>.NeedsQuoting
+  fullName.vb: Link.Foundation.Links.Notation.Link(Of TLinkAddress).NeedsQuoting
+  nameWithType: Link<TLinkAddress>.NeedsQuoting
+  nameWithType.vb: Link(Of TLinkAddress).NeedsQuoting
 - uid: Link.Foundation.Links.Notation.Link`1.Quote
   name: Quote
   href: api/Link.Foundation.Links.Notation.Link-1.html#Link_Foundation_Links_Notation_Link_1_Quote
@@ -2076,6 +2094,24 @@ references:
   fullName.vb: Link.Foundation.Links.Notation.Link(Of TLinkAddress).Quote
   nameWithType: Link<TLinkAddress>.Quote
   nameWithType.vb: Link(Of TLinkAddress).Quote
+- uid: Link.Foundation.Links.Notation.Link`1.QuoteReference(System.String)
+  name: QuoteReference(string?)
+  href: api/Link.Foundation.Links.Notation.Link-1.html#Link_Foundation_Links_Notation_Link_1_QuoteReference_System_String_
+  commentId: M:Link.Foundation.Links.Notation.Link`1.QuoteReference(System.String)
+  name.vb: QuoteReference(String)
+  fullName: Link.Foundation.Links.Notation.Link<TLinkAddress>.QuoteReference(string?)
+  fullName.vb: Link.Foundation.Links.Notation.Link(Of TLinkAddress).QuoteReference(String)
+  nameWithType: Link<TLinkAddress>.QuoteReference(string?)
+  nameWithType.vb: Link(Of TLinkAddress).QuoteReference(String)
+- uid: Link.Foundation.Links.Notation.Link`1.QuoteReference*
+  name: QuoteReference
+  href: api/Link.Foundation.Links.Notation.Link-1.html#Link_Foundation_Links_Notation_Link_1_QuoteReference_
+  commentId: Overload:Link.Foundation.Links.Notation.Link`1.QuoteReference
+  isSpec: "True"
+  fullName: Link.Foundation.Links.Notation.Link<TLinkAddress>.QuoteReference
+  fullName.vb: Link.Foundation.Links.Notation.Link(Of TLinkAddress).QuoteReference
+  nameWithType: Link<TLinkAddress>.QuoteReference
+  nameWithType.vb: Link(Of TLinkAddress).QuoteReference
 - uid: Link.Foundation.Links.Notation.Link`1.RawId
   name: RawId
   href: api/Link.Foundation.Links.Notation.Link-1.html#Link_Foundation_Links_Notation_Link_1_RawId
