@@ -80,6 +80,12 @@ final class DelimitedReferences {
 private func reading(
     _ document: [Unicode.Scalar], start: Int, quote: Unicode.Scalar, count: Int, end: Int?
 ) -> Reading? {
+    if count % 2 == 0 && staysOnItsLine(document, bodyStart: start + count, end: end) {
+        // A pair, or a longer even run, that ends its line (or is followed by
+        // whitespace up to a line break before anything closes it) is the
+        // empty reference however later lines continue (issue #443).
+        return Reading(value: "", length: count)
+    }
     let emptyReference = count % 2 == 0 ? Reading(value: "", length: count) : nil
     guard let end else {
         // Nothing closes the run: an even one is the empty reference, which a
@@ -109,6 +115,24 @@ private func reading(
         return emptyReference
     }
     return Reading(value: String(value), length: end - start)
+}
+
+/// Whether an even run whose body starts at `bodyStart` has to be read as the
+/// empty reference because its n-quoted reading would leave the line without
+/// opening a multiline reference: whitespace follows the run directly, and a
+/// line break comes before the closing run (or no run closes it at all).
+private func staysOnItsLine(_ document: [Unicode.Scalar], bodyStart: Int, end: Int?) -> Bool {
+    if bodyStart < document.count && !isWhitespace(document[bodyStart]) {
+        return false
+    }
+    guard let end else { return true }
+    return document[bodyStart..<end].contains { $0 == "\n" || $0 == "\r" }
+}
+
+/// A space, a tab or a line break: what may follow an even run that does not
+/// open a multiline reference.
+private func isWhitespace(_ scalar: Unicode.Scalar) -> Bool {
+    scalar == " " || scalar == "\t" || scalar == "\n" || scalar == "\r"
 }
 
 private func runLength(_ text: [Unicode.Scalar], from start: Int, quote: Unicode.Scalar) -> Int {
@@ -191,28 +215,52 @@ private func isSubstantiveBody(_ content: String.UnicodeScalarView) -> Bool {
     return hasVisible && depth == 0
 }
 
+/// Whether the `#` at `position` starts a comment: the port of `opensComment`
+/// (`js/src/comments.js`). It has to open a token (start the document or
+/// follow a space, a tab or a line break), and either only indentation stands
+/// before it on its line or no character that could continue a bare reference
+/// follows it: whitespace, the end of the document, `(`, `:` or `)`. So
+/// `a: b # why` and `a: b #` hold a comment, while `tag #release` is the link
+/// of `tag` and `#release` (issue #444). Whether the `#` stands inside a
+/// delimited reference is up to the caller.
+///
+///     opensComment("# note", 0)        // true: the start of a line
+///     opensComment("a # why", 2)       // true: a space follows it
+///     opensComment("tag #release", 4)  // false: a value
+///     opensComment("issue#1047", 5)    // false: inside a token
+func opensComment(_ document: [Unicode.Scalar], _ position: Int) -> Bool {
+    guard document[position] == "#" else { return false }
+    if position > 0 && !isWhitespace(document[position - 1]) {
+        return false
+    }
+    var before = position - 1
+    while before >= 0 && (document[before] == " " || document[before] == "\t") {
+        before -= 1
+    }
+    if before < 0 || document[before] == "\n" || document[before] == "\r" {
+        return true
+    }
+    let next = position + 1
+    return next >= document.count || tokenSeparators.contains(document[next])
+}
+
 /// The document with every comment blanked out: the port of `stripComments`
-/// (`js/src/comments.js`). `#` starts a comment at the start of the document
-/// or after a space, a tab or a line break, outside delimited references.
-/// Every scalar of a comment becomes a space, so positions do not move.
+/// (`js/src/comments.js`). `#` starts a comment where `opensComment` says so,
+/// outside delimited references. Every scalar of a comment becomes a space, so
+/// positions do not move.
 func stripComments(_ document: [Unicode.Scalar]) -> [Unicode.Scalar] {
     var blanked = document
     var position = 0
     let references = DelimitedReferences(document)
-    let beforeComment: [Unicode.Scalar] = [" ", "\t", "\n", "\r"]
     // Whether a token may start at `position`. The document is read token by
     // token, as the grammar reads it, so a `#` inside a reference that starts
     // right after a group, another reference or a literal stays content
     // (issue #377).
     var tokenStart = true
 
-    func follows(_ allowed: [Unicode.Scalar]) -> Bool {
-        position == 0 || allowed.contains(document[position - 1])
-    }
-
     while position < document.count {
         let scalar = document[position]
-        if scalar == "#" && follows(beforeComment) {
+        if scalar == "#" && opensComment(document, position) {
             while position < document.count && document[position] != "\n"
                 && document[position] != "\r"
             {
@@ -241,6 +289,12 @@ func stripComments(_ document: [Unicode.Scalar]) -> [Unicode.Scalar] {
 /// start of the document, and right after a delimited reference or a
 /// versioned literal: the places the grammar reads a reference from.
 let tokenSeparators: [Unicode.Scalar] = [" ", "\t", "\n", "\r", "(", ":", ")"]
+
+/// `[^ \t\n\r(:)"'\`]`: what may start a bare reference, and so continue one
+/// after a run of colons inside it (issue #444).
+func isBareReferenceStart(_ scalar: Unicode.Scalar) -> Bool {
+    !tokenSeparators.contains(scalar) && !quoteScalars.contains(scalar)
+}
 
 /// Where the versioned literal `~<digits>{<payload>}` that starts at `start`
 /// ends, or `nil` when none starts there.
@@ -272,10 +326,13 @@ private func delimitedTokenEnd(
 
 /// The document with every comment replaced by spaces of the same length, so
 /// offsets, lines and columns stay the same: `stripComments` of the
-/// JavaScript package. `#` starts a comment at the start of the document or
-/// after whitespace, outside quoted references.
+/// JavaScript package. Outside quoted references, `#` starts a comment at
+/// the start of a line, after any indentation, and later on a line after a
+/// space or a tab when whitespace, the end of the document, `(`, `:` or `)`
+/// follows it; otherwise it is an ordinary character (issue #444).
 ///
-///     stripComments("a: b # why\n")  // "a: b      \n"
+///     stripComments("a: b # why\n")    // "a: b      \n"
+///     stripComments("tag #release\n")  // "tag #release\n"
 ///     stripComments("issue#1047\n")  // "issue#1047\n"
 public func stripComments(_ document: String) -> String {
     var view = String.UnicodeScalarView()

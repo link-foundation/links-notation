@@ -96,7 +96,12 @@ public func formatLinks(_ links: [Link], lessParentheses: Bool = false) -> Strin
 public func formatLinks(_ links: [Link], options: FormatOptions) -> String
 public func escapeReference(_ reference: String?, minimal: Bool = false) -> String
 public func unescapeReference(_ reference: String) throws -> String
+public func quoteReference(_ reference: String?, minimal: Bool = false) -> String
+public func needsQuoting(_ reference: String, minimal: Bool = false) -> Bool
 ```
+
+`quoteReference` is `escapeReference` under the name the other bindings share,
+and `needsQuoting(reference)` tells whether it would change the text.
 
 ### Parser
 
@@ -114,7 +119,8 @@ let cst: CstNode = try parser.parseCst(document)
 - `maxInputSize` - The longest document accepted, in UTF-16 code units
   (default: `nil`, which means `defaultMaxInputSize`, 10 MiB); a longer one
   throws `ParseError.inputTooLarge`
-- `comments` - Whether `#` starts a comment (default: `true`)
+- `comments` - Whether `#` starts a comment (default: `true`); see
+  [Comments](#comments)
 - `syntax` - Whether parsed links record how their ids were written in
   `rawId` (default: `true`); `false` is the AST mode
 
@@ -372,11 +378,38 @@ deploy: staging # only staging, for now
 Both comments are gone by the time the document is read, leaving the single
 link `(deploy: staging)`. A `#` only opens a comment where a reference could
 begin, so a `#` inside a token (`issue#1047`) and a `#` inside a delimited
-reference (`"#"`) stay ordinary characters.
+reference (`"#"`) stay ordinary characters. At the start of a line, after any
+indentation, a `#` always opens a comment. Later on a line it opens one only
+when whitespace, `(`, `)`, `:` or the end of the document follows it, so
+`deploy: staging #` and `a b #(note)` hold a comment while `tag #release` is the
+link of `tag` and `#release`: a value is never silently dropped.
 
 A formatter keeps the same rule from the other side: a reference that begins
 with a `#` is written quoted (`'#tag'`), so a document it writes reads back as
 itself.
+
+### Colons inside references
+
+A run of colons between two characters of a bare reference belongs to the
+reference, so `12:30`, `https://example.com/a#b` and `std::string` are one
+reference each, and `a:b: c` is a link whose ID is `a:b`. A colon followed by
+whitespace, a parenthesis, a quote or a versioned literal still separates an ID
+from its values, so `a: b`, `a:"b"`, `a:(b c)` and `a:~1{62}` read as before.
+
+### Quoting a reference
+
+`quoteReference(text)` writes one reference so a parser reads it back as
+exactly `text`, quoting it (or writing a versioned literal) only when it has
+to; `needsQuoting(text)` says whether it has to. Both stay conservative, so
+the result also reads back with older releases: a colon, whitespace, a
+parenthesis, a quote and a leading `#` are always quoted.
+
+```swift
+quoteReference("plain")    // "plain"
+quoteReference("12:30")    // "'12:30'"
+quoteReference("")         // "~1{}"
+needsQuoting("#release")   // true
+```
 
 Comments are on by default, and a parser can be told to read `#` as an ordinary
 character again, for documents written before comments existed:

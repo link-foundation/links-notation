@@ -22,6 +22,10 @@ final class ParityTests: XCTestCase {
                 "less-parentheses-leading-nested",
                 "indented-id-references", "indented-id-quoted", "indented-id-explicit-links",
                 "indented-id-nested", "indented-id-inline-descendants", "indented-id-comments",
+                "empty-quote-pairs-per-line", "empty-quote-pairs-single", "empty-quote-pair-then-quote",
+                "empty-quote-pairs-top-level", "empty-quote-pair-trailing-space", "doubled-quotes-alone",
+                "single-quote-characters", "multiline-even-run", "hash-values", "colon-inside-references",
+                "colon-after-reference-id",
             ])
     }
 

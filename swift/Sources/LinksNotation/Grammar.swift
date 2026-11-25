@@ -484,15 +484,44 @@ final class Grammar {
         return nil
     }
 
-    // simpleReference = &{ !prefix } referenceSymbol+
+    // simpleReference = &{ !prefix }
+    //   $(referenceSymbol (referenceSymbol / innerColons)*)
+    //
+    // A bare reference may hold colons between its characters, so `12:30`,
+    // `std::string` and `https://example.com/a#b` are each one reference
+    // (issue #444). A run of colons belongs to the reference only when a
+    // character that could start a bare reference follows it: `a: b`,
+    // `a:(b)`, `a:"b"` and `a:~1{62}` still separate an ID from its values.
     private func simpleReference() -> String? {
         guard !hasReferenceLiteralPrefix(input, at: position) else { return nil }
         let start = position
-        while match(Expect.referenceSymbol, isReferenceSymbol) {}
-        guard position > start else { return nil }
+        guard match(Expect.referenceSymbol, isReferenceSymbol) else { return nil }
+        while true {
+            if match(Expect.referenceSymbol, isReferenceSymbol) {
+                continue
+            }
+            if innerColonsFollow() {
+                while match(":", Expect.colon) {}
+                continue
+            }
+            break
+        }
         var text = String.UnicodeScalarView()
         text.append(contentsOf: input[start..<position])
         return String(text)
+    }
+
+    // innerColons = &(":"+ !referenceLiteralPrefix bareReferenceStart) ":"+
+    //
+    // The lookahead, which records no failure: whether a run of colons starts
+    // here and a bare reference continues after it.
+    private func innerColonsFollow() -> Bool {
+        var after = position
+        while after < input.count && input[after] == ":" {
+            after += 1
+        }
+        return after > position && after < input.count && isBareReferenceStart(input[after])
+            && !hasReferenceLiteralPrefix(input, at: after)
     }
 
     // eol = __ (lineBreaks / eof / nestedGroupEnd)
