@@ -260,12 +260,31 @@ methods on `Link`. Use minimal mode only for whole text lines; default escaping
 still quotes spaces so references can be used inside tuples:
 
 ```javascript
-import { Link, escapeReference, unescapeReference } from 'links-notation';
+import {
+  Link,
+  escapeReference,
+  needsQuoting,
+  quoteReference,
+  unescapeReference,
+} from 'links-notation';
 
 Link.escapeReference('plain text'); // "'plain text'"
 escapeReference('plain text', { minimal: true }); // 'plain text'
 unescapeReference("'it''s ready'"); // "it's ready"
+quoteReference('a:b'); // "'a:b'"
+needsQuoting('tag'); // false
+needsQuoting('#release'); // true
 ```
+
+`quoteReference` is `escapeReference` under the name the other bindings
+share, and `needsQuoting(reference)` tells whether it would change the
+reference. Both are conservative: whitespace, colons, parentheses, quotes and a
+leading `#` are always quoted, so the result reads back as the same single
+reference wherever it is placed in a document, including the start of a line.
+
+A bare reference may hold colons between its characters (`12:30`,
+`std::string`), and an even run of quotes followed by whitespace never reaches
+past its line, so `a ""\nb ""` reads as `(a "")` and `(b "")`.
 
 `unescapeReference` decodes a complete serialized reference, including n-quote
 delimiters, doubled escapes, and versioned literals. It rejects incomplete
@@ -470,9 +489,13 @@ deploy: staging # only staging, for now
 ```
 
 Both comments are gone by the time the document is read, leaving the single
-link `(deploy: staging)`. A `#` only opens a comment where a reference could
-begin, so a `#` inside a token (`issue#1047`) and a `#` inside a delimited
-reference (`"#"`) stay ordinary characters.
+link `(deploy: staging)`. A `#` opens a comment at the start of a line, and
+later on a line when it follows whitespace and is followed by whitespace, a
+parenthesis, a colon or the end of the document. Every other `#` is an
+ordinary character: inside a token (`issue#1047`), inside a delimited
+reference (`"#"`), and at the start of a value (`tag #release` reads as
+`(tag #release)`). `stripComments(document)` blanks exactly the comments the
+parser skips.
 
 A formatter keeps the same rule from the other side: a reference that begins
 with a `#` is written quoted (`'#tag'`), so a document it writes reads back as
@@ -528,6 +551,10 @@ Represents a single link with ID and values.
 - `escapeReference(reference, options)` - Quote a reference; `minimal: true`
   allows ordinary prose on a text document line
 - `unescapeReference(reference)` - Decode a complete serialized reference
+- `quoteReference(reference, options)` - The same function as
+  `escapeReference`
+- `needsQuoting(reference, options)` - `true` when `quoteReference` would
+  change the reference
 
 #### `LinksGroup`
 

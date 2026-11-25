@@ -94,8 +94,19 @@ reference_or_link   = nested_group
 reference           = delimited_reference
                     | simple_reference ;
 
-(* An unquoted reference (alphanumeric and special chars) *)
-simple_reference    = reference_symbol, { reference_symbol } ;
+(* An unquoted reference (alphanumeric and special chars). It may hold
+   colons between its characters (12:30, std::string, https://a/b), but it
+   never starts or ends with one *)
+simple_reference    = reference_symbol, { reference_symbol | inner_colons } ;
+
+(* Colons stay inside a simple reference only when a character that could
+   start one follows them: not whitespace, a parenthesis, a colon, a
+   delimiter, the end of the document, or the reserved prefix ~[0-9]+{.
+   So "a:b: c" links "a:b" to "c", while "a: b", "a:(b)", 'a:"b"' and
+   "a:~1{62}" still name a link with the ID "a" *)
+inner_colons        = ":", { ":" } ;
+(* Condition: followed by a reference_symbol that is not a delimiter, and not
+   by ~[0-9]+{ *)
 
 (* The three delimiters behave identically; nothing else delimits *)
 delimiter           = '"' | "'" | "`" ;
@@ -120,7 +131,9 @@ n_quoted_reference  = delimiter_run, { any_char }, delimiter_run ;
 
 (* A bare delimiter pair is the empty reference, and so is any longer even
    run that does not open an n-quoted reference: the shortest reading wins,
-   so "" is one empty reference and "" "" is two of them *)
+   so "" is one empty reference and "" "" is two of them. An even run
+   followed by whitespace never reaches past its line: when nothing closes it
+   before a line break, it is the empty reference whatever later lines hold *)
 empty_reference     = delimiter, delimiter, { delimiter, delimiter } ;
 (* Condition: the whole run uses the same delimiter *)
 
@@ -128,8 +141,9 @@ empty_reference     = delimiter, delimiter, { delimiter, delimiter } ;
 (*                          COMMENTS                               *)
 (* ============================================================== *)
 
-(* A "#" written where a reference could begin opens a comment that runs to
-   the end of its line. Comments are taken out before the rules above are
+(* A "#" at the start of a line, or later on a line before whitespace, a
+   parenthesis, a colon or the end of the document, opens a comment that runs
+   to the end of its line. Comments are taken out before the rules above are
    applied: every character of a comment is replaced with a space, so what
    follows keeps the position it was written at, and a line that held nothing
    but a comment becomes a line of whitespace, which separates links the way
@@ -138,18 +152,23 @@ empty_reference     = delimiter, delimiter, { delimiter, delimiter } ;
    "#" is an ordinary reference_symbol everywhere. *)
 comment             = comment_start, { any_char - newline } ;
 
-(* A comment starts only at the start of the document or after a space, a tab
-   or a line break, so a "#" inside a token (issue#1047) is an ordinary
-   character, and a "#" inside a delimited reference belongs to that
+(* A comment starts at the start of a line, after any indentation, or later on
+   a line after a space or a tab when no character that could continue a
+   reference follows the "#". So a "#" inside a token (issue#1047) is an
+   ordinary character, "tag #release" holds the value "#release", "a: b # why"
+   holds a comment, and a "#" inside a delimited reference belongs to that
    reference *)
-comment_start       = ? start of document ?, "#"
-                    | whitespace_char, "#" ;
+comment_start       = ? start of a line ?, horizontal_whitespace, "#"
+                    | horizontal_whitespace_char, "#", comment_follower ;
+
+comment_follower    = whitespace_char | "(" | ":" | ")" | ? end of document ? ;
 
 (* ============================================================== *)
 (*                      TERMINAL SYMBOLS                           *)
 (* ============================================================== *)
 
-(* Characters allowed in simple references *)
+(* Characters allowed in simple references; a colon may still stand between
+   two of them as inner_colons *)
 (* Excludes: whitespace, opening paren, colon, closing paren *)
 reference_symbol    = any_char - whitespace_char - "(" - ":" - ")" ;
 
@@ -157,7 +176,9 @@ reference_symbol    = any_char - whitespace_char - "(" - ":" - ")" ;
 whitespace_char     = " " | "\t" | "\n" | "\r" ;
 
 (* Horizontal whitespace (spaces and tabs only) *)
-horizontal_whitespace = { " " | "\t" } ;
+horizontal_whitespace = { horizontal_whitespace_char } ;
+
+horizontal_whitespace_char = " " | "\t" ;
 
 (* Any whitespace (including newlines) *)
 whitespace          = { whitespace_char } ;

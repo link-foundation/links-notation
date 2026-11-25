@@ -69,11 +69,20 @@
 
   (comment_start:
     (alternative:
-      (sequence start_of_document "#")
-      (sequence whitespace_char "#")))
+      (sequence start_of_line horizontal_whitespace "#")
+      (sequence horizontal_whitespace_char "#" comment_follower)))
+
+  (comment_follower:
+    (alternative whitespace_char "(" ":" ")" EOF))
 
   (simple_reference:
-    (one_or_more reference_symbol))
+    (sequence reference_symbol
+      (zero_or_more (alternative reference_symbol inner_colons))))
+
+  (inner_colons:
+    (one_or_more ":")
+    (condition: "Followed by a reference_symbol that is not a delimiter")
+    (condition: "Not followed by a reference literal prefix ~[0-9]+{"))
 
   (delimiter:
     (alternative "\"" "'" "`"))
@@ -94,7 +103,8 @@
   (empty_reference:
     (one_or_more (sequence delimiter delimiter))
     (condition: "The whole run uses the same delimiter")
-    (condition: "An even run that does not open an n_quoted_reference is the empty reference"))
+    (condition: "An even run that does not open an n_quoted_reference is the empty reference")
+    (condition: "An even run followed by whitespace that nothing closes on its own line is the empty reference"))
 
   (reference_symbol:
     (not (alternative whitespace_char "(" ":" ")")))
@@ -103,7 +113,10 @@
     (alternative " " "\t" "\n" "\r"))
 
   (horizontal_whitespace:
-    (zero_or_more (alternative " " "\t")))
+    (zero_or_more horizontal_whitespace_char))
+
+  (horizontal_whitespace_char:
+    (alternative " " "\t"))
 
   (whitespace:
     (zero_or_more whitespace_char))
