@@ -32,9 +32,13 @@ final class ReferenceLiteral
         return $text;
     }
 
-    public static function hasPrefix(string $text): bool
+    /**
+     * Report whether the versioned-literal prefix `~<digits>{` is written at
+     * $offset of $text (by default its start).
+     */
+    public static function hasPrefix(string $text, int $offset = 0): bool
     {
-        return preg_match('/\A~[0-9]+\{/', $text) === 1;
+        return preg_match('/\G~[0-9]+\{/', $text, offset: $offset) === 1;
     }
 
     /**

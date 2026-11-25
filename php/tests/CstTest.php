@@ -93,9 +93,15 @@ class CstTest extends TestCase
             [CstKind::REFERENCE, CstKind::WHITESPACE, CstKind::REFERENCE],
             array_map(static fn (CstNode $token): string => $token->kind, $cst->tokens())
         );
+        // With comments read, `#b` later on a line is a value (issue #444),
+        // while `# b` is a comment.
+        self::assertSame(
+            [CstKind::REFERENCE, CstKind::WHITESPACE, CstKind::REFERENCE],
+            array_map(static fn (CstNode $token): string => $token->kind, (new Parser())->parseCst($input)->tokens())
+        );
         self::assertSame(
             [CstKind::REFERENCE, CstKind::WHITESPACE, CstKind::COMMENT],
-            array_map(static fn (CstNode $token): string => $token->kind, (new Parser())->parseCst($input)->tokens())
+            array_map(static fn (CstNode $token): string => $token->kind, (new Parser())->parseCst('a # b')->tokens())
         );
     }
 

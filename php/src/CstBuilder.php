@@ -143,7 +143,21 @@ final class CstBuilder
             }
         }
 
-        $end = $start + 1 + strcspn($prepared, self::BARE_REFERENCE_END, $start + 1);
+        // Colons belong to the reference when a bare reference continues
+        // after them, as in `12:30` (issue #444).
+        $end = $start + 1;
+        $length = strlen($prepared);
+        while ($end < $length) {
+            $end += strcspn($prepared, self::BARE_REFERENCE_END, $end);
+            if ($end >= $length || $prepared[$end] !== ':') {
+                break;
+            }
+            $after = Parser::innerColonsEnd($prepared, $end);
+            if ($after < 0) {
+                break;
+            }
+            $end = $after;
+        }
         $text = substr($input, $start, $end - $start);
 
         return new CstNode(CstKind::REFERENCE, $text, value: $text);

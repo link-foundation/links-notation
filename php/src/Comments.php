@@ -3,10 +3,17 @@
 /**
  * Comments, and the rule that decides where one starts.
  *
- * `#` starts a comment when it opens a token: at the start of the document or
- * after a space, a tab or a line break. A `#` written inside a token
- * (`issue#1047`) or inside a delimited reference (`"# not a comment"`) is an
- * ordinary character.
+ * `#` starts a comment when it opens a token and is not a value:
+ *
+ * - at the start of a line, after any indentation, a `#` always starts one;
+ * - later on a line, after a space or a tab, a `#` starts one only when no
+ *   character that could continue a bare reference follows it, that is when
+ *   whitespace, the end of the document, `(`, `)` or `:` comes next. So
+ *   `a: b # why` and `a: b #` hold a comment, while `tag #release` is the link
+ *   of `tag` and `#release` (issue #444): a value is never silently dropped.
+ *
+ * A `#` written inside a token (`issue#1047`) or inside a delimited reference
+ * (`"# not a comment"`) is an ordinary character.
  */
 
 declare(strict_types=1);
@@ -37,6 +44,39 @@ class Comments
     /** @var string What a comment may start after. */
     private const BEFORE_COMMENT = " \t\n\r";
 
+    /** @var string Indentation: what may stand between the start of a line and a comment. */
+    private const INDENTATION = " \t";
+
+    /**
+     * Report whether the `#` at $position of $document starts a comment: it
+     * opens a token, and either only indentation stands before it on its line
+     * or no character that could continue a bare reference follows it.
+     *
+     * `opensComment('# note', 0)` and `opensComment('a # why', 2)` are true,
+     * as is `opensComment('a #', 2)`; `opensComment('tag #release', 4)` is
+     * false, the `#` opening a value, and so is `opensComment('issue#1047', 5)`,
+     * the `#` standing inside a token (issue #444).
+     */
+    public static function opensComment(string $document, int $position): bool
+    {
+        if (($document[$position] ?? '') !== self::COMMENT) {
+            return false;
+        }
+        if (!self::follows($document, $position, self::BEFORE_COMMENT)) {
+            return false;
+        }
+        $before = $position - 1;
+        while ($before >= 0 && str_contains(self::INDENTATION, $document[$before])) {
+            $before--;
+        }
+        if ($before < 0 || $document[$before] === "\n" || $document[$before] === "\r") {
+            return true;
+        }
+        $next = $position + 1;
+
+        return $next >= strlen($document) || str_contains(self::SEPARATORS, $document[$next]);
+    }
+
     /**
      * Return $document with every comment blanked out.
      *
@@ -44,7 +84,8 @@ class Comments
      * document is read token by token, the way the parser reads it, so a `#`
      * inside a delimited reference that starts right after a group, another
      * reference or a literal is content, as it is in one that starts after a
-     * space (issue #377).
+     * space (issue #377). A `#` that opens a value later on a line is kept:
+     * `tag #release # note` keeps `tag #release` (issue #444).
      */
     public static function stripComments(string $document): string
     {
@@ -57,7 +98,7 @@ class Comments
         while ($position < $length) {
             $char = $document[$position];
 
-            if ($char === self::COMMENT && self::follows($document, $position, self::BEFORE_COMMENT)) {
+            if ($char === self::COMMENT && self::opensComment($document, $position)) {
                 if ($blanked === null) {
                     $blanked = $document;
                 }

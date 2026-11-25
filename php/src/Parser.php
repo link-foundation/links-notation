@@ -28,6 +28,9 @@ class Parser
      */
     public const DEFAULT_MAX_DEPTH = 64;
 
+    /** What cannot start a bare reference after colons inside one (issue #444). */
+    private const NOT_AFTER_INNER_COLONS = " \t\n\r(:)\"'`";
+
     /** @var int Maximum input size in bytes. */
     public int $maxInputSize;
 
@@ -203,7 +206,10 @@ class Parser
      * escaped quote sequence. A run of an even number of delimiters that does
      * not open a reference with a substantive body is the empty reference: the
      * shortest reading, a bare delimiter pair enclosing nothing, wins over a
-     * longer n-quote delimiter.
+     * longer n-quote delimiter. An even run followed directly by whitespace
+     * that ends its line, or reaches a line break before the run closing it,
+     * is the empty reference too, however later lines continue (issue #443):
+     * `""x\ny""` is still a multiline reference.
      *
      * Nothing at or after $stop is read; it defaults to the end of $text.
      *
@@ -233,6 +239,11 @@ class Parser
 
         $isEvenRun = $quoteCount % 2 === 0;
         $emptyReference = $isEvenRun ? ['', $start + $quoteCount] : null;
+        // An even run followed directly by whitespace or the end of the text
+        // is the empty reference when it ends its line: nothing closes it, or
+        // a line break comes before what does (issue #443).
+        $endsItsLine = $isEvenRun && ($pos >= $length || str_contains(" \t\n\r", $text[$pos]));
+        $bodyStart = $pos;
 
         $openClose = str_repeat($quoteChar, $quoteCount);
         $escapeSequence = str_repeat($quoteChar, $quoteCount * 2);
@@ -247,6 +258,9 @@ class Parser
             if (self::startsWithin($text, $pos, $length, $openClose)) {
                 $afterClose = $pos + $quoteCount;
                 if ($afterClose >= $length || $text[$afterClose] !== $quoteChar) {
+                    if ($endsItsLine && strcspn($text, "\n\r", $bodyStart, $pos - $bodyStart) < $pos - $bodyStart) {
+                        return $emptyReference;
+                    }
                     if ($isEvenRun && !self::isSubstantiveBody($content)) {
                         return $emptyReference;
                     }
@@ -675,33 +689,80 @@ class Parser
      * The colon after obj_1 should NOT be found as a top-level colon
      * because it's inside the second parenthesized expression. $text starts at
      * $offset in the document.
+     *
+     * Colons inside a bare reference (see innerColonsEnd()) belong to it, so
+     * `12:30` holds no colon and `a:b: c` has the ID `a:b` (issue #444). A
+     * delimited reference or a versioned literal is skipped only where a token
+     * starts, as the grammar reads one.
      */
     private function findColonOutsideQuotes(string $text, int $offset): int
     {
         $parenDepth = 0;
         $i = 0;
         $length = strlen($text);
+        // Whether the character before $i belongs to a bare reference.
+        $inBareReference = false;
 
         while ($i < $length) {
             $char = $text[$i];
-            if (in_array($char, ['"', "'", '`'], true)) {
-                $end = $this->skipQuotedString($text, $i, $offset);
+            if ($char === ':') {
+                $after = $inBareReference ? self::innerColonsEnd($text, $i) : -1;
+                if ($after >= 0) {
+                    $i = $after;
+                    continue;
+                }
+                if ($parenDepth === 0) {
+                    // Only return colon if it's outside quotes AND at parenthesis depth 0
+                    return $i;
+                }
+                $inBareReference = false;
+            } elseif (str_contains(" \t\n\r()", $char)) {
+                if ($char === '(') {
+                    $parenDepth++;
+                } elseif ($char === ')') {
+                    $parenDepth--;
+                }
+                $inBareReference = false;
+            } elseif (!$inBareReference) {
+                $end = in_array($char, ['"', "'", '`'], true) ? $this->skipQuotedString($text, $i, $offset) : -1;
+                if ($end < 0) {
+                    $end = ReferenceLiteral::end($text, $i);
+                }
                 if ($end > $i) {
                     $i = $end;
                     continue;
                 }
-            } elseif ($char === '(') {
-                $parenDepth++;
-            } elseif ($char === ')') {
-                $parenDepth--;
-            } elseif ($char === ':' && $parenDepth === 0) {
-                // Only return colon if it's outside quotes AND at parenthesis depth 0
-                return $i;
+                $inBareReference = true;
             }
             $i++;
         }
 
         return -1;
+    }
+
+    /**
+     * Find where the run of colons at $start of $text ends when it belongs to
+     * the bare reference written before it: a character that could start a
+     * bare reference follows the run, and no versioned literal does. So
+     * `12:30`, `std::string` and `https://x/y` are one reference each, while
+     * `a: b`, `a:(b)`, `a:"b"` and `a:~1{62}` separate an ID from its values
+     * (issue #444).
+     *
+     * @return int The position right after the colons, or -1 when they end
+     *             the reference
+     */
+    public static function innerColonsEnd(string $text, int $start): int
+    {
+        $after = $start + strspn($text, ':', $start);
+        if (
+            $after >= strlen($text)
+            || str_contains(self::NOT_AFTER_INNER_COLONS, $text[$after])
+            || ReferenceLiteral::hasPrefix($text, $after)
+        ) {
+            return -1;
+        }
+
+        return $after;
     }
 
     /**

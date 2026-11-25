@@ -180,6 +180,37 @@ class Link
     }
 
     /**
+     * Write one reference so that a parser reads it back as exactly this
+     * text, in the ID or value position of any link: the name escapeReference()
+     * gives the same function to code that thinks in quoting rather than
+     * escaping. Text that needs no delimiters is returned as it is; anything
+     * else is quoted, or written as a versioned literal when it is empty or
+     * holds a control character, and null gives ''.
+     *
+     * The answer is deliberately conservative, so the text also reads back
+     * with releases older than the one that made bare `12:30` and
+     * `tag #release` legal (issue #444): a colon, a whitespace character, a
+     * parenthesis, a quote, and a `#` that starts the text still ask for
+     * quotes. `plain` gives `plain`, `has space` gives `'has space'`,
+     * `#release` gives `'#release'` and '' gives `~1{}`.
+     */
+    public static function quoteReference(?string $reference): string
+    {
+        return self::escapeReference($reference);
+    }
+
+    /**
+     * Report whether one reference has to be quoted (or written as a
+     * versioned literal) to read back as exactly this text, that is whether
+     * quoteReference() changes it: `plain` needs no quotes, while `12:30` and
+     * '' do.
+     */
+    public static function needsQuoting(string $reference): bool
+    {
+        return self::quoteReference($reference) !== $reference;
+    }
+
+    /**
      * The delimiter one reference was written between, read from the reference
      * as it was written: `'`, `"` or `` ` `` for a quoted reference (however
      * many of them open it), and null for a bare reference, a versioned
