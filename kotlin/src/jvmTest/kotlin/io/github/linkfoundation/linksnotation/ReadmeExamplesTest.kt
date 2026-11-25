@@ -42,6 +42,22 @@ class ReadmeExamplesTest {
     }
 
     @Test
+    fun commentsColonsAndQuoting() {
+        assertEquals(listOf(Link("a", listOf(Link("b")))), Parser().parse("a: b # why"))
+        assertEquals(listOf(Link("a", listOf(Link("b")))), Parser().parse("a: b #"))
+        assertEquals(listOf(Link(null, listOf(Link("tag"), Link("#release")))), Parser().parse("tag #release"))
+        assertEquals("(issue#1047)", formatLinks(Parser().parse("issue#1047")))
+        assertEquals(listOf(Link(null, listOf(Link("time"), Link("12:30")))), Parser().parse("time 12:30"))
+        assertEquals(listOf(Link("a:b", listOf(Link("c")))), Parser().parse("a:b: c"))
+        assertEquals(listOf(Link("a", listOf(Link("b")))), Parser().parse("a:\"b\""))
+        assertEquals("(a ~1{})\n(b)", formatLinks(Parser().parse("a \"\"\nb")))
+        assertEquals("plain", quoteReference("plain"))
+        assertEquals("'12:30'", quoteReference("12:30"))
+        assertEquals("~1{}", quoteReference(""))
+        assertTrue(needsQuoting("#release"))
+    }
+
+    @Test
     fun formatOptions() {
         val link = Link("id", listOf(Link("value1"), Link("value2"), Link("value3")))
         val options = FormatOptions(maxInlineRefs = 2, preferInline = false)

@@ -443,15 +443,27 @@ internal class Grammar(
         return reading.value
     }
 
-    // simpleReference = &{ no literal prefix } referenceSymbol+
+    // simpleReference = &{ no literal prefix } $(referenceSymbol (referenceSymbol / innerColons)*)
+    // innerColons = &(":"+ !referenceLiteralPrefix bareReferenceStart) ":"+
+    //
+    // A bare reference may hold colons between its characters, so `12:30`,
+    // `std::string` and `https://example.com/a#b` are each one reference
+    // (issue #444). A run of colons belongs to the reference only when a
+    // character that could start a bare reference follows it: `a: b`, `a:(b)`,
+    // `a:"b"` and `a:~1{62}` still separate an ID from its values. The colon
+    // test is a lookahead that records no failure, so a document that fails to
+    // parse reports the same error as before.
     private fun simpleReference(): String? {
         if (hasReferenceLiteralPrefix(input, pos)) return null
         val start = pos
-        val length =
-            repeatClass(REFERENCE_SYMBOL, atLeastOne = true) {
-                it != ' ' && it != '\t' && it != '\n' && it != '\r' && it != '(' && it != ':' && it != ')'
-            }
-        return if (length < 0) null else input.substring(start, pos)
+        if (repeatClass(REFERENCE_SYMBOL, atLeastOne = true, ::isReferenceSymbol) < 0) return null
+        while (true) {
+            val after = innerColonsEnd(input, pos)
+            if (after < 0) break
+            pos = after
+            repeatClass(REFERENCE_SYMBOL, test = ::isReferenceSymbol)
+        }
+        return input.substring(start, pos)
     }
 
     // eol = __ (lineBreaks / eof / nestedGroupEnd)
@@ -536,6 +548,9 @@ internal class Grammar(
         fun isSpaceOrTab(character: Char): Boolean = character == ' ' || character == '\t'
 
         fun isLineBreak(character: Char): Boolean = character == '\r' || character == '\n'
+
+        /** `referenceSymbol = [^ \t\n\r(:)]` */
+        fun isReferenceSymbol(character: Char): Boolean = character !in TOKEN_SEPARATORS
 
         /** Peggy's literalEscape, for the characters it names. */
         fun literalEscape(text: String): String {

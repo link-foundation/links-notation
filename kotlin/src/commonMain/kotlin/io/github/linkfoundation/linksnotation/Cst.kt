@@ -142,9 +142,6 @@ class CstNode internal constructor(
     }
 }
 
-/** What ends a bare reference. */
-private const val BARE_REFERENCE_END = " \t\r\n(:)"
-
 /**
  * Where the reference that starts at [start] ends, read as the grammar reads
  * it: a literal or a delimited reference in the document as written, [source],
@@ -162,9 +159,9 @@ private fun referenceEnd(
         val end = references.endAt(start)
         if (end != null) return end
     }
-    var end = start + 1
-    while (end < prepared.length && prepared[end] !in BARE_REFERENCE_END) end++
-    return end
+    // A bare reference ends where the grammar ends it, colons included
+    // (issue #444).
+    return bareReferenceEnd(prepared, start)
 }
 
 /** An open container of the tree, and the line of it being filled. */

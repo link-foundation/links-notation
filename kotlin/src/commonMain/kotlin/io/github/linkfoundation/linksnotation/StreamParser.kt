@@ -269,9 +269,8 @@ private fun structurallyComplete(
     var tokenStart = true
     while (position < document.length) {
         val character = document[position]
-        val previous = if (position == 0) null else document[position - 1]
 
-        if (comments && character == '#' && (previous == null || previous in " \t\n\r")) {
+        if (comments && opensComment(document, position)) {
             val newline = document.indexOf('\n', position)
             if (newline == -1) return true
             // The newline ends the comment and is read as a separator.

@@ -81,6 +81,37 @@ Link("a").combine(Link("b")).format() // (a b)
 escapeReference("has space")         // 'has space'
 ```
 
+### Comments, Colons and Quoting
+
+`#` opens a comment only where a reference could begin. At the start of a line,
+after any indentation, it always does; later on a line it does only when
+whitespace, `(`, `)`, `:` or the end of the document follows it. So
+`a: b # why` and `a: b #` hold a comment, while `tag #release` is the link of
+`tag` and `#release`, and `issue#1047` is one reference.
+
+A run of colons between two characters of a bare reference belongs to the
+reference: `12:30`, `https://example.com/a#b` and `std::string` are one
+reference each, and `a:b: c` is a link whose ID is `a:b`. A colon followed by
+whitespace, a parenthesis, a quote or a versioned literal still separates an ID
+from its values, so `a: b`, `a:"b"`, `a:(b c)` and `a:~1{62}` read as before.
+
+An even run of quotes followed by whitespace up to the end of its line is the
+empty reference, so `a ""` on one line never swallows the lines after it.
+
+`quoteReference(text)` writes one reference so a parser reads it back as
+exactly `text`, quoting it (or writing a versioned literal) only when it has
+to; `needsQuoting(text)` says whether it has to. Both take `minimal` as
+`escapeReference` does, and stay conservative, so the result also reads back
+with older releases: a colon, whitespace, a parenthesis, a quote and a leading
+`#` are always quoted.
+
+```kotlin
+quoteReference("plain") // plain
+quoteReference("12:30") // '12:30'
+quoteReference("")      // ~1{}
+needsQuoting("#release") // true
+```
+
 ### Formatting Options
 
 ```kotlin
@@ -198,7 +229,9 @@ The behaviour is the same; the shapes follow Kotlin conventions:
 - `StreamParser` has no `parseAsync`; `onLink`, `onError` and `onEnd` take
   Kotlin functions, and `StreamParser.parse` returns a lazy `Sequence`.
 - `LinksGroup` children are `LinksGroup`s; `escapeReference`,
-  `unescapeReference` and `referenceQuote` are top-level functions.
+  `quoteReference`, `needsQuoting`, `unescapeReference` and `referenceQuote`
+  are top-level functions, and `minimal` is a parameter rather than an
+  options object.
 - Links are compared with `==`.
 
 ## Package Information
