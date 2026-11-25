@@ -3,6 +3,8 @@ export {
   escapeReference,
   unescapeReference,
   referenceQuote,
+  quoteReference,
+  needsQuoting,
 } from './references.js';
 export { CstKind, CstNode } from './Cst.js';
 export {

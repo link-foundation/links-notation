@@ -164,9 +164,11 @@ describe('StreamParser', () => {
   });
 
   test('waits for the line that closes an even run of quotes (issue #377)', () => {
-    // `""` is the empty reference only when nothing closes it, and here the
-    // next line does, so the first line cannot be emitted on its own.
-    const input = 'a "" b\n"" c\n';
+    // `""b` opens a reference that only a later line can close, and here the
+    // next line does, so the first line cannot be emitted on its own. (A `""`
+    // followed by whitespace and the end of its line is the empty reference
+    // whatever follows, issue #443.)
+    const input = 'a ""b\n"" c\n';
     const stream = new StreamParser();
     for (const character of input) {
       expect(stream.write(character)).toEqual([]);

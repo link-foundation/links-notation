@@ -1,5 +1,6 @@
 import { Emitter } from './Emitter.js';
 import { Parser } from './Parser.js';
+import { opensComment } from './comments.js';
 import { DelimitedReferences } from './quotes.js';
 import { referenceLiteralEnd } from './ReferenceLiteral.js';
 
@@ -252,20 +253,14 @@ function structurallyComplete(document, comments) {
   // reference or a literal (issue #377).
   const quotes = ['"', "'", '`'];
   const separators = [' ', '\t', '\n', '\r', '(', ':', ')'];
-  const beforeComment = [' ', '\t', '\n', '\r'];
   const references = new DelimitedReferences(document);
   let depth = 0;
   let tokenStart = true;
 
   for (let position = 0; position < document.length; position++) {
     const character = document[position];
-    const previous = position === 0 ? null : document[position - 1];
 
-    if (
-      comments &&
-      character === '#' &&
-      (previous === null || beforeComment.includes(previous))
-    ) {
+    if (comments && opensComment(document, position)) {
       const newline = document.indexOf('\n', position);
       if (newline === -1) return true;
       position = newline;

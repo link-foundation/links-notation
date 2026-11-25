@@ -807,5 +807,422 @@
     ],
     "format": "(x: a b)",
     "lessParentheses": "x: a b"
+  },
+  {
+    "id": "empty-quote-pairs-per-line",
+    "feature": "empty-references",
+    "input": "root:\n  a \"\"\n  b \"\"\n",
+    "expected": [
+      {
+        "id": "root",
+        "values": [
+          {
+            "id": null,
+            "values": [
+              {
+                "id": "a",
+                "values": []
+              },
+              {
+                "id": "",
+                "values": []
+              }
+            ]
+          },
+          {
+            "id": null,
+            "values": [
+              {
+                "id": "b",
+                "values": []
+              },
+              {
+                "id": "",
+                "values": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "format": "(root: (a ~1{}) (b ~1{}))",
+    "lessParentheses": "root: (a ~1{}) (b ~1{})"
+  },
+  {
+    "id": "empty-quote-pairs-single",
+    "feature": "empty-references",
+    "input": "root:\n  a ''\n  b ''\n",
+    "expected": [
+      {
+        "id": "root",
+        "values": [
+          {
+            "id": null,
+            "values": [
+              {
+                "id": "a",
+                "values": []
+              },
+              {
+                "id": "",
+                "values": []
+              }
+            ]
+          },
+          {
+            "id": null,
+            "values": [
+              {
+                "id": "b",
+                "values": []
+              },
+              {
+                "id": "",
+                "values": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "format": "(root: (a ~1{}) (b ~1{}))",
+    "lessParentheses": "root: (a ~1{}) (b ~1{})"
+  },
+  {
+    "id": "empty-quote-pair-then-quote",
+    "feature": "empty-references",
+    "input": "root:\n  a \"\"\n  b \"x y\"\n",
+    "expected": [
+      {
+        "id": "root",
+        "values": [
+          {
+            "id": null,
+            "values": [
+              {
+                "id": "a",
+                "values": []
+              },
+              {
+                "id": "",
+                "values": []
+              }
+            ]
+          },
+          {
+            "id": null,
+            "values": [
+              {
+                "id": "b",
+                "values": []
+              },
+              {
+                "id": "x y",
+                "values": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "format": "(root: (a ~1{}) (b 'x y'))",
+    "lessParentheses": "root: (a ~1{}) (b 'x y')"
+  },
+  {
+    "id": "empty-quote-pairs-top-level",
+    "feature": "empty-references",
+    "input": "a \"\"\nb \"\"\n",
+    "expected": [
+      {
+        "id": null,
+        "values": [
+          {
+            "id": "a",
+            "values": []
+          },
+          {
+            "id": "",
+            "values": []
+          }
+        ]
+      },
+      {
+        "id": null,
+        "values": [
+          {
+            "id": "b",
+            "values": []
+          },
+          {
+            "id": "",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "format": "(a ~1{})\n(b ~1{})",
+    "lessParentheses": "a ~1{}\nb ~1{}"
+  },
+  {
+    "id": "empty-quote-pair-trailing-space",
+    "feature": "empty-references",
+    "input": "a \"\" \nb \"\"\n",
+    "expected": [
+      {
+        "id": null,
+        "values": [
+          {
+            "id": "a",
+            "values": []
+          },
+          {
+            "id": "",
+            "values": []
+          }
+        ]
+      },
+      {
+        "id": null,
+        "values": [
+          {
+            "id": "b",
+            "values": []
+          },
+          {
+            "id": "",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "format": "(a ~1{})\n(b ~1{})",
+    "lessParentheses": "a ~1{}\nb ~1{}"
+  },
+  {
+    "id": "doubled-quotes-alone",
+    "feature": "quote-runs",
+    "input": "(a: \"\"\"\")\n(b: \"\"\"\"\"\")\n",
+    "expected": [
+      {
+        "id": "a",
+        "values": [
+          {
+            "id": "",
+            "values": []
+          }
+        ]
+      },
+      {
+        "id": "b",
+        "values": [
+          {
+            "id": "",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "format": "(a: ~1{})\n(b: ~1{})",
+    "lessParentheses": "a: ~1{}\nb: ~1{}"
+  },
+  {
+    "id": "single-quote-characters",
+    "feature": "quote-runs",
+    "input": "(a: '\"')\n(b: \"'\")\n",
+    "expected": [
+      {
+        "id": "a",
+        "values": [
+          {
+            "id": "\"",
+            "values": []
+          }
+        ]
+      },
+      {
+        "id": "b",
+        "values": [
+          {
+            "id": "'",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "format": "(a: '\"')\n(b: \"'\")",
+    "lessParentheses": "a: '\"'\nb: \"'\""
+  },
+  {
+    "id": "multiline-even-run",
+    "feature": "multiline-references",
+    "input": "a \"\"x\ny\"\"\n",
+    "expected": [
+      {
+        "id": null,
+        "values": [
+          {
+            "id": "a",
+            "values": []
+          },
+          {
+            "id": "x\ny",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "format": "(a ~1{780a79})",
+    "lessParentheses": "a ~1{780a79}"
+  },
+  {
+    "id": "hash-values",
+    "feature": "comments",
+    "input": "root:\n  tag #release\n  colour #ff0000 # a note\n  a: b #\n",
+    "expected": [
+      {
+        "id": "root",
+        "values": [
+          {
+            "id": null,
+            "values": [
+              {
+                "id": "tag",
+                "values": []
+              },
+              {
+                "id": "#release",
+                "values": []
+              }
+            ]
+          },
+          {
+            "id": null,
+            "values": [
+              {
+                "id": "colour",
+                "values": []
+              },
+              {
+                "id": "#ff0000",
+                "values": []
+              }
+            ]
+          },
+          {
+            "id": "a",
+            "values": [
+              {
+                "id": "b",
+                "values": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "format": "(root: (tag '#release') (colour '#ff0000') (a: b))",
+    "lessParentheses": "root: (tag '#release') (colour '#ff0000') (a: b)"
+  },
+  {
+    "id": "colon-inside-references",
+    "feature": "named-links",
+    "input": "time 12:30\nurl https://example.com/a#b\ntype std::string\n",
+    "expected": [
+      {
+        "id": null,
+        "values": [
+          {
+            "id": "time",
+            "values": []
+          },
+          {
+            "id": "12:30",
+            "values": []
+          }
+        ]
+      },
+      {
+        "id": null,
+        "values": [
+          {
+            "id": "url",
+            "values": []
+          },
+          {
+            "id": "https://example.com/a#b",
+            "values": []
+          }
+        ]
+      },
+      {
+        "id": null,
+        "values": [
+          {
+            "id": "type",
+            "values": []
+          },
+          {
+            "id": "std::string",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "format": "(time '12:30')\n(url 'https://example.com/a#b')\n(type 'std::string')",
+    "lessParentheses": "time '12:30'\nurl 'https://example.com/a#b'\ntype 'std::string'"
+  },
+  {
+    "id": "colon-after-reference-id",
+    "feature": "named-links",
+    "input": "a:b: c\nd:\"e f\"\ng:(h i)\nj :k\n",
+    "expected": [
+      {
+        "id": "a:b",
+        "values": [
+          {
+            "id": "c",
+            "values": []
+          }
+        ]
+      },
+      {
+        "id": "d",
+        "values": [
+          {
+            "id": "e f",
+            "values": []
+          }
+        ]
+      },
+      {
+        "id": "g",
+        "values": [
+          {
+            "id": null,
+            "values": [
+              {
+                "id": "h",
+                "values": []
+              },
+              {
+                "id": "i",
+                "values": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "j",
+        "values": [
+          {
+            "id": "k",
+            "values": []
+          }
+        ]
+      }
+    ],
+    "format": "('a:b': c)\n(d: 'e f')\n(g: (h i))\n(j: k)",
+    "lessParentheses": "('a:b': c)\nd: 'e f'\ng: (h i)\nj: k"
   }
 ]

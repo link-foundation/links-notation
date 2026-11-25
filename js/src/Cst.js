@@ -19,6 +19,7 @@ import { stripComments } from './comments.js';
 import { DelimitedReferences, QUOTES } from './quotes.js';
 import {
   decodeReferenceLiteral,
+  hasReferenceLiteralPrefix,
   referenceLiteralEnd as literalEnd,
 } from './ReferenceLiteral.js';
 
@@ -137,6 +138,9 @@ function quoteText(text) {
 /** What ends a bare reference. */
 const BARE_REFERENCE_END = new Set([' ', '\t', '\r', '\n', '(', ':', ')']);
 
+/** What cannot start a bare reference after colons inside one. */
+const NOT_AFTER_INNER_COLONS = new Set([...BARE_REFERENCE_END, '"', "'", '`']);
+
 /**
  * The concrete syntax tree of a document that has already been parsed.
  * @param {string} input - The document as written
@@ -237,7 +241,25 @@ function referenceEnd(prepared, start, references) {
     if (end !== null) return end;
   }
   let end = start + 1;
-  while (end < prepared.length && !BARE_REFERENCE_END.has(prepared[end])) end++;
+  while (end < prepared.length) {
+    if (prepared[end] === ':') {
+      // Colons belong to the reference when a bare reference continues after
+      // them, as in `12:30` (issue #444).
+      let after = end;
+      while (prepared[after] === ':') after++;
+      if (
+        after === prepared.length ||
+        NOT_AFTER_INNER_COLONS.has(prepared[after]) ||
+        hasReferenceLiteralPrefix(prepared, after)
+      ) {
+        break;
+      }
+      end = after;
+    } else if (BARE_REFERENCE_END.has(prepared[end])) {
+      break;
+    }
+    end++;
+  }
   return end;
 }
 

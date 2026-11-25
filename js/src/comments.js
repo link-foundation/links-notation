@@ -1,10 +1,17 @@
 /**
  * Comments, and the rule that decides where one starts.
  *
- * `#` starts a comment when it opens a token: at the start of the document or
- * after a space, a tab or a line break. A `#` written inside a token
- * (`issue#1047`) or inside a delimited reference (`"# not a comment"`) is an
- * ordinary character.
+ * `#` starts a comment when it opens a token and is not a value:
+ *
+ * - at the start of a line, after any indentation, a `#` always starts one;
+ * - later on a line, after a space or a tab, a `#` starts one only when no
+ *   character that could continue a bare reference follows it, that is when
+ *   whitespace, the end of the document, `(`, `)` or `:` comes next. So
+ *   `a: b # why` and `a: b #` hold a comment, while `tag #release` is the link
+ *   of `tag` and `#release` (issue #444): a value is never silently dropped.
+ *
+ * A `#` written inside a token (`issue#1047`) or inside a delimited reference
+ * (`"# not a comment"`) is an ordinary character.
  *
  * {@link stripComments} replaces every character of every comment with a space
  * rather than removing it, so every later character keeps the offset it had in
@@ -28,6 +35,35 @@ const SEPARATORS = [' ', '\t', '\n', '\r', '(', ':', ')'];
 /** What a comment may start after. */
 const BEFORE_COMMENT = [' ', '\t', '\n', '\r'];
 
+/** Indentation: what may stand between the start of a line and a comment. */
+const INDENTATION = [' ', '\t'];
+
+/**
+ * Whether the `#` at `position` starts a comment: it opens a token, and either
+ * only indentation stands before it on its line or no character that could
+ * continue a bare reference follows it.
+ * @param {string} document - The document being read
+ * @param {number} position - Position of the character being judged
+ * @returns {boolean} True when a comment starts at the position
+ * @example
+ * opensComment('# note', 0); // true: the start of a line
+ * opensComment('a #', 2); // true: nothing follows it
+ * opensComment('a # why', 2); // true: a space follows it
+ * opensComment('tag #release', 4); // false: a value
+ * opensComment('issue#1047', 5); // false: inside a token
+ */
+export function opensComment(document, position) {
+  if (document[position] !== COMMENT) return false;
+  if (!follows(document, position, BEFORE_COMMENT)) return false;
+  let before = position - 1;
+  while (before >= 0 && INDENTATION.includes(document[before])) before--;
+  if (before < 0 || document[before] === '\n' || document[before] === '\r') {
+    return true;
+  }
+  const next = position + 1;
+  return next >= document.length || SEPARATORS.includes(document[next]);
+}
+
 /**
  * The document with every comment blanked out.
  *
@@ -40,6 +76,7 @@ const BEFORE_COMMENT = [' ', '\t', '\n', '\r'];
  * @returns {string} The document, of the same length, without its comments
  * @example
  * stripComments('a: b # why\n'); // 'a: b      \n'
+ * stripComments('tag #release\n'); // 'tag #release\n'
  * stripComments('"# kept"\n'); // '"# kept"\n'
  * stripComments('(a)" #kept"\n'); // '(a)" #kept"\n'
  * stripComments('issue#1047\n'); // 'issue#1047\n'
@@ -56,7 +93,7 @@ export function stripComments(document) {
   while (position < document.length) {
     const character = document[position];
 
-    if (character === COMMENT && follows(document, position, BEFORE_COMMENT)) {
+    if (character === COMMENT && opensComment(document, position)) {
       blanked = blanked ?? document.split('');
       while (
         position < document.length &&

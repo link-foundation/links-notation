@@ -2500,7 +2500,7 @@
         "js/src/quotes.js",
         "js/src/references.js"
       ],
-      "sha256": "efa63844b433fd29830f17d422c631381e1014bbbba33c7501426b9a657d5679"
+      "sha256": "04b72f6fb760134c3d86abe87ee71e85df5a965ee9788d3a0a33bb9f34debdd4"
     },
     "rust": {
       "files": [
