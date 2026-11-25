@@ -81,14 +81,22 @@ fn without_comment_support_hash_is_part_of_references() {
         .collect();
     assert_eq!(kinds, ["reference", "whitespace", "reference"]);
 
-    let with_comments = parse_lino_to_cst(input).unwrap();
-    let kinds: Vec<_> = with_comments
-        .tokens()
-        .iter()
-        .map(|token| token.kind)
-        .collect();
+    // With comments, a `#` that opens a value later on a line is still part of
+    // the reference (issue #444); one followed by a space opens a comment.
+    let kinds_with_comments = |document: &str| -> Vec<CstKind> {
+        parse_lino_to_cst(document)
+            .unwrap()
+            .tokens()
+            .iter()
+            .map(|token| token.kind)
+            .collect()
+    };
     assert_eq!(
-        kinds,
+        kinds_with_comments(input),
+        [CstKind::Reference, CstKind::Whitespace, CstKind::Reference]
+    );
+    assert_eq!(
+        kinds_with_comments("a # b"),
         [CstKind::Reference, CstKind::Whitespace, CstKind::Comment]
     );
 }

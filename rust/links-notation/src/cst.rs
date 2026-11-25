@@ -17,6 +17,7 @@
 //! [`strip_comments`]: crate::comments::strip_comments
 
 use crate::comments::COMMENT;
+use crate::parser::bare_reference_end;
 use crate::quotes::{DelimitedReferences, QUOTES};
 use crate::reference_literal::{decode_reference_literal, reference_literal_end};
 use crate::{ParseError, ParserConfig, check_document};
@@ -296,9 +297,6 @@ impl Container {
     }
 }
 
-/// The bytes that end a bare reference.
-const BARE_REFERENCE_END: &[u8] = b" \t\r\n(:)";
-
 /// The concrete syntax tree of `document`, which has already been parsed.
 /// `prepared` is the document the parser read: the same bytes, with its
 /// comments blanked when `comments` is on.
@@ -410,9 +408,8 @@ fn read_reference(
             return (start + reading.length, reading.value, Some(first as char));
         }
     }
-    let mut end = start + 1;
-    while end < blanked.len() && !BARE_REFERENCE_END.contains(&blanked[end]) {
-        end += 1;
-    }
+    // A bare reference ends where the parser ends it, colons included
+    // (issue #444).
+    let end = bare_reference_end(prepared, start);
     (end, document[start..end].to_owned(), None)
 }

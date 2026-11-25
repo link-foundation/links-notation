@@ -207,7 +207,7 @@ fn a_hash_inside_a_reference_that_follows_a_group_is_content() {
 #[test]
 fn a_hash_inside_a_reference_that_follows_another_reference_is_content() {
     assert_parses_as("\"x\"' #y'\n", "(<x> < #y>)");
-    assert_parses_as("```q```\"\" #c\n\"\"\"\n", "(<q> < #c\n\">)");
+    assert_parses_as("```q```\"\"x # c\n\"\"\"\n", "(<q> <x # c\n\">)");
 }
 
 #[test]
@@ -228,5 +228,41 @@ fn the_comment_reader_skips_the_references_the_parser_reads() {
     assert_eq!(strip_comments("(a)\" #b\"\n"), "(a)\" #b\"\n");
     assert_eq!(strip_comments("\"x\"' #y'\n"), "\"x\"' #y'\n");
     assert_eq!(strip_comments("~1{62}\" #b\"\n"), "~1{62}\" #b\"\n");
-    assert_eq!(strip_comments("a\"b #c\"\n"), "a\"b    \n");
+    assert_eq!(strip_comments("a\"b # c\"\n"), "a\"b     \n");
+}
+
+// Issue #444: a `#` that opens a token later on a line and is followed by a
+// character that could continue a bare reference is a value, so a value is
+// never dropped as a comment. At the start of a line it is still a comment.
+
+#[test]
+fn a_hash_that_opens_a_value_later_on_a_line_is_the_value() {
+    assert_parses_as("tag #release\n", "(<tag> <#release>)");
+    assert_eq!(
+        rendered("root:\n  tag #release\n  next 1\n"),
+        rendered("root:\n  tag \"#release\"\n  next 1\n")
+    );
+    assert_parses_as("colour #ff0000 # a note\n", "(<colour> <#ff0000>)");
+}
+
+#[test]
+fn a_hash_followed_by_a_space_a_parenthesis_or_nothing_opens_a_comment() {
+    assert_parses_as("a: b #\n", "(<a>: <b>)");
+    assert_parses_as("a: b #\tnote\n", "(<a>: <b>)");
+    assert_parses_as("a b #(note)\n", "(<a> <b>)");
+    assert_parses_as("a b #:note\n", "(<a> <b>)");
+}
+
+#[test]
+fn a_hash_at_the_start_of_a_line_opens_a_comment_whatever_follows_it() {
+    assert_parses_as("#release\na\n", "(<a>)");
+    assert_eq!(rendered("root\n  #release\n  a\n"), rendered("root\n  a\n"));
+}
+
+#[test]
+fn the_comment_reader_keeps_a_hash_that_opens_a_value() {
+    assert_eq!(
+        strip_comments("tag #release # note\n"),
+        "tag #release       \n"
+    );
 }

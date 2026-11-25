@@ -1328,7 +1328,50 @@ fn group_consecutive_links(links: &[LiNo<String>]) -> Vec<LiNo<String>> {
 
 /// Escape a reference string by adding quotes if necessary.
 fn escape_reference(reference: &str) -> String {
+    quote_reference(reference)
+}
+
+/// Writes one reference so that a parser reads it back as exactly this text,
+/// in the ID or value position of any link.
+///
+/// This is the function the formatter writes every reference with. Text that
+/// needs no delimiters is returned as it is; anything else is quoted, or
+/// written as a versioned literal when it is empty or holds a control
+/// character.
+///
+/// The answer is deliberately conservative, so the text also reads back with
+/// releases older than the one that made bare `12:30` and `tag #release` legal
+/// (issue #444): a colon, a whitespace character, a parenthesis, a quote, and a
+/// `#` that starts the text still ask for quotes.
+///
+/// # Examples
+/// ```
+/// use links_notation::quote_reference;
+///
+/// assert_eq!(quote_reference("plain"), "plain");
+/// assert_eq!(quote_reference("has space"), "'has space'");
+/// assert_eq!(quote_reference("12:30"), "'12:30'");
+/// assert_eq!(quote_reference("#release"), "'#release'");
+/// assert_eq!(quote_reference(""), "~1{}");
+/// ```
+pub fn quote_reference(reference: &str) -> String {
     reference_literal::format_reference(reference)
+}
+
+/// Whether one reference has to be quoted (or written as a versioned literal)
+/// to read back as exactly this text, that is whether [`quote_reference`]
+/// changes it.
+///
+/// # Examples
+/// ```
+/// use links_notation::needs_quoting;
+///
+/// assert!(!needs_quoting("plain"));
+/// assert!(needs_quoting("12:30"));
+/// assert!(needs_quoting(""));
+/// ```
+pub fn needs_quoting(reference: &str) -> bool {
+    quote_reference(reference) != reference
 }
 
 /// Whether a link holds exactly one link that has values. The parentheses of an

@@ -1,7 +1,17 @@
 //! Comments, and the rule that decides where one starts.
 //!
 //! A comment starts at a `#` written where a line or a token starts and runs to
-//! the end of the line. The parser never sees it: [`strip_comments`] replaces
+//! the end of the line, unless the `#` opens a value:
+//!
+//! - at the start of a line, after any indentation, a `#` always starts one;
+//! - later on a line, after a space or a tab, a `#` starts one only when no
+//!   character that could continue a bare reference follows it, that is when
+//!   whitespace, the end of the document, `(`, `)` or `:` comes next. So
+//!   `a: b # why` and `a: b #` hold a comment, while `tag #release` is the link
+//!   of `tag` and `#release` (issue #444): a value is never silently dropped.
+//!
+//! A `#` written inside a token (`issue#1047`) or inside a delimited reference
+//! (`"# not a comment"`) is an ordinary character. The parser never sees it: [`strip_comments`] replaces
 //! every byte of every comment with a space before the document is parsed, so
 //! the notation itself stays exactly as it was and a position reported by the
 //! parser still points at the same character of the document the caller wrote.
@@ -22,6 +32,35 @@ const SEPARATORS: [u8; 7] = *b" \t\n\r(:)";
 /// `issue#1047` is a reference and not the start of a comment.
 const BEFORE_COMMENT: [u8; 4] = *b" \t\n\r";
 
+/// Indentation: what may stand between the start of a line and a comment.
+const INDENTATION: [u8; 2] = *b" \t";
+
+/// Whether the `#` at byte `position` of `document` starts a comment: it opens
+/// a token, and either only indentation stands before it on its line or no
+/// character that could continue a bare reference follows it.
+///
+/// The comment stripper and the stream parser both judge a `#` with this one
+/// rule, so they always agree on where a comment starts.
+pub(crate) fn opens_comment(document: &[u8], position: usize) -> bool {
+    if document.get(position) != Some(&(COMMENT as u8)) {
+        return false;
+    }
+    if !follows(document, position, &BEFORE_COMMENT) {
+        return false;
+    }
+    let line_start = document[..position]
+        .iter()
+        .rposition(|byte| !INDENTATION.contains(byte));
+    match line_start {
+        None => return true,
+        Some(before) if matches!(document[before], b'\n' | b'\r') => return true,
+        Some(_) => {}
+    }
+    document
+        .get(position + 1)
+        .is_none_or(|next| SEPARATORS.contains(next))
+}
+
 /// Blanks out every comment in `document`, keeping every other byte where it
 /// was.
 ///
@@ -41,6 +80,7 @@ const BEFORE_COMMENT: [u8; 4] = *b" \t\n\r";
 ///
 /// assert_eq!(strip_comments("a: b # why\n"), "a: b      \n");
 /// assert_eq!(strip_comments("\"# kept\"\n"), "\"# kept\"\n");
+/// assert_eq!(strip_comments("tag #release\n"), "tag #release\n");
 /// assert_eq!(strip_comments("issue#1047\n"), "issue#1047\n");
 /// assert_eq!(strip_comments("(a)\" #kept\"\n"), "(a)\" #kept\"\n");
 /// ```
@@ -54,7 +94,7 @@ pub fn strip_comments(document: &str) -> String {
     while position < bytes.len() {
         let byte = bytes[position];
 
-        if byte == COMMENT as u8 && follows(&bytes, position, &BEFORE_COMMENT) {
+        if byte == COMMENT as u8 && opens_comment(document.as_bytes(), position) {
             while position < bytes.len() && bytes[position] != b'\n' && bytes[position] != b'\r' {
                 bytes[position] = b' ';
                 position += 1;

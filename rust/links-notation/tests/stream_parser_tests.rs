@@ -96,9 +96,11 @@ fn rejects_writes_after_finish() {
 
 #[test]
 fn waits_for_the_line_that_closes_an_even_run_of_quotes() {
-    // `""` is the empty reference only when nothing closes it, and here the
+    // `""b` opens a reference that only a later line can close, and here the
     // next line does, so the first line cannot be emitted on its own (#377).
-    let input = "a \"\" b\n\"\" c\n";
+    // (A `""` followed by whitespace and the end of its line is the empty
+    // reference whatever follows, issue #443.)
+    let input = "a \"\"b\n\"\" c\n";
     let mut stream = StreamParser::new();
     for character in input.chars() {
         assert!(stream.write(&character.to_string()).unwrap().is_empty());
