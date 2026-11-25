@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Keep an empty quote pair that ends its line on that line, read a `#` that
+  starts a value later on a line as the value, and keep colons between the
+  characters of an unquoted reference in it (`12:30`, `std::string`), in all
+  ten bindings; add `quoteReference` and `needsQuoting`. Breaking: `a:b` and
+  `12:30` are now single references. Prepare 0.32.0; see
+  [the release fragment](changelog.d/445.md),
+  [issue 443](https://github.com/link-foundation/links-notation/issues/443) and
+  [issue 444](https://github.com/link-foundation/links-notation/issues/444).
+
 ### Added
 
 - Python: ship the PEP 561 `py.typed` marker so type checkers use the package's
