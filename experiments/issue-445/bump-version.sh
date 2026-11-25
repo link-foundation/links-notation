@@ -34,3 +34,9 @@ open(path, 'w').write('\n'.join(out))
 PY
 done
 git grep -n -F "$from" -- . ':!CHANGELOG.md' ':!changelog.d' ':!dev' || true
+# A minor bump also has to move the caret and find_package floors, which quote an
+# older patch (or no patch) and so are not caught above. For 0.32.0 these were
+# benchmarks/php/composer.json (^0.31.4 -> ^0.32.0, then its lock content-hash via
+# composer-hashes.php), the PHP README install snippets (^0.31 -> ^0.32) and the
+# C++ README find_package floors (0.31 -> 0.32).
+git grep -nE "\\^${f%\\.*}|find_package\\(links_notation ${f%\\.*}" -- . ':!CHANGELOG.md' ':!changelog.d' ':!dev' || true
