@@ -8,7 +8,8 @@ namespace Link.Foundation.Links.Notation
     /// </summary>
     /// <remarks>
     /// Any number N of delimiters opens and closes a reference, and 2N delimiters stand
-    /// for N written as content. The grammar reads references through this class, so
+    /// for N written as content. An even run followed by whitespace up to its line break
+    /// is the empty reference, whatever later lines hold (issue #443). The grammar reads references through this class, so
     /// blanking comments reaches a reference exactly as far as the parser does.
     /// </remarks>
     internal static class Quotes
@@ -80,6 +81,16 @@ namespace Link.Foundation.Links.Notation
 
             bool isEvenRun = quoteCount % 2 == 0;
 
+            if (isEvenRun && StaysOnItsLine(subject, start))
+            {
+                // A pair, or a longer even run, that ends its line (or is followed by
+                // whitespace up to a line break before anything closes it) is the empty
+                // reference however later lines continue (issue #443).
+                value = string.Empty;
+                length = quoteCount;
+                return true;
+            }
+
             string openClose = new string(quoteChar, quoteCount);
             string escapeSeq = new string(quoteChar, quoteCount * 2);
 
@@ -136,30 +147,70 @@ namespace Link.Foundation.Links.Notation
             TryParse(subject, start, out var ignored, out var length) ? start + length : -1;
 
         /// <summary>
-        /// Reports whether a run of delimiters after the one opening at
-        /// <paramref name="start"/> closes it: a run of R closes a reference opened by N
-        /// exactly when R / N is odd. An even run nothing closes is the empty reference,
-        /// until a closing run is written after it.
+        /// Reports whether the reference opened at <paramref name="start"/> is settled: a
+        /// later run closes it, or it is an even run that stays on its line and so is the
+        /// empty reference whatever follows it (issue #443). A reference that is not
+        /// settled may still change what it holds when more of the document is written.
         /// </summary>
         /// <param name="subject">The whole document being read.</param>
         /// <param name="start">The position of the opening delimiter.</param>
-        /// <returns><see langword="true"/> when a later run closes the reference.</returns>
-        internal static bool ClosingRunFollows(string subject, int start)
+        /// <returns><see langword="true"/> when no later text changes the reference.</returns>
+        internal static bool IsSettled(string subject, int start)
+        {
+            if (ClosingRunEnd(subject, start, subject.Length) >= 0) return true;
+            return RunLength(subject, start) % 2 == 0 && StaysOnItsLine(subject, start);
+        }
+
+        /// <summary>
+        /// The position just past the first run of delimiters that closes the reference
+        /// opened at <paramref name="start"/>, or -1 when no run closes it: a run of R
+        /// closes a reference opened by N exactly when R / N is odd. An even run nothing
+        /// closes is the empty reference, until a closing run is written after it. Only
+        /// runs that start before <paramref name="limit"/> are looked at.
+        /// </summary>
+        private static int ClosingRunEnd(string subject, int start, int limit)
         {
             char quote = subject[start];
-            int count = 0;
-            while (start + count < subject.Length && subject[start + count] == quote) count++;
+            int count = RunLength(subject, start);
             int position = start + count;
-            while (true)
+            while (position < limit)
             {
-                position = subject.IndexOf(quote, position);
-                if (position < 0) return false;
-                int length = 0;
-                while (position + length < subject.Length && subject[position + length] == quote) length++;
-                if (length / count % 2 == 1) return true;
+                position = subject.IndexOf(quote, position, limit - position);
+                if (position < 0) return -1;
+                int length = RunLength(subject, position);
+                if (length / count % 2 == 1) return position + length;
                 position += length;
             }
+            return -1;
         }
+
+        /// <summary>The number of delimiters in a row from <paramref name="start"/>.</summary>
+        private static int RunLength(string subject, int start)
+        {
+            int length = 0;
+            while (start + length < subject.Length && subject[start + length] == subject[start]) length++;
+            return length;
+        }
+
+        /// <summary>
+        /// Reports whether the even run opened at <paramref name="start"/> has to be read
+        /// as the empty reference because its n-quoted reading would leave the line without
+        /// opening a multiline reference: whitespace (or the end of the document) follows
+        /// the run directly, and a line break comes before the closing run, or no run
+        /// closes it at all (issue #443). A run holds no line break, so that is when no run
+        /// that starts before the end of the line closes the reference, and only the rest
+        /// of the line is read.
+        /// </summary>
+        private static bool StaysOnItsLine(string subject, int start)
+        {
+            int bodyStart = start + RunLength(subject, start);
+            if (bodyStart < subject.Length && " \t\n\r".IndexOf(subject[bodyStart]) < 0) return false;
+            int lineEnd = subject.IndexOfAny(LineBreaks, bodyStart);
+            return ClosingRunEnd(subject, start, lineEnd < 0 ? subject.Length : lineEnd) < 0;
+        }
+
+        /// <summary>The characters that end a line.</summary>
+        private static readonly char[] LineBreaks = { '\n', '\r' };
 
         /// <summary>
         /// The delimiter of a reference written as <paramref name="raw"/>, when

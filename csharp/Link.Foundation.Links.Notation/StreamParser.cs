@@ -11,7 +11,6 @@ namespace Link.Foundation.Links.Notation
     public sealed class StreamParser
     {
         private const int DefaultMaxBufferSize = 10 * 1024 * 1024;
-        private const string BeforeComment = " \t\n\r";
 
         private readonly Parser _parser;
         private readonly StringBuilder _buffer = new();
@@ -257,7 +256,7 @@ namespace Link.Foundation.Links.Notation
             for (var position = 0; position < document.Length; position++)
             {
                 var character = document[position];
-                if (comments && character == Comments.Comment && Follows(document, position, BeforeComment))
+                if (comments && Comments.OpensComment(document, position))
                 {
                     var newline = document.IndexOf('\n', position);
                     if (newline < 0) break;
@@ -276,9 +275,10 @@ namespace Link.Foundation.Links.Notation
                 {
                     // A reference nothing closes yet may be closed by a later line, which
                     // changes what it holds: an even run is the empty reference only when
-                    // no run in the whole document closes it.
+                    // no run in the whole document closes it, or when whitespace follows
+                    // it up to its line break (issue #443).
                     var end = Quotes.ReferenceEnd(document, position);
-                    if (end < 0 || !Quotes.ClosingRunFollows(document, position)) return false;
+                    if (end < 0 || !Quotes.IsSettled(document, position)) return false;
                     position = end - 1;
                     continue;
                 }
@@ -295,9 +295,6 @@ namespace Link.Foundation.Links.Notation
             }
             return depth == 0;
         }
-
-        private static bool Follows(string document, int position, string allowed) =>
-            position == 0 || allowed.IndexOf(document[position - 1]) >= 0;
     }
 
     /// <summary>An absolute stream position and the unresolved record size.</summary>

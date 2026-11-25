@@ -213,6 +213,35 @@ var links = new Parser().Parse(@"value (
 Console.WriteLine(links[0]); // (value ((id 1) (label one)))
 ```
 
+### Colons, Empty Quotes and Quoting References
+
+A run of colons belongs to a bare reference when the reference has started and
+a character that can start a bare reference follows the run, so times, URLs and
+qualified names need no quotes: `12:30`, `std::string` and
+`https://example.com/a#b` are one reference each, and `a:b: c` has the ID
+`a:b`. A colon followed by whitespace, a parenthesis, a quote or a versioned
+literal (`a: b`, `a:(b)`, `a:"b"`, `a:~1{62}`) still separates an ID from its
+values.
+
+An even run of quotes followed by whitespace up to the end of its line (`a ""`)
+is the empty reference, whatever later lines hold; an even run followed directly
+by text (`""x`) still opens a reference that may span lines.
+
+`Link<T>.QuoteReference` writes one reference so a parser reads it back as
+exactly that text, and `Link<T>.NeedsQuoting` says whether it has to be quoted.
+Both are deliberately conservative: colons, whitespace, parentheses, quotes and
+a leading `#` are still quoted, so the text also reads back with older releases.
+
+```csharp
+var links = new Parser().Parse("meeting: 12:30 https://example.com/a#b\n");
+Console.WriteLine(links[0]); // (meeting: '12:30' 'https://example.com/a#b')
+
+Link<string>.QuoteReference("plain");  // plain
+Link<string>.QuoteReference("12:30");  // '12:30'
+Link<string>.QuoteReference("");       // ~1{}
+Link<string>.NeedsQuoting("#release"); // true
+```
+
 ### Comments
 
 A `#` hides the rest of the line it stands on, so a document can carry prose
@@ -226,7 +255,11 @@ deploy: staging # only staging, for now
 Both comments are gone by the time the document is read, leaving the single
 link `(deploy: staging)`. A `#` only opens a comment where a reference could
 begin, so a `#` inside a token (`issue#1047`) and a `#` inside a delimited
-reference (`"#"`) stay ordinary characters.
+reference (`"#"`) stay ordinary characters. At the start of a line, after any
+indentation, a `#` always opens a comment; later on a line it opens one only
+when whitespace, `(`, `)`, `:` or the end of the document follows it. So
+`a: b # why` and `a: b #` hold a comment, while `tag #release` is the link of
+`tag` and `#release`: a value is never silently dropped.
 
 A formatter keeps the same rule from the other side: a reference that begins
 with a `#` is written quoted (`'#tag'`), so a document it writes reads back as

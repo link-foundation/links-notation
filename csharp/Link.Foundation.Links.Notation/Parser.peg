@@ -375,7 +375,20 @@ literalReference <string> = &'~' &{
     ReferenceLiteral.TryRead(state.Subject, state.Location, out _quoteValue, out _quoteLength)
 } consumeQuoted { _quoteValue }
 
-simpleReference <string> = &{ !ReferenceLiteral.HasPrefix(state.Subject, state.Location) } "" referenceSymbol+
+// A bare reference may hold colons between its characters, so `12:30`,
+// `std::string` and `https://example.com/a#b` are each one reference
+// (issue #444). A run of colons belongs to the reference only when a character
+// that could start a bare reference follows it: `a: b`, `a:(b)`, `a:"b"` and
+// `a:~1{62}` still separate an ID from its values, and a bare reference never
+// starts or ends with a colon.
+simpleReference <string> = &{ !ReferenceLiteral.HasPrefix(state.Subject, state.Location) } "" referenceSymbol (referenceSymbol / innerColons)*
+
+// The whole test is a lookahead written without calling another rule: the tracer
+// that finds where a failed parse stopped sees every rule a lookahead enters, so a
+// run of colons that ends the reference leaves no trace in the error a document
+// that fails to parse reports. The character class is what can start a bare
+// reference, and "~" [0-9]+ "{" opens a versioned literal.
+innerColons = &(":"+ !("~" [0-9]+ "{") [^ \t\n\r(:)"'`]) ":"+
 
 quotedReference <string> = doubleQuotedUniversal / singleQuotedUniversal / backtickQuotedUniversal
 
